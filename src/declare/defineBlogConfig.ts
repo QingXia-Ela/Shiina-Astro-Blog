@@ -35,7 +35,7 @@ interface BasicBackgroundConfig {
 
 // footer 配置
 interface BasicPageFooterConfig {
-  /** 底部 footer，默认是 `Copyright © By {你的名字}` */
+  /** 底部 footer，默认是 `Copyright © By {你的名字}`，会作为 HTML 插入到页尾 */
   content?: string[]
 }
 
@@ -64,7 +64,15 @@ interface BasicPageConfig {
   footer?: PageFooterConfig
 }
 
-type PageList = ''
+enum PageList {
+  'index' = 'index',
+  'blog' = 'blog',
+  'tags' = 'tags',
+  'about' = 'about',
+  'friends' = 'friends',
+  'article' = 'article',
+  'custom' = 'custom'
+}
 
 interface PageConfig extends BasicPageConfig { }
 
@@ -74,7 +82,7 @@ interface BlogConfig {
     dark?: DarkThemeColorConfig
   }
   pages?: {
-
+    [key in PageList]: PageConfig
   }
   UserInfo?: BasicPersonalConfig
 }
