@@ -11,6 +11,12 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/mdx": "^0.12.1",
+    "@astrojs/sitemap": "^1.0.0",
+    "@astrojs/vue": "^1.2.1",
     "astro": "^1.6.11"
+  },
+  "devDependencies": {
+    "lodash": "^4.17.21"
   }
 }
