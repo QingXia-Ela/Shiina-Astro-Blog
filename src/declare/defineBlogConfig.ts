@@ -31,10 +31,19 @@ interface BasicHeaderConfig {
 interface PageHeaderConfig extends BasicHeaderConfig { }
 
 interface BasicBackgroundConfig {
+  /** 
+   * 背景类型，`photo` 为图片，`fade` 为渐变色，`purity` 为纯色
+   * 
+   * - 选用 `photo` `fade` 时内部使用 `background-image` 处理，图片只需要写上路径即可
+   * 
+   * - 使用 `purity` 则用 `background-color` 处理
+   */
+  type: 'photo' | 'fade' | 'purity'
+  jsPlugin: boolean
   /** 为背景提供一个毛玻璃效果，默认 `false`，详见：[MDN filter](https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter) */
-  filter?: boolean
+  filter: boolean
   /** 为背景提供一个暗色效果，默认 `false`，详见：[MDN filter](https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter) */
-  mask?: boolean
+  mask: boolean
 }
 
 // footer 配置
@@ -66,7 +75,7 @@ interface DarkThemeColorConfig extends Partial<BasicThemeColorConfig> { }
 // 页面配置
 interface BasicPageConfig {
   header?: PageHeaderConfig
-  background?: BasicBackgroundConfig
+  background?: Partial<BasicBackgroundConfig>
   footer?: PageFooterConfig
 }
 
