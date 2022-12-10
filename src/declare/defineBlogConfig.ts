@@ -64,29 +64,20 @@ interface BasicPageConfig {
   footer?: PageFooterConfig
 }
 
-enum PageList {
-  'index' = 'index',
-  'blog' = 'blog',
-  'tags' = 'tags',
-  'about' = 'about',
-  'friends' = 'friends',
-  'article' = 'article',
-  'custom' = 'custom'
-}
-
 interface PageConfig extends BasicPageConfig { }
+
+type PageList = 'index' | 'blog' | 'tags' | 'about' | 'friends' | 'article' | 'custom'
 
 interface BlogConfig {
   color?: {
     light?: LightThemeColorConfig
     dark?: DarkThemeColorConfig
   }
-  pages?: {
-    [key in PageList]: PageConfig
-  }
+  pages?: Record<PageList, PageConfig>
   UserInfo?: BasicPersonalConfig
 }
 
 export default function defineBlogConfig(config: BlogConfig) {
+  config.pages
   return config
 }
