@@ -32,9 +32,9 @@ interface PageHeaderConfig extends BasicHeaderConfig { }
 
 interface BasicBackgroundConfig {
   /** 为背景提供一个毛玻璃效果，默认 `false`，详见：[MDN filter](https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter) */
-  filter: boolean
+  filter?: boolean
   /** 为背景提供一个暗色效果，默认 `false`，详见：[MDN filter](https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter) */
-  mask: boolean
+  mask?: boolean
 }
 
 // footer 配置
@@ -75,8 +75,7 @@ interface PageConfig extends BasicPageConfig { }
 type PageList = 'index' | 'blog' | 'tags' | 'about' | 'friends' | 'article' | 'custom'
 
 interface BlogConfig {
-  DefaultHeader: BasicHeaderConfig
-  DefaultFooter: BasicFooterConfig
+  PageDefaultSettings: BasicPageConfig
   color: {
     light?: LightThemeColorConfig
     dark?: DarkThemeColorConfig
@@ -87,15 +86,21 @@ interface BlogConfig {
 
 export default function defineBlogConfig(config: Partial<BlogConfig>) {
   const _Default_Config_: BlogConfig = {
-    DefaultHeader: {
-      hidden: false,
-      keepBackgroundColor: true
-    },
-    DefaultFooter: {
-      hidden: false,
-      content: [
-        'Copyright © By {{ name }}'
-      ]
+    PageDefaultSettings: {
+      header: {
+        hidden: false,
+        keepBackgroundColor: true
+      },
+      background: {
+        filter: false,
+        mask: false
+      },
+      footer: {
+        hidden: false,
+        content: [
+          'Copyright © By {{ name }}'
+        ]
+      }
     },
     color: {
       light: {
