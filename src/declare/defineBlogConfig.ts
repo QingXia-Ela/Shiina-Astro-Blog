@@ -7,18 +7,22 @@ interface BasicLinkConfig {
 
 interface BasicPersonalConfig {
   name: string
-  introduction: string,
+  introduction?: string,
+  /** 头像路径，从项目根目录开始查找，如：`/source/avatar.jpg`，如果文件位于 `/public` 下可以将其省略 */
   avatar?: string,
   link?: BasicLinkConfig[]
 }
 
 // search 相关配置
 interface BasicSearchConfig {
-  requestURL: string
+  useRequest?: boolean
+  requestURL?: string
 }
 
 // header 通用配置
 interface BasicHeaderConfig {
+  /** 隐藏 header，默认 `false` */
+  hidden?: boolean
   /** 保持背景颜色，即取消透明模式，默认 `true` */
   keepBackgroundColor?: boolean
 }
@@ -34,12 +38,14 @@ interface BasicBackgroundConfig {
 }
 
 // footer 配置
-interface BasicPageFooterConfig {
+interface BasicFooterConfig {
+  /** 隐藏 footer，默认 `false` */
+  hidden?: boolean
   /** 底部 footer，默认是 `Copyright © By {你的名字}`，会作为 HTML 插入到页尾 */
   content?: string[]
 }
 
-interface PageFooterConfig extends BasicPageFooterConfig { }
+interface PageFooterConfig extends BasicFooterConfig { }
 
 // 底色配置
 interface BasicThemeColorConfig {
@@ -69,15 +75,57 @@ interface PageConfig extends BasicPageConfig { }
 type PageList = 'index' | 'blog' | 'tags' | 'about' | 'friends' | 'article' | 'custom'
 
 interface BlogConfig {
-  color?: {
+  DefaultHeader: BasicHeaderConfig
+  DefaultFooter: BasicFooterConfig
+  color: {
     light?: LightThemeColorConfig
     dark?: DarkThemeColorConfig
   }
-  pages?: Record<PageList, PageConfig>
-  UserInfo?: BasicPersonalConfig
+  pages: Partial<Record<PageList, PageConfig>>
+  UserInfo: BasicPersonalConfig
 }
 
-export default function defineBlogConfig(config: BlogConfig) {
-  config.pages
-  return config
+export default function defineBlogConfig(config: Partial<BlogConfig>) {
+  const _Default_Config_: BlogConfig = {
+    DefaultHeader: {
+      hidden: false,
+      keepBackgroundColor: true
+    },
+    DefaultFooter: {
+      hidden: false,
+      content: [
+        'Copyright © By {{ name }}'
+      ]
+    },
+    color: {
+      light: {
+        backgroundDefault: '#f2f5f8',
+        backgroundActiveDefault: '#ddd',
+        textDefault: '#fff',
+        tipsDefault: '#ad7ffd'
+      },
+      dark: {
+        backgroundDefault: '#222',
+        backgroundActiveDefault: '#444',
+        textDefault: '#000',
+        tipsDefault: '#4e3e6b'
+      },
+    },
+    pages: {
+      'index': {
+        header: {
+          hidden: true
+        },
+        footer: {
+          hidden: true
+        }
+      }
+    },
+    UserInfo: {
+      name: 'Shiinafan',
+      introduction: '有钱终成眷属，没钱亲眼目睹',
+      avatar: '/source/avatar.jpg'
+    }
+  }
+  return Object.assign(_Default_Config_, config)
 }
