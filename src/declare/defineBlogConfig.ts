@@ -13,7 +13,10 @@ interface BasicPersonalConfig {
   link?: BasicLinkConfig[]
 }
 
-// search 相关配置
+/**
+ * search 相关配置
+ * @deprecated 将会在新版本中启用
+ */
 interface BasicSearchConfig {
   useRequest?: boolean
   requestURL?: string
@@ -39,6 +42,9 @@ interface BasicBackgroundConfig {
    * - 使用 `purity` 则用 `background-color` 处理
    */
   type: 'photo' | 'fade' | 'purity'
+  /**
+   * @deprecated 将会在新版本中启用
+   */
   jsPlugin: boolean
   /** 为背景提供一个毛玻璃效果，默认 `false`，详见：[MDN filter](https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter) */
   filter: boolean
