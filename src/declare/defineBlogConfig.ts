@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 // 外链配置
 interface BasicLinkConfig {
   sitename: string,
@@ -112,7 +114,7 @@ interface BlogConfig {
 }
 
 export default function defineBlogConfig(config: Partial<BlogConfig>) {
-  const _Default_Config_: BlogConfig = {
+  const _DEFAULT_CONFIG_: BlogConfig = {
     PageDefaultSettings: {
       header: {
         hidden: false,
@@ -161,8 +163,19 @@ export default function defineBlogConfig(config: Partial<BlogConfig>) {
         footer: {
           hidden: true
         }
-      }
+      },
+      'blog': {},
+      'about': {},
+      'article': {},
+      'custom': {},
+      'friends': {},
+      'tags': {},
     }
   }
-  return Object.assign(_Default_Config_, config)
+  for (const i in _DEFAULT_CONFIG_.pages) {
+    // @ts-expect-error
+    _DEFAULT_CONFIG_.pages[i] = _.defaultsDeep(_DEFAULT_CONFIG_.pages[i], _DEFAULT_CONFIG_.PageDefaultSettings)
+  }
+
+  return Object.assign(_DEFAULT_CONFIG_, config)
 }
