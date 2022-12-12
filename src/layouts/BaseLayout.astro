@@ -1,7 +1,11 @@
 ---
 import "@/styles/global.scss";
 import HeadMeta from "@/components/HeadMeta.astro";
+import Header from "@/components/Header/index.astro";
 import cfg from "blog.config";
+import GetCurrentPageSetting from "@/utils/GetCurrentPageSetting";
+
+const { header } = GetCurrentPageSetting(Astro.url);
 
 const {
   color: { light, dark },
@@ -42,6 +46,7 @@ const {
     <HeadMeta />
   </head>
   <body>
+    {header!.hidden ? null : <Header />}
     <main>
       <slot />
     </main>

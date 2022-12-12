@@ -27,6 +27,8 @@ interface BasicSearchConfig {
 
 // header 通用配置
 interface BasicHeaderConfig {
+  /** 当前网站标题，会用于 head 部分设置网站标题与大标题 */
+  title: string
   /** 隐藏 header，默认 `false` */
   hidden?: boolean
   /** 保持背景颜色，即取消透明模式，默认 `true` */
@@ -88,7 +90,7 @@ interface BasicPageConfig {
   footer?: PageFooterConfig
 }
 
-interface PageConfig extends BasicPageConfig { }
+export interface PageConfig extends BasicPageConfig { }
 
 // 网站配置
 interface BasicWebsiteConfig {
@@ -100,7 +102,7 @@ interface BasicWebsiteConfig {
   url: string
 }
 
-type PageList = 'index' | 'blog' | 'tags' | 'about' | 'friends' | 'article' | 'custom'
+export type PageList = 'index' | 'blog' | 'tags' | 'about' | 'friends' | 'article' | 'custom'
 
 interface BlogConfig {
   PageDefaultSettings: BasicPageConfig
@@ -113,10 +115,11 @@ interface BlogConfig {
   UserInfo: BasicPersonalConfig
 }
 
-export default function defineBlogConfig(config: Partial<BlogConfig>) {
+export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfig {
   const _DEFAULT_CONFIG_: BlogConfig = {
     PageDefaultSettings: {
       header: {
+        title: '',
         hidden: false,
         keepBackgroundColor: true
       },
@@ -145,31 +148,44 @@ export default function defineBlogConfig(config: Partial<BlogConfig>) {
       light: {
         backgroundDefault: '#f2f5f8',
         backgroundActiveDefault: '#ddd',
-        textDefault: '#fff',
+        textDefault: '#222',
         tipsDefault: '#ad7ffd'
       },
       dark: {
-        backgroundDefault: '#222',
+        backgroundDefault: '#121212',
         backgroundActiveDefault: '#444',
-        textDefault: '#000',
+        textDefault: '#fff',
         tipsDefault: '#4e3e6b'
       },
     },
     pages: {
       'index': {
         header: {
-          hidden: true
-        },
-        footer: {
-          hidden: true
+          title: '主页'
         }
       },
-      'blog': {},
-      'about': {},
+      'blog': {
+        header: {
+          title: '博客'
+        }
+      },
+      'about': {
+        header: {
+          title: '关于'
+        }
+      },
       'article': {},
       'custom': {},
-      'friends': {},
-      'tags': {},
+      'friends': {
+        header: {
+          title: '友链'
+        }
+      },
+      'tags': {
+        header: {
+          title: '标签'
+        }
+      },
     }
   }
   // copy default value from page default settings
