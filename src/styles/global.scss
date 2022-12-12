@@ -1,0 +1,177 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  width: 100%;
+  min-height: 100%;
+  background-color: #191919;
+}
+
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
+.text_nowrap {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+a {
+  color: #fff !important;
+  padding: 0 0.2rem;
+}
+
+.text_underline_decoration {
+  text-decoration: underline !important;
+}
+
+.underline_button {
+  text-decoration: underline;
+  transition: color 0.3s;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.transparent_button {
+  font-family: 'SourceHanSansCN-Light';
+  position: relative;
+  line-height: 1.2;
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  vertical-align: top;
+
+  &:hover {
+    color: #c6c9ce !important;
+  }
+
+  &:hover.hover_pointer {
+    cursor: pointer;
+  }
+
+  &.active {
+    color: #c6c9ce !important;
+  }
+
+  &.disabled {
+    color: rgb(95, 88, 88) !important;
+    cursor: default !important;
+  }
+}
+
+.row_split_line1 {
+  width: 100%;
+  height: 2px;
+  margin: 1.4rem 0;
+  background-image: linear-gradient(90deg,
+      transparent 0%,
+      #666 50%,
+      transparent 100%);
+}
+
+.f1 {
+  flex: 1;
+}
+
+.por {
+  position: relative;
+}
+
+.h100 {
+  height: 100%;
+}
+
+.h90 {
+  height: 90%;
+}
+
+.h80 {
+  height: 80%;
+}
+
+.h70 {
+  height: 70%;
+}
+
+.h60 {
+  height: 60%;
+}
+
+.h50 {
+  height: 50%;
+}
+
+.h40 {
+  height: 40%;
+}
+
+.h30 {
+  height: 30%;
+}
+
+.h20 {
+  height: 20%;
+}
+
+.h10 {
+  height: 10%;
+}
+
+.w100 {
+  width: 100% !important;
+}
+
+.w90 {
+  width: 90% !important;
+}
+
+.w80 {
+  width: 80% !important;
+}
+
+.w70 {
+  width: 70% !important;
+}
+
+.w60 {
+  width: 60% !important;
+}
+
+.w50 {
+  width: 50% !important;
+}
+
+.w40 {
+  width: 40% !important;
+}
+
+.w30 {
+  width: 30% !important;
+}
+
+.w20 {
+  width: 20% !important;
+}
+
+.w10 {
+  width: 10% !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+}
+
+input[type='number'] {
+  -webkit-appearance: none !important;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

@@ -1,0 +1,49 @@
+---
+import "@/styles/global.scss";
+import HeadMeta from "@/components/HeadMeta.astro";
+import cfg from "blog.config";
+
+const {
+  color: { light, dark },
+} = cfg;
+---
+
+<style
+  define:vars={{
+    "l-background-default": light.backgroundDefault,
+    "l-background-active-default": light.backgroundActiveDefault,
+    "l-text-default": light.textDefault,
+    "l-tips-default": light.tipsDefault,
+    "d-background-default": dark.backgroundDefault,
+    "d-background-active-default": dark.backgroundActiveDefault,
+    "d-text-default": dark.textDefault,
+    "d-tips-default": dark.tipsDefault,
+  }}
+>
+  body {
+    --background-default: var(--l-background-default);
+    --background-active-default: var(--l-background-active-default);
+    --text-default: var(--l-text-default);
+    --tips-default: var(--l-tips-default);
+  }
+
+  html.dark > body {
+    --background-default: var(--d-background-default);
+    --background-active-default: var(--d-background-active-default);
+    --text-default: var(--d-text-default);
+    --tips-default: var(--d-tips-default);
+  }
+</style>
+
+<style lang="scss"></style>
+
+<html lang="en">
+  <head>
+    <HeadMeta />
+  </head>
+  <body>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

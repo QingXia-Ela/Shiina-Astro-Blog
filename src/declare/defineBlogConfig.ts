@@ -1,10 +1,11 @@
-// 个人信息配置
+// 外链配置
 interface BasicLinkConfig {
   sitename: string,
   link: string,
   class: string
 }
 
+// 个人信息配置
 interface BasicPersonalConfig {
   name: string
   introduction?: string,
@@ -74,9 +75,9 @@ interface BasicThemeColorConfig {
   tipsDefault: string
 }
 
-interface LightThemeColorConfig extends Partial<BasicThemeColorConfig> { }
+interface LightThemeColorConfig extends BasicThemeColorConfig { }
 
-interface DarkThemeColorConfig extends Partial<BasicThemeColorConfig> { }
+interface DarkThemeColorConfig extends BasicThemeColorConfig { }
 
 // 页面配置
 interface BasicPageConfig {
@@ -87,13 +88,24 @@ interface BasicPageConfig {
 
 interface PageConfig extends BasicPageConfig { }
 
+// 网站配置
+interface BasicWebsiteConfig {
+  /** 网站默认标题，会被放入 head 标签内的 title 部分，header 处也会使用 */
+  title: string
+  /** 网站描述 */
+  description: string
+  /** 网站线上链接 */
+  url: string
+}
+
 type PageList = 'index' | 'blog' | 'tags' | 'about' | 'friends' | 'article' | 'custom'
 
 interface BlogConfig {
   PageDefaultSettings: BasicPageConfig
+  WebsiteSettings: BasicWebsiteConfig
   color: {
-    light?: LightThemeColorConfig
-    dark?: DarkThemeColorConfig
+    light: LightThemeColorConfig
+    dark: DarkThemeColorConfig
   }
   pages: Partial<Record<PageList, PageConfig>>
   UserInfo: BasicPersonalConfig
@@ -116,6 +128,16 @@ export default function defineBlogConfig(config: Partial<BlogConfig>) {
           'Copyright © By {{ name }}'
         ]
       }
+    },
+    WebsiteSettings: {
+      title: `Shiina's Blog`,
+      description: '',
+      url: 'https://blog.shiinafan.top'
+    },
+    UserInfo: {
+      name: 'Shiinafan',
+      introduction: '有钱终成眷属，没钱亲眼目睹',
+      avatar: '/source/avatar.jpg'
     },
     color: {
       light: {
@@ -140,11 +162,6 @@ export default function defineBlogConfig(config: Partial<BlogConfig>) {
           hidden: true
         }
       }
-    },
-    UserInfo: {
-      name: 'Shiinafan',
-      introduction: '有钱终成眷属，没钱亲眼目睹',
-      avatar: '/source/avatar.jpg'
     }
   }
   return Object.assign(_Default_Config_, config)
