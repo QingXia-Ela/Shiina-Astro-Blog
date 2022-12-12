@@ -172,10 +172,11 @@ export default function defineBlogConfig(config: Partial<BlogConfig>) {
       'tags': {},
     }
   }
+  // copy default value from page default settings
   for (const i in _DEFAULT_CONFIG_.pages) {
     // @ts-expect-error
     _DEFAULT_CONFIG_.pages[i] = _.defaultsDeep(_DEFAULT_CONFIG_.pages[i], _DEFAULT_CONFIG_.PageDefaultSettings)
   }
 
-  return Object.assign(_DEFAULT_CONFIG_, config)
+  return _.defaultsDeep(_DEFAULT_CONFIG_, config)
 }
