@@ -28,7 +28,7 @@ interface BasicSearchConfig {
 // header 通用配置
 interface BasicHeaderConfig {
   /** 当前网站标题，会用于 head 部分设置网站标题与大标题 */
-  title: string
+  title?: string
   /** 隐藏 header，默认 `false` */
   hidden?: boolean
   /** 保持背景颜色，即取消透明模式，默认 `true` */
@@ -194,5 +194,5 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
     _DEFAULT_CONFIG_.pages[i] = _.defaultsDeep(_DEFAULT_CONFIG_.pages[i], _DEFAULT_CONFIG_.PageDefaultSettings)
   }
 
-  return _.defaultsDeep(_DEFAULT_CONFIG_, config)
+  return _.defaultsDeep(config, _DEFAULT_CONFIG_)
 }

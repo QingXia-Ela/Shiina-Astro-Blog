@@ -1,0 +1,32 @@
+---
+---
+
+<div class="menu">test</div>
+
+<style lang="scss">
+  .menu {
+    display: flex;
+    font-size: 1rem;
+
+    .item {
+      padding: 0 1rem;
+      cursor: pointer;
+    }
+
+    .theme_switch {
+      cursor: pointer;
+      user-select: none;
+    }
+  }
+
+  .menu_mobile {
+    position: absolute;
+    display: none;
+  }
+
+  @media screen and (max-width: 992px) {
+    .menu {
+      display: none;
+    }
+  }
+</style>

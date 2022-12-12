@@ -4,7 +4,8 @@ import cfg from "blog.config";
 type PathListProps = Record<string, PageList>
 
 const PathList: PathListProps = {
-  '/': 'index'
+  '/': 'index',
+  '/about': 'about'
 }
 
 export default function (url: URL): PageConfig {

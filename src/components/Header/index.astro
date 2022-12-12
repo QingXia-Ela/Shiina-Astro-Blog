@@ -11,11 +11,11 @@ const KeepBGColor = header!.keepBackgroundColor,
 ---
 
 <header>
-  <div class={`wrapper ${KeepBGColor ? "keep_bg" : ""} show_menu`}>
+  <div class={`wrapper ${KeepBGColor ? "keep_bg" : ""}`}>
     <div class="full_item">
       <div class="title">{title}</div>
     </div>
-    <div class="full_item full_title">{Pos + title}</div>
+    <div class="full_item full_title text_nowrap">{Pos + title}</div>
   </div>
 </header>
 
@@ -61,31 +61,11 @@ const KeepBGColor = header!.keepBackgroundColor,
         font-size: 1.2rem;
         font-weight: 700;
       }
-
-      .menu {
-        display: flex;
-        font-size: 1rem;
-
-        .item {
-          padding: 0 1rem;
-          cursor: pointer;
-        }
-
-        .theme_switch {
-          cursor: pointer;
-          user-select: none;
-        }
-      }
-
-      .menu_mobile {
-        position: absolute;
-        display: none;
-      }
     }
   }
 
   @media screen and (max-width: 992px) {
-    .header {
+    header {
       .wrapper {
         transform: translateY(0);
 

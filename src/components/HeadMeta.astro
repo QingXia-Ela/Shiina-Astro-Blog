@@ -1,4 +1,5 @@
 ---
+import GetCurrentPageSetting from "@/utils/GetCurrentPageSetting";
 import cfg from "blog.config";
 export interface Props {
   /** 标题覆盖 */
@@ -6,6 +7,8 @@ export interface Props {
 }
 const { props } = Astro;
 
+const { header } = GetCurrentPageSetting(Astro.url),
+  Pos = header!.title ? `${header!.title} - ` : "";
 const {
   WebsiteSettings: { title, description, url },
 } = cfg;
@@ -15,7 +18,7 @@ const {
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>{props.title ? props.title : title}</title>
+<title>{Pos + (props.title ? props.title : title)}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 
