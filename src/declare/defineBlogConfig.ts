@@ -104,7 +104,7 @@ interface BasicWebsiteConfig {
 
 export type PageList = 'index' | 'blog' | 'tags' | 'about' | 'friends' | 'article' | 'custom'
 
-interface BlogConfig {
+interface BlogConfig extends Record<any, any> {
   PageDefaultSettings: BasicPageConfig
   WebsiteSettings: BasicWebsiteConfig
   color: {
