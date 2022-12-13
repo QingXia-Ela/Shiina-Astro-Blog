@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@astrojs/vue": "^1.2.1",
+    "@types/lodash": "^4.14.191",
     "lodash": "^4.17.21",
     "sass": "^1.56.2"
   }

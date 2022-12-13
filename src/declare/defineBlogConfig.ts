@@ -1,10 +1,13 @@
-// 个人信息配置
+import _ from 'lodash'
+
+// 外链配置
 interface BasicLinkConfig {
   sitename: string,
   link: string,
   class: string
 }
 
+// 个人信息配置
 interface BasicPersonalConfig {
   name: string
   introduction?: string,
@@ -24,6 +27,8 @@ interface BasicSearchConfig {
 
 // header 通用配置
 interface BasicHeaderConfig {
+  /** 当前网站标题，会用于 head 部分设置网站标题与大标题 */
+  title?: string
   /** 隐藏 header，默认 `false` */
   hidden?: boolean
   /** 保持背景颜色，即取消透明模式，默认 `true` */
@@ -74,9 +79,9 @@ interface BasicThemeColorConfig {
   tipsDefault: string
 }
 
-interface LightThemeColorConfig extends Partial<BasicThemeColorConfig> { }
+interface LightThemeColorConfig extends BasicThemeColorConfig { }
 
-interface DarkThemeColorConfig extends Partial<BasicThemeColorConfig> { }
+interface DarkThemeColorConfig extends BasicThemeColorConfig { }
 
 // 页面配置
 interface BasicPageConfig {
@@ -85,24 +90,36 @@ interface BasicPageConfig {
   footer?: PageFooterConfig
 }
 
-interface PageConfig extends BasicPageConfig { }
+export interface PageConfig extends BasicPageConfig { }
 
-type PageList = 'index' | 'blog' | 'tags' | 'about' | 'friends' | 'article' | 'custom'
+// 网站配置
+interface BasicWebsiteConfig {
+  /** 网站默认标题，会被放入 head 标签内的 title 部分，header 处也会使用 */
+  title: string
+  /** 网站描述 */
+  description: string
+  /** 网站线上链接 */
+  url: string
+}
 
-interface BlogConfig {
+export type PageList = 'index' | 'blog' | 'tags' | 'about' | 'friends' | 'article' | 'custom'
+
+interface BlogConfig extends Record<any, any> {
   PageDefaultSettings: BasicPageConfig
+  WebsiteSettings: BasicWebsiteConfig
   color: {
-    light?: LightThemeColorConfig
-    dark?: DarkThemeColorConfig
+    light: LightThemeColorConfig
+    dark: DarkThemeColorConfig
   }
   pages: Partial<Record<PageList, PageConfig>>
   UserInfo: BasicPersonalConfig
 }
 
-export default function defineBlogConfig(config: Partial<BlogConfig>) {
-  const _Default_Config_: BlogConfig = {
+export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfig {
+  const _DEFAULT_CONFIG_: BlogConfig = {
     PageDefaultSettings: {
       header: {
+        title: '',
         hidden: false,
         keepBackgroundColor: true
       },
@@ -117,35 +134,65 @@ export default function defineBlogConfig(config: Partial<BlogConfig>) {
         ]
       }
     },
-    color: {
-      light: {
-        backgroundDefault: '#f2f5f8',
-        backgroundActiveDefault: '#ddd',
-        textDefault: '#fff',
-        tipsDefault: '#ad7ffd'
-      },
-      dark: {
-        backgroundDefault: '#222',
-        backgroundActiveDefault: '#444',
-        textDefault: '#000',
-        tipsDefault: '#4e3e6b'
-      },
-    },
-    pages: {
-      'index': {
-        header: {
-          hidden: true
-        },
-        footer: {
-          hidden: true
-        }
-      }
+    WebsiteSettings: {
+      title: `Shiina's Blog`,
+      description: '',
+      url: 'https://blog.shiinafan.top'
     },
     UserInfo: {
       name: 'Shiinafan',
       introduction: '有钱终成眷属，没钱亲眼目睹',
       avatar: '/source/avatar.jpg'
+    },
+    color: {
+      light: {
+        backgroundDefault: '#f5f5f5',
+        backgroundActiveDefault: '#eee',
+        textDefault: '#222',
+        tipsDefault: '#3F5EFB'
+      },
+      dark: {
+        backgroundDefault: '#121212',
+        backgroundActiveDefault: '#444',
+        textDefault: '#fff',
+        tipsDefault: '#a1b0fc'
+      },
+    },
+    pages: {
+      'index': {
+        header: {
+          title: '主页'
+        }
+      },
+      'blog': {
+        header: {
+          title: '博客'
+        }
+      },
+      'about': {
+        header: {
+          title: '关于'
+        }
+      },
+      'article': {},
+      'custom': {},
+      'friends': {
+        header: {
+          title: '友链'
+        }
+      },
+      'tags': {
+        header: {
+          title: '标签'
+        }
+      },
     }
   }
-  return Object.assign(_Default_Config_, config)
+  // copy default value from page default settings
+  for (const i in _DEFAULT_CONFIG_.pages) {
+    // @ts-expect-error
+    _DEFAULT_CONFIG_.pages[i] = _.defaultsDeep(_DEFAULT_CONFIG_.pages[i], _DEFAULT_CONFIG_.PageDefaultSettings)
+  }
+
+  return _.defaultsDeep(config, _DEFAULT_CONFIG_)
 }

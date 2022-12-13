@@ -1,0 +1,95 @@
+---
+import _ from "lodash";
+
+export interface Props {
+  ItemName: string;
+  type?: "normal" | "list";
+  iconfont?: string;
+  data?: Array<{ href: string; name: string }>;
+}
+
+const _DEFAULT_PROPS_: Props = {
+  ItemName: "",
+  type: "list",
+  iconfont: "",
+};
+
+let { ItemName, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
+---
+
+<div class="item list h100">
+  {iconfont.length ? <i class={iconfont} /> : undefined}
+  {ItemName}
+  <div class="list_item column_flex default_box_shadow">
+    <a href="/">技术</a>
+    <a href="/">随笔</a>
+  </div>
+</div>
+
+<style lang="scss">
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    position: relative;
+    font-size: 0.95rem;
+    padding: 0 1.2rem 0 0.6rem;
+    color: var(--text-default);
+    transition: color 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--tips-default);
+
+      .list_item {
+        visibility: visible;
+      }
+    }
+
+    &.list {
+      &::before {
+        content: " ";
+        position: absolute;
+        top: calc(50% - 0.2rem);
+        right: 0.4rem;
+        border: 0.3rem solid var(--text-default);
+        border-bottom-width: 0;
+        border-left-color: transparent;
+        border-right-color: transparent;
+      }
+    }
+
+    &.list:hover {
+      &::before {
+        border-color: var(--tips-default);
+        border-left-color: transparent;
+        border-right-color: transparent;
+      }
+    }
+
+    .list_item {
+      visibility: hidden;
+      align-items: center;
+      position: absolute;
+      top: 4rem;
+      left: calc(50% - 4rem);
+      width: 8rem;
+      padding: 0.4rem 0;
+      color: var(--text-default);
+      background-color: var(--background-default);
+      border-radius: 0.4rem;
+
+      a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 0.25rem 0;
+        transition: none;
+
+        &:hover {
+          background-color: var(--background-active-default);
+        }
+      }
+    }
+  }
+</style>

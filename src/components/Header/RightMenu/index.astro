@@ -1,0 +1,94 @@
+---
+import cfg from "blog.config";
+import MenuItem from "./Item/Item.astro";
+import ListMenuItem from "./Item/ListItem.astro";
+import ThemeSwitch from "./ThemeSwitch.astro";
+import "@/assets/fonts/header/menu/iconfont.css";
+
+interface MenuItemProps extends Record<string, any> {
+  name: string;
+  href?: string;
+  type?: "normal" | "list";
+  iconfont?: string;
+  data?: any[];
+}
+
+const ItemList: MenuItemProps[] = [
+  {
+    name: "首页",
+    href: "/",
+    type: "normal",
+    iconfont: "iconfont icon-24gl-home11",
+  },
+  {
+    name: "博客",
+    href: "/blog",
+    type: "normal",
+    iconfont: "iconfont icon-24gl-fileText",
+  },
+  {
+    name: "归档",
+    type: "list",
+    iconfont: "iconfont icon-24gl-banknotes",
+  },
+  {
+    name: "标签",
+    href: "/tags",
+    iconfont: "iconfont icon-24gl-tags2",
+  },
+  {
+    name: "友链",
+    href: "/friends",
+    iconfont: "iconfont icon-24gl-link",
+  },
+  {
+    name: "关于",
+    href: "/about",
+    iconfont: "iconfont icon-24gl-user",
+  },
+];
+---
+
+<div class="menu">
+  {
+    ItemList.map(({ href, name, type, iconfont }) => {
+      return !type || type === "normal" ? (
+        <a href={href} class="h100 flex_center">
+          <MenuItem ItemName={name} type={type} iconfont={iconfont} />
+        </a>
+      ) : (
+        <ListMenuItem ItemName={name} type={type} iconfont={iconfont} />
+      );
+    })
+  }
+  <ThemeSwitch />
+</div>
+
+<style lang="scss">
+  .menu {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    font-size: 1rem;
+
+    .item {
+      cursor: pointer;
+    }
+
+    .theme_switch {
+      cursor: pointer;
+      user-select: none;
+    }
+  }
+
+  .menu_mobile {
+    position: absolute;
+    display: none;
+  }
+
+  @media screen and (max-width: 992px) {
+    .menu {
+      display: none;
+    }
+  }
+</style>
