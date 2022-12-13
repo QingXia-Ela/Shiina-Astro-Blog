@@ -8,6 +8,7 @@ interface MenuItemProps extends Record<string, any> {
   href?: string;
   type?: "normal" | "list";
   iconfont?: string;
+  data?: any[];
 }
 
 const ItemList: MenuItemProps[] = [
@@ -49,14 +50,12 @@ const ItemList: MenuItemProps[] = [
 <div class="menu">
   {
     ItemList.map(({ href, name, type, iconfont }) => {
-      return (
-        <a href={href}>
-          {!type || type === "normal" ? (
-            <MenuItem ItemName={name} type={type} iconfont={iconfont} />
-          ) : (
-            <ListMenuItem ItemName={name} type={type} iconfont={iconfont} />
-          )}
+      return !type || type === "normal" ? (
+        <a href={href} class="h100 flex_center">
+          <MenuItem ItemName={name} type={type} iconfont={iconfont} />
         </a>
+      ) : (
+        <ListMenuItem ItemName={name} type={type} iconfont={iconfont} />
       );
     })
   }
@@ -65,6 +64,8 @@ const ItemList: MenuItemProps[] = [
 <style lang="scss">
   .menu {
     display: flex;
+    align-items: center;
+    height: 100%;
     font-size: 1rem;
 
     .item {

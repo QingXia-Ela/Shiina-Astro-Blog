@@ -146,8 +146,8 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
     },
     color: {
       light: {
-        backgroundDefault: '#fff',
-        backgroundActiveDefault: '#FFFDE4',
+        backgroundDefault: '#f5f5f5',
+        backgroundActiveDefault: '#eee',
         textDefault: '#222',
         tipsDefault: '#3F5EFB'
       },
@@ -155,7 +155,7 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
         backgroundDefault: '#121212',
         backgroundActiveDefault: '#444',
         textDefault: '#fff',
-        tipsDefault: '#4e3e6b'
+        tipsDefault: '#a1b0fc'
       },
     },
     pages: {
