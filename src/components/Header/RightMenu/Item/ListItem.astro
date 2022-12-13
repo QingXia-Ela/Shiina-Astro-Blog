@@ -1,0 +1,51 @@
+---
+import _ from "lodash";
+
+export interface Props {
+  ItemName: string;
+  type?: "normal" | "list";
+  iconfont?: string;
+}
+
+const _DEFAULT_PROPS_: Props = {
+  ItemName: "",
+  type: "list",
+  iconfont: "",
+};
+
+let { ItemName, type, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
+---
+
+<div class="item list">
+  {iconfont.length ? <i class={iconfont} /> : undefined}
+  {ItemName}
+</div>
+<style lang="scss">
+  .item {
+    position: relative;
+    font-size: 0.95rem;
+    padding: 0 1rem 0 0.8rem;
+    cursor: pointer;
+
+    &.list {
+      &::before {
+        content: " ";
+        position: absolute;
+        top: calc(50% - 0.15rem);
+        right: 0;
+        border: 0.3rem solid var(--text-default);
+        border-bottom-width: 0;
+        border-left-color: transparent;
+        border-right-color: transparent;
+      }
+    }
+
+    &.list:hover {
+      &::before {
+        border-color: var(--tips-default);
+        border-left-color: transparent;
+        border-right-color: transparent;
+      }
+    }
+  }
+</style>

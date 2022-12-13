@@ -1,0 +1,30 @@
+---
+import _ from "lodash";
+
+export interface Props {
+  ItemName: string;
+  type?: "normal" | "list";
+  iconfont?: string;
+}
+
+const _DEFAULT_PROPS_: Props = {
+  ItemName: "",
+  type: "normal",
+  iconfont: "",
+};
+
+let { ItemName, type, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
+---
+
+<div class={`item ${type === "list" ? "list" : ""}`}>
+  {iconfont.length ? <i class={iconfont} /> : undefined}
+  {ItemName}
+</div>
+<style lang="scss">
+  .item {
+    position: relative;
+    font-size: 0.95rem;
+    padding: 0 0.8rem;
+    cursor: pointer;
+  }
+</style>

@@ -1,7 +1,66 @@
 ---
+import MenuItem from "./Item/Item.astro";
+import ListMenuItem from "./Item/ListItem.astro";
+import "@/assets/fonts/header/menu/iconfont.css";
+
+interface MenuItemProps extends Record<string, any> {
+  name: string;
+  href?: string;
+  type?: "normal" | "list";
+  iconfont?: string;
+}
+
+const ItemList: MenuItemProps[] = [
+  {
+    name: "首页",
+    href: "/",
+    type: "normal",
+    iconfont: "iconfont icon-home2",
+  },
+  {
+    name: "博客",
+    href: "/blog",
+    type: "normal",
+    iconfont: "iconfont icon-paper",
+  },
+  {
+    name: "归档",
+    type: "list",
+    iconfont: "iconfont icon-guidangicon",
+  },
+  {
+    name: "标签",
+    href: "/tags",
+    iconfont: "iconfont icon-label_fill",
+  },
+  {
+    name: "友链",
+    href: "/friends",
+    iconfont: "iconfont icon-link",
+  },
+  {
+    name: "关于",
+    href: "/about",
+    iconfont: "iconfont icon-timerauto",
+  },
+];
 ---
 
-<div class="menu">test</div>
+<div class="menu">
+  {
+    ItemList.map(({ href, name, type, iconfont }) => {
+      return (
+        <a href={href}>
+          {!type || type === "normal" ? (
+            <MenuItem ItemName={name} type={type} iconfont={iconfont} />
+          ) : (
+            <ListMenuItem ItemName={name} type={type} iconfont={iconfont} />
+          )}
+        </a>
+      );
+    })
+  }
+</div>
 
 <style lang="scss">
   .menu {
@@ -9,7 +68,6 @@
     font-size: 1rem;
 
     .item {
-      padding: 0 1rem;
       cursor: pointer;
     }
 

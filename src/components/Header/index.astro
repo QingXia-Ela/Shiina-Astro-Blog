@@ -1,6 +1,8 @@
 ---
 import cfg from "blog.config";
 import GetCurrentPageSetting from "@/utils/GetCurrentPageSetting";
+import RightMenu from "./RightMenu/index.astro";
+import RightMenuMobile from "./RightMenu/mobile.astro";
 
 const { header } = GetCurrentPageSetting(Astro.url);
 const KeepBGColor = header!.keepBackgroundColor,
@@ -11,9 +13,11 @@ const KeepBGColor = header!.keepBackgroundColor,
 ---
 
 <header>
-  <div class={`wrapper ${KeepBGColor ? "keep_bg" : ""}`}>
+  <div class={`wrapper ${KeepBGColor ? "keep_bg" : ""} show_menu`}>
     <div class="full_item">
       <div class="title">{title}</div>
+      <RightMenu />
+      <RightMenuMobile />
     </div>
     <div class="full_item full_title text_nowrap">{Pos + title}</div>
   </div>
@@ -72,10 +76,6 @@ const KeepBGColor = header!.keepBackgroundColor,
         .full_item {
           justify-content: center;
           padding: 0;
-        }
-
-        .menu {
-          display: none;
         }
       }
     }

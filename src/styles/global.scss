@@ -5,6 +5,7 @@
 }
 
 html {
+  font-family: 'Microsoft YaHei', 'Times New Roman', Times, serif;
   width: 100%;
   min-height: 100%;
   background-color: rgb(69, 196, 255);
@@ -13,6 +14,16 @@ html {
 body {
   width: 100%;
   min-height: 100%;
+
+  a {
+    color: var(--text-default);
+    text-decoration: none;
+    transition: color .2s;
+
+    &:hover {
+      color: var(--tips-default);
+    }
+  }
 }
 
 .text_nowrap {
@@ -22,7 +33,6 @@ body {
 }
 
 a {
-  color: #fff !important;
   padding: 0 0.2rem;
 }
 

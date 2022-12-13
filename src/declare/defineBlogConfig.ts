@@ -146,10 +146,10 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
     },
     color: {
       light: {
-        backgroundDefault: '#f2f5f8',
-        backgroundActiveDefault: '#ddd',
+        backgroundDefault: '#fff',
+        backgroundActiveDefault: '#FFFDE4',
         textDefault: '#222',
-        tipsDefault: '#ad7ffd'
+        tipsDefault: '#3F5EFB'
       },
       dark: {
         backgroundDefault: '#121212',
