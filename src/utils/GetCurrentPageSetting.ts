@@ -5,7 +5,8 @@ type PathListProps = Record<string, PageList>
 
 const PathList: PathListProps = {
   '/': 'index',
-  '/about': 'about'
+  '/about': 'about',
+  '/search': 'search'
 }
 
 export default function (url: URL): PageConfig {
