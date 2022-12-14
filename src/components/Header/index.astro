@@ -73,8 +73,6 @@ const KeepBGColor = header!.keepBackgroundColor,
         .title {
           font-size: 1.2rem;
           font-weight: 700;
-          transition: transform 0.5s, background-color 0.5s;
-          background-color: var(--background-default);
         }
       }
     }
@@ -91,13 +89,15 @@ const KeepBGColor = header!.keepBackgroundColor,
           padding: 0;
 
           .title {
+            z-index: 900;
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 900;
-            position: relative;
             width: 100%;
             height: 100%;
+            transition: transform 0.5s, background-color 0.5s;
+            background-color: var(--background-default);
           }
 
           &.list {

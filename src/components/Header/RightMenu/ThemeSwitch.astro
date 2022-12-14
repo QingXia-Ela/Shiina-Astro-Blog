@@ -12,6 +12,7 @@
    * DARK_MODE = 'dark'
    */
   const DARK_MODE = "dark";
+  if (!window._Mobile_Menu_Namespace_) window._Mobile_Menu_Namespace_ = {};
 
   function SwitchState(choose) {
     document.querySelector("html").setAttribute("class", choose ? "dark" : "");
