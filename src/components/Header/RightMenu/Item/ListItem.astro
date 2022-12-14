@@ -1,5 +1,8 @@
 ---
 import _ from "lodash";
+/**
+ * import  { MobileMenuId } from "@/constant/Header"
+ */
 
 export interface Props {
   ItemName: string;
@@ -18,13 +21,43 @@ let { ItemName, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
 ---
 
 <div class="item list h100">
-  {iconfont.length ? <i class={iconfont} /> : undefined}
-  {ItemName}
+  <div class="info">
+    {iconfont.length ? <i class={iconfont} /> : undefined}
+    {ItemName}
+  </div>
   <div class="list_item column_flex default_box_shadow">
     <a href="/">技术</a>
     <a href="/">随笔</a>
   </div>
 </div>
+
+<script type="module">
+  /**
+   * MobileMenuId = 'MobileMenu'
+   */
+  const MobileMenuId = "MobileMenu";
+  if (!window._Mobile_Menu_Namespace_) window._Mobile_Menu_Namespace_ = {};
+
+  if (!window._Mobile_Menu_Namespace_.AddListItem) {
+    const ItemList = document
+      .getElementById(MobileMenuId)
+      .querySelector(".list_menu_item")
+      .querySelectorAll(".item");
+    ItemList.forEach((val) => {
+      val.addEventListener("click", (e) => {
+        let CurrentClass = val.getAttribute("class"),
+          FinalClass = "",
+          isOpen = /open/.test(CurrentClass);
+
+        if (isOpen) FinalClass = CurrentClass.replace("open");
+        else FinalClass = CurrentClass + " open";
+
+        val.setAttribute("class", FinalClass);
+      });
+    });
+    window._Mobile_Menu_Namespace_.AddListItem = true;
+  }
+</script>
 
 <style lang="scss">
   .item {
@@ -33,29 +66,42 @@ let { ItemName, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
     gap: 0.3rem;
     position: relative;
     font-size: 0.95rem;
-    padding: 0 1.2rem 0 0.6rem;
+    padding: 0 0.5rem 0 0.6rem;
     color: var(--text-default);
-    transition: color 0.2s;
+    background-color: var(--background-default);
+    transition: color 0.2s, background-color 0.3s;
     cursor: pointer;
 
-    &:hover {
+    &:hover,
+    &.open {
       color: var(--tips-default);
 
       .list_item {
-        visibility: visible;
+        display: block;
+      }
+
+      .info {
+        line-height: 3rem;
+
+        &::after {
+          border-top-color: var(--tips-default);
+        }
       }
     }
 
-    &.list {
-      &::before {
+    .info {
+      line-height: 3rem;
+
+      &::after {
         content: " ";
-        position: absolute;
-        top: calc(50% - 0.2rem);
-        right: 0.4rem;
+        position: relative;
+        top: 0.75rem;
+        left: 0.3rem;
         border: 0.3rem solid var(--text-default);
         border-bottom-width: 0;
         border-left-color: transparent;
         border-right-color: transparent;
+        transition: border-top-color 0.3s;
       }
     }
 
@@ -68,7 +114,7 @@ let { ItemName, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
     }
 
     .list_item {
-      visibility: hidden;
+      display: none;
       align-items: center;
       position: absolute;
       top: 4rem;
@@ -89,6 +135,18 @@ let { ItemName, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
         &:hover {
           background-color: var(--background-active-default);
         }
+      }
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .item {
+      flex-flow: column nowrap;
+      padding: 0;
+
+      .list_item {
+        width: 95%;
+        position: static;
       }
     }
   }

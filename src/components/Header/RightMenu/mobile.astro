@@ -1,11 +1,130 @@
 ---
 import ItemList from "./ItemList";
+import MenuItem from "./Item/Item.astro";
+import ListMenuItem from "./Item/ListItem.astro";
+import { MobileMenuId } from "@/constant/Header";
 ---
 
-<div class="menu_mobile"></div>
+<div class="menu_mobile" id={MobileMenuId}>
+  <div class="switch_button">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+  <div class="list">
+    {
+      ItemList.map(({ href, name, type, iconfont }) => {
+        return !type || type === "normal" ? (
+          <a href={href} class="h100 flex_center list_item">
+            <MenuItem ItemName={name} type={type} iconfont={iconfont} />
+          </a>
+        ) : (
+          <div class="list_menu_item">
+            <ListMenuItem ItemName={name} type={type} iconfont={iconfont} />
+          </div>
+        );
+      })
+    }
+  </div>
+</div>
+
+<script type="module">
+  const MobileMenuId = "MobileMenu",
+    MobileMenuElement = document.querySelector("#" + MobileMenuId);
+
+  MobileMenuElement.querySelector(".switch_button").addEventListener(
+    "click",
+    () => {
+      let CurrentClass = MobileMenuElement.getAttribute("class"),
+        FinalClass = "",
+        isOpen = /open/.test(CurrentClass);
+
+      if (isOpen) FinalClass = CurrentClass.replace("open");
+      else FinalClass = CurrentClass + " open";
+
+      MobileMenuElement.setAttribute("class", FinalClass);
+    }
+  );
+</script>
 
 <style lang="scss">
   .menu_mobile {
     position: absolute;
+    width: 100%;
+    height: 100%;
+
+    .switch_button {
+      z-index: 901;
+      position: absolute;
+      top: 1.25rem;
+      right: 1rem;
+      width: 1.8rem;
+      height: 1.5rem;
+
+      .line {
+        position: absolute;
+        width: 100%;
+        height: 0.2rem;
+        background-color: var(--text-default);
+        transition: transform 0.3s, opacity 0.3s;
+      }
+
+      .line:first-child {
+        top: 0;
+      }
+
+      .line:nth-child(2) {
+        top: 0.6rem;
+      }
+
+      .line:nth-child(3) {
+        top: 1.3rem;
+      }
+    }
+
+    .list {
+      position: absolute;
+      top: 100%;
+      width: 100%;
+      transform: translateY(-100%);
+      transition: transform 0.3s;
+
+      .list_item,
+      .list_menu_item {
+        width: 100%;
+        min-height: 3rem;
+        background-color: var(--background-default);
+        padding: 0 calc(50% - 2.5rem);
+      }
+
+      .list_menu_item {
+        padding: 0;
+      }
+    }
+
+    &.open {
+      .switch_button {
+        .line:first-child {
+          transform: translateY(0.65rem) rotateZ(45deg);
+        }
+
+        .line:nth-child(2) {
+          opacity: 0;
+        }
+
+        .line:nth-child(3) {
+          transform: translateY(-0.65rem) rotateZ(-45deg);
+        }
+      }
+      .list {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  @media screen and (min-width: 992px) {
+    .menu_mobile {
+      display: none;
+    }
   }
 </style>
