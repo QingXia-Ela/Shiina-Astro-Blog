@@ -130,7 +130,7 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
       footer: {
         hidden: false,
         content: [
-          'Copyright © By {{ name }}'
+          '<div>Copyright © 2022</div>'
         ]
       }
     },
@@ -193,11 +193,15 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
       }
     }
   }
+
+
+  let C = _.defaultsDeep(config, _DEFAULT_CONFIG_)
+
   // copy default value from page default settings
-  for (const i in _DEFAULT_CONFIG_.pages) {
-    // @ts-expect-error
-    _DEFAULT_CONFIG_.pages[i] = _.defaultsDeep(_DEFAULT_CONFIG_.pages[i], _DEFAULT_CONFIG_.PageDefaultSettings)
+  for (const i in C.pages) {
+    C.pages[i] = _.defaultsDeep(JSON.parse(JSON.stringify(C.pages[i])), JSON.parse(JSON.stringify(C.PageDefaultSettings)))
+
   }
 
-  return _.defaultsDeep(config, _DEFAULT_CONFIG_)
+  return C
 }

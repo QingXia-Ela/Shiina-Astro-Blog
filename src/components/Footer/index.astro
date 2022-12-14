@@ -1,0 +1,24 @@
+---
+export interface Props {
+  content: string[];
+}
+
+const { content } = Astro.props;
+---
+
+<footer set:html={content.map((val) => val)} />
+
+<style lang="scss">
+  footer {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 10rem;
+    color: var(--text-default);
+    background-color: var(--background-default);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16),
+      0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  }
+</style>
