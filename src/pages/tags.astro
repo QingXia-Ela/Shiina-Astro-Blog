@@ -1,13 +1,27 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const TestWord = [];
 ---
 
 <BaseLayout>
-  <div class="tags"></div>
+  <div class="tags flex_center">
+    <div class="wrapper">111</div>
+  </div>
 </BaseLayout>
 
 <style lang="scss">
   .tags {
-    height: 100%;
+    margin: 6rem 0;
+    .wrapper {
+      width: 70%;
+      min-height: 30rem;
+      padding: 5rem;
+      color: var(--text-default);
+      background-color: var(--background-default);
+      border-radius: 1rem;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16),
+        0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    }
   }
 </style>
