@@ -7,12 +7,26 @@ export interface Props {
 
 const { filter, mask, type, content } = Astro.props.cfg;
 
-console.log(Astro.props.cfg);
+let bg = "";
+
+switch (type) {
+  case "fade":
+    bg = `background-image: ${content};`;
+    break;
+  case "photo":
+    bg = `background-image: url(${content});`;
+    break;
+
+  default:
+    bg = `background-color: ${content};`;
+    break;
+}
 ---
 
 <div
   id="Background"
   class={`${mask ? " mask" : ""} ${filter ? " filter" : ""}`}
+  style={bg}
 >
 </div>
 
@@ -25,7 +39,7 @@ console.log(Astro.props.cfg);
     width: 100vw;
     height: 100vh;
     background-position: center;
-    background-image: url(/src/assets/1.jpg);
+    // background-image: url(/src/assets/1.jpg);
     background-size: cover;
 
     &::before {

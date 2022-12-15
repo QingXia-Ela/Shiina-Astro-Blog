@@ -2,6 +2,10 @@ import defineBlogConfig from "@/declare/defineBlogConfig";
 
 export default defineBlogConfig({
   PageDefaultSettings: {
+    background: {
+      type: 'fade',
+      content: `linear-gradient(to left, #12c2e9, #c471ed, #f64f59)`
+    },
     footer: {
       content: [
         '<div>Copyright © 2022 - 2023 Shiinafan</div>',
@@ -18,13 +22,5 @@ export default defineBlogConfig({
     title: `Shiina's Blog`,
     description: '',
     url: 'https://blog.shiinafan.top'
-  },
-  pages: {
-    index: {
-      background: {
-        filter: true,
-        mask: true,
-      }
-    }
   }
 })
