@@ -2,11 +2,12 @@
 import "@/styles/global.scss";
 import HeadMeta from "@/components/HeadMeta.astro";
 import Header from "@/components/Header/index.astro";
+import Background from "@/components/Background/index.astro";
 import Footer from "@/components/Footer/index.astro";
 import cfg from "blog.config";
 import GetCurrentPageSetting from "@/utils/GetCurrentPageSetting";
 
-const { header, footer } = GetCurrentPageSetting(Astro.url);
+const { header, footer, background } = GetCurrentPageSetting(Astro.url);
 
 const {
   color: { light, dark },
@@ -51,6 +52,7 @@ const {
     <main>
       <slot />
     </main>
+    <Background cfg={background!} />
     {footer!.hidden ? null : <Footer content={footer!.content!} />}
   </body>
 </html>

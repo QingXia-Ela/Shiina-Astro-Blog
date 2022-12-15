@@ -38,22 +38,28 @@ interface BasicHeaderConfig {
 // 单个页面的 header 配置
 interface PageHeaderConfig extends BasicHeaderConfig { }
 
-interface BasicBackgroundConfig {
+export interface BasicBackgroundConfig {
   /** 
-   * 背景类型，`photo` 为图片，`fade` 为渐变色，`purity` 为纯色
-   * 
-   * - 选用 `photo` `fade` 时内部使用 `background-image` 处理，图片只需要写上路径即可
-   * 
-   * - 使用 `purity` 则用 `background-color` 处理
+   * 背景类型，`photo` 为图片；`fade` 为渐变色，但只要是 `background-image` 可接受的参数即可；`purity` 为纯色
    */
   type: 'photo' | 'fade' | 'purity'
+  /**
+   * 填入内容，根据 `type` 选项决定
+   * - `photo`，则填入图片路径
+   * - `fade` 则填入 `background-image` 可接受参数，比如 `linear-gradient()`
+   * - `purify` 则填入颜色代码，如 `#eee`
+   */
+  content: string
   /**
    * @deprecated 将会在新版本中启用
    */
   jsPlugin: boolean
   /** 为背景提供一个毛玻璃效果，默认 `false`，详见：[MDN filter](https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter) */
   filter: boolean
-  /** 为背景提供一个暗色效果，默认 `false`，详见：[MDN filter](https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter) */
+  /** 为背景提供一个暗色效果，默认 `false`，详见：[MDN background-color](https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-color)
+   * 
+   * 颜色透明度 0.6
+   */
   mask: boolean
 }
 
@@ -125,7 +131,9 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
       },
       background: {
         filter: false,
-        mask: false
+        mask: false,
+        type: "purity",
+        content: "#ddd"
       },
       footer: {
         hidden: false,
@@ -194,13 +202,10 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
     }
   }
 
-
   let C = _.defaultsDeep(config, _DEFAULT_CONFIG_)
 
-  // copy default value from page default settings
   for (const i in C.pages) {
-    C.pages[i] = _.defaultsDeep(JSON.parse(JSON.stringify(C.pages[i])), JSON.parse(JSON.stringify(C.PageDefaultSettings)))
-
+    C.pages[i] = _.defaultsDeep(C.pages[i], C.PageDefaultSettings)
   }
 
   return C

@@ -20,8 +20,11 @@ export default defineBlogConfig({
     url: 'https://blog.shiinafan.top'
   },
   pages: {
-    'index': {
-
+    index: {
+      background: {
+        filter: true,
+        mask: true,
+      }
     }
   }
 })
