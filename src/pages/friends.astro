@@ -1,0 +1,26 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import WhiteModule from "@/components/WhiteModule.astro";
+const Content = (await Astro.glob("/source/_Protect/friends.md"))[0].Content;
+---
+
+<BaseLayout>
+  <div class="friends">
+    <WhiteModule title={"友情链接"}>
+      烫烫烫
+      <!-- <div class="md">
+        <Content />
+      </div> -->
+    </WhiteModule>
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+  .friends {
+    width: 70%;
+    margin: 4rem auto;
+    :global(.white_module) {
+      padding: 2rem 4rem;
+    }
+  }
+</style>

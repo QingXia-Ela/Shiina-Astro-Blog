@@ -26,13 +26,17 @@ const wordList = [
   "明日方舟",
   "hiiro",
   "压缩毛巾",
+  "threejs",
+  "tailwind",
+  "UI",
+  "java",
 ];
 
 const sizelist = ["s", "m", "l", "xl"];
 
 for (let i = 0; i < 100; i++) {
   TestWord.push({
-    content: wordList[Math.round((wordList.length - 1) * Math.random())],
+    content: wordList[i % (wordList.length - 1)],
     size: sizelist[Math.round((sizelist.length - 1) * Math.random())],
   });
 }
@@ -40,7 +44,7 @@ for (let i = 0; i < 100; i++) {
 
 <BaseLayout>
   <div class="tags flex_center">
-    <div class="wrapper">
+    <div class="wrapper white_module">
       {
         TestWord.map((val) => {
           return (
@@ -67,10 +71,6 @@ for (let i = 0; i < 100; i++) {
       min-height: 30rem;
       padding: 5rem;
       font-size: 1.4rem;
-      background-color: var(--background-default);
-      border-radius: 1rem;
-      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16),
-        0 2px 10px 0 rgba(0, 0, 0, 0.12);
 
       .word {
         color: var(--tips-default);
@@ -96,6 +96,15 @@ for (let i = 0; i < 100; i++) {
         &.xl {
           font-size: 1.4rem;
         }
+      }
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .tags {
+      .wrapper {
+        padding: 2rem;
+        width: 90%;
       }
     }
   }
