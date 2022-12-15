@@ -94,6 +94,8 @@ interface BasicPageConfig {
   header?: PageHeaderConfig
   background?: Partial<BasicBackgroundConfig>
   footer?: PageFooterConfig
+  /** 给予页面中心部分最小高度，默认为 `true` */
+  setMinHeight?: boolean
 }
 
 export interface PageConfig extends BasicPageConfig { }
@@ -124,6 +126,7 @@ interface BlogConfig extends Record<any, any> {
 export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfig {
   const _DEFAULT_CONFIG_: BlogConfig = {
     PageDefaultSettings: {
+      setMinHeight: true,
       header: {
         title: '',
         hidden: false,
