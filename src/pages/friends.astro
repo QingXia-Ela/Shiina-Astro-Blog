@@ -7,10 +7,32 @@ const Content = (await Astro.glob("/source/_Protect/friends.md"))[0].Content;
 <BaseLayout>
   <div class="friends">
     <WhiteModule title={"友情链接"}>
-      烫烫烫
-      <!-- <div class="md">
+      <div class="friends_list">
+        {
+          (() => {
+            let res = [];
+            for (let i = 0; i < 10; i++) {
+              res.push(
+                <div class="friend_item">
+                  <div class="avatar_wrapper">
+                    <img src="/favicon.svg" alt="" />
+                  </div>
+                  <div class="info">
+                    <div class="name">Shiina</div>
+                    <div class="autograph">
+                      烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+            return res;
+          })()
+        }
+      </div>
+      <div class="md">
         <Content />
-      </div> -->
+      </div>
     </WhiteModule>
   </div>
 </BaseLayout>
@@ -19,8 +41,108 @@ const Content = (await Astro.glob("/source/_Protect/friends.md"))[0].Content;
   .friends {
     width: 70%;
     margin: 4rem auto;
+    color: var(--text-default);
+
     :global(.white_module) {
-      padding: 2rem 4rem;
+      padding: 2rem 6rem;
+    }
+
+    .friends_list {
+      width: fit-content;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      align-content: center;
+      flex-wrap: wrap;
+      margin: 3rem auto;
+
+      .friend_item {
+        display: flex;
+        width: 33.33%;
+        height: 5rem;
+        padding: 0 3rem;
+        align-items: center;
+        transition: background-color 0.1s;
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--background-active-default);
+        }
+
+        .avatar_wrapper {
+          width: 4rem;
+          height: 4rem;
+          border-radius: 100vh;
+          overflow: hidden;
+          box-shadow: 0 0 5px 2px #5e5e5e4d;
+        }
+
+        .info {
+          flex: 1;
+          margin-left: 1rem;
+          text-align: left;
+
+          .name {
+            font-weight: 700;
+          }
+
+          .autograph {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            width: 100%;
+            max-height: 2.8rem;
+            color: #888;
+            font-size: 0.9rem;
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
+        }
+      }
+    }
+
+    .md {
+      padding: 3rem;
+      border-radius: 1rem;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16),
+        0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  @media screen and (max-width: 1280px) {
+    .friends {
+      width: 95%;
+
+      .friends_list {
+        .friend_item {
+          width: 33.33%;
+        }
+      }
+
+      :global(.white_module) {
+        padding: 2rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .friends {
+      .friends_list {
+        .friend_item {
+          width: 50%;
+          padding: 0 2rem;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    .friends {
+      .friends_list {
+        .friend_item {
+          width: 100%;
+        }
+      }
     }
   }
 </style>

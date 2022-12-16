@@ -16,5 +16,12 @@ export default defineConfig({
         }
       ]
     }
+  },
+  markdown: {
+    shikiConfig: {
+      theme: 'dracula',
+      langs: [],
+      wrap: true
+    }
   }
 });
