@@ -1,5 +1,8 @@
+import cfg from "blog.config";
+const { SearchConfig } = cfg;
+
 interface MenuItemProps extends Record<string, any> {
-  name: string;
+  name?: string;
   href?: string;
   type?: "normal" | "list";
   iconfont?: string;
@@ -38,7 +41,15 @@ const ItemList: MenuItemProps[] = [
     name: "关于",
     href: "/about",
     iconfont: "iconfont icon-24gl-user",
-  },
+  }
+
 ];
+
+if (SearchConfig) {
+  ItemList.push({
+    href: '/search',
+    iconfont: 'iconfont icon-24gl-search2'
+  })
+}
 
 export default ItemList

@@ -121,6 +121,12 @@ interface BlogConfig extends Record<any, any> {
   }
   pages: Partial<Record<PageList, PageConfig>>
   UserInfo: BasicPersonalConfig
+  /** 
+   * 搜索配置
+   * 
+   * @deprecated 还在开发中
+   */
+  SearchConfig?: BasicSearchConfig
 }
 
 export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfig {

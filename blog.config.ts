@@ -22,5 +22,6 @@ export default defineBlogConfig({
     title: `Shiina's Blog`,
     description: '',
     url: 'https://blog.shiinafan.top'
-  }
+  },
+  SearchConfig: {}
 })

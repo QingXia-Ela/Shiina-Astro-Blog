@@ -1,8 +1,39 @@
 ---
 import SearchVue from "./search.vue";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import cfg from "blog.config";
+const { SearchConfig } = cfg;
 ---
 
 <BaseLayout>
-  <SearchVue client:load />
+  <div class="search white_module">
+    {
+      SearchConfig ? (
+        <>
+          <h1 class="tips">站内搜索</h1>
+          <SearchVue client:load />
+        </>
+      ) : (
+        <h2 class="tips">非常抱歉，本站暂未启用搜索功能！</h2>
+      )
+    }
+  </div>
 </BaseLayout>
+
+<style lang="scss">
+  .search {
+    width: 70%;
+    margin: 3rem auto;
+    padding: 2rem;
+
+    & > .tips {
+      text-align: center;
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .search {
+      width: 95%;
+    }
+  }
+</style>
