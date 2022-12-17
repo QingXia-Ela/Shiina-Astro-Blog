@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
+import StateArea from './StateArea/index.vue'
 
 const SearchContent = ref("")
 </script>
@@ -9,6 +10,7 @@ const SearchContent = ref("")
     <input id="InputArea" type="text" placeholder="文章关键字..." v-model="SearchContent" />
     <i class="iconfont icon-24gl-search2"></i>
   </div>
+  <StateArea />
 </template>
 
 <style lang="scss" scoped>

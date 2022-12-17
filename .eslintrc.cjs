@@ -11,10 +11,11 @@ module.exports = {
     ],
     "overrides": [
     ],
-    "parser": "@typescript-eslint/parser",
+    "parser": "vue-eslint-parser",
     "parserOptions": {
         "ecmaVersion": "latest",
-        "sourceType": "module"
+        "sourceType": "module",
+        "parser": "@typescript-eslint/parser",
     },
     "plugins": [
         "vue",
@@ -22,6 +23,7 @@ module.exports = {
     ],
     "rules": {
         "@typescript-eslint/no-explicit-any": "off",
-        "@typescript-eslint/no-non-null-assertion": "off"
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "vue/multi-word-component-names": "off"
     }
 }
