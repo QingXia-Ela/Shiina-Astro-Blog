@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import EmptyVue from './state/empty.vue';
 import PendingVue from './state/pending.vue';
+import ErrorVue from './state/error.vue'
 </script>
 
 <template>
   <div class="state_area">
-    <PendingVue />
+    <ErrorVue />
   </div>
 </template>
 
