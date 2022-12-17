@@ -1,7 +1,7 @@
 const Split = '---'
 
 function removeCharOnHeadAndTail(str: string, ch?: string | RegExp, time = 1) {
-  let s = str.split("")
+  const s = str.split("")
   for (let i = 0; i < time; i++) {
     if (typeof ch === 'string') {
       if (s[0] === ch) s.shift()
@@ -16,15 +16,16 @@ function removeCharOnHeadAndTail(str: string, ch?: string | RegExp, time = 1) {
 }
 
 function SpeicalKeyFactory(key: string, value: string) {
-  let newVal: any = value
+  let newVal: string | string[] = value
   switch (key) {
     case 'time':
       return new Date(value)
-    case 'tags':
+    case 'tags': {
       const s = removeCharOnHeadAndTail(value, ' ').split("")
       s.pop(), s.shift()
       newVal = s.join('').split(',')
       break;
+    }
     case 'categories':
       newVal = removeCharOnHeadAndTail(value, /[ '"]/, 2)
       break;
@@ -36,12 +37,13 @@ function SpeicalKeyFactory(key: string, value: string) {
 }
 
 export default function (str: string) {
-  let I1 = str.indexOf(Split), I2, res: { [key: string]: any } = {}
+  const I1 = str.indexOf(Split), res: { [key: string]: any } = {}
+  let I2 = 0
   if (I1 === 0) {
     I2 = str.indexOf(Split, 2)
     const InfoArray = str.substring(4, I2 - 1).split("\n")
     for (const i of InfoArray) {
-      let index = i.indexOf(":"), key = i.substring(0, index), value = i.substring(index + 1)
+      const index = i.indexOf(":"), key = i.substring(0, index), value = i.substring(index + 1)
       res[key] = SpeicalKeyFactory(key, value)
       res['_content'] = str.substring(I2 + 3)
     }

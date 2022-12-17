@@ -36,7 +36,7 @@ interface BasicHeaderConfig {
 }
 
 // 单个页面的 header 配置
-interface PageHeaderConfig extends BasicHeaderConfig { }
+type PageHeaderConfig = BasicHeaderConfig
 
 export interface BasicBackgroundConfig {
   /** 
@@ -71,7 +71,7 @@ interface BasicFooterConfig {
   content?: string[]
 }
 
-interface PageFooterConfig extends BasicFooterConfig { }
+type PageFooterConfig = BasicFooterConfig
 
 // 底色配置
 interface BasicThemeColorConfig {
@@ -85,9 +85,9 @@ interface BasicThemeColorConfig {
   tipsDefault: string
 }
 
-interface LightThemeColorConfig extends BasicThemeColorConfig { }
+type LightThemeColorConfig = BasicThemeColorConfig
 
-interface DarkThemeColorConfig extends BasicThemeColorConfig { }
+type DarkThemeColorConfig = BasicThemeColorConfig
 
 // 页面配置
 interface BasicPageConfig {
@@ -98,7 +98,7 @@ interface BasicPageConfig {
   setMinHeight?: boolean
 }
 
-export interface PageConfig extends BasicPageConfig { }
+export type PageConfig = BasicPageConfig
 
 // 网站配置
 interface BasicWebsiteConfig {
@@ -211,7 +211,7 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
     }
   }
 
-  let C = _.defaultsDeep(config, _DEFAULT_CONFIG_)
+  const C = _.defaultsDeep(config, _DEFAULT_CONFIG_)
 
   for (const i in C.pages) {
     C.pages[i] = _.defaultsDeep(C.pages[i], C.PageDefaultSettings)

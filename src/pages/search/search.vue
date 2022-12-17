@@ -48,4 +48,12 @@ const SearchContent = ref("")
     }
   }
 }
+
+@media screen and (max-width: 992px) {
+  .search_input {
+    margin: 2rem;
+
+    #InputArea {}
+  }
+}
 </style>
