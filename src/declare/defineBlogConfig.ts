@@ -172,7 +172,7 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
         backgroundDefault: '#121212',
         backgroundActiveDefault: '#444',
         textDefault: '#fff',
-        tipsDefault: '#a1b0fc'
+        tipsDefault: '#919edf'
       },
     },
     pages: {
