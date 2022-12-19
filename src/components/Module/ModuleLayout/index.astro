@@ -1,0 +1,37 @@
+---
+import WhiteModule from "@/components/WhiteModule.astro";
+
+export interface Props {
+  horizontal?: boolean;
+  title?: string;
+}
+
+const { horizontal, title } = Astro.props;
+---
+
+<div class={`module_wrapper ${horizontal ? "horizontal" : "vertical"}`}>
+  <WhiteModule>
+    <slot />
+  </WhiteModule>
+</div>
+
+<style lang="scss">
+  .module_wrapper {
+    &.horizontal {
+      width: 49%;
+      height: 100%;
+    }
+
+    &.vertical {
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .module_wrapper {
+      &.horizontal {
+        width: 100%;
+        margin: 1rem 0;
+      }
+    }
+  }
+</style>

@@ -1,8 +1,12 @@
 ---
 import cfg from "blog.config";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import BlogInfo from "@/components/BlogInfo.astro";
 ---
 
 <BaseLayout>
 	<!-- <img src={cfg.UserInfo.avatar} alt="" /> -->
+	<div class="w">
+		<BlogInfo horizontal={true} />
+	</div>
 </BaseLayout>

@@ -126,11 +126,13 @@ const {
   <body>
     {header!.hidden ? null : <Header />}
     <main class={`${setMinHeight ? "get_min_height" : ""} md-wrapper`}>
+      <slot name="before-markdown" />
       <WhiteModule>
         <div class="markdown-body">
           <slot />
         </div>
       </WhiteModule>
+      <slot name="after-markdown" />
     </main>
     <Background cfg={background!} />
     {footer!.hidden ? null : <Footer content={footer!.content!} />}

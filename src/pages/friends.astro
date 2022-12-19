@@ -6,7 +6,8 @@ const Content = (await Astro.glob("/source/_Protect/friends.md"))[0].Content;
 
 <BaseLayout>
   <div class="friends">
-    <WhiteModule title={"友情链接"}>
+    <WhiteModule>
+      <h1>友情链接</h1>
       <div class="friends_list">
         {
           (() => {
@@ -45,6 +46,10 @@ const Content = (await Astro.glob("/source/_Protect/friends.md"))[0].Content;
 
     :global(.white_module) {
       padding: 2rem 6rem;
+
+      & > h1 {
+        text-align: center;
+      }
     }
 
     .friends_list {

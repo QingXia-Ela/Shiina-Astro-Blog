@@ -1,0 +1,39 @@
+---
+import ModuleLayout from "@/components/Module/ModuleLayout/index.astro";
+export interface Props {
+  horizontal?: boolean;
+}
+
+const { horizontal } = Astro.props;
+---
+
+<div class={`blog_info ${horizontal ? "horizontal" : "vertical"}`}>
+  <ModuleLayout horizontal={horizontal} />
+  <ModuleLayout horizontal={horizontal} />
+</div>
+
+<style lang="scss">
+  .blog_info {
+    width: 100%;
+
+    &.horizontal {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      align-content: center;
+      height: 12rem;
+      margin: 1rem 0;
+    }
+
+    &.vertical {
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      width: 100%;
+      margin: 0 1rem;
+    }
+  }
+</style>
