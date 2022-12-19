@@ -10,7 +10,7 @@ const { horizontal, title } = Astro.props;
 ---
 
 <div class={`module_wrapper ${horizontal ? "horizontal" : "vertical"}`}>
-  <WhiteModule>
+  <WhiteModule title={title}>
     <slot />
   </WhiteModule>
 </div>
@@ -23,6 +23,7 @@ const { horizontal, title } = Astro.props;
     }
 
     &.vertical {
+      margin: 1rem 0;
     }
   }
 

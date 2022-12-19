@@ -5,6 +5,7 @@ type PathListProps = Record<string, PageList>
 
 const PathList: PathListProps = {
   '/': 'index',
+  '/blog': 'blog',
   '/about': 'about',
   '/search': 'search',
   '/tags': 'tags',

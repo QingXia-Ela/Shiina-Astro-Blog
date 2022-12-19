@@ -8,8 +8,8 @@ const { horizontal } = Astro.props;
 ---
 
 <div class={`blog_info ${horizontal ? "horizontal" : "vertical"}`}>
-  <ModuleLayout horizontal={horizontal} />
-  <ModuleLayout horizontal={horizontal} />
+  <ModuleLayout horizontal={horizontal} title={"个人信息"} />
+  <ModuleLayout horizontal={horizontal} title={"近期文章"} />
 </div>
 
 <style lang="scss">
