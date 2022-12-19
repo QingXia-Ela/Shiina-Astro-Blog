@@ -16,6 +16,9 @@
     "@astrojs/sitemap": "^1.0.0",
     "@astrojs/vue": "^1.2.1",
     "astro": "^1.6.11",
+    "github-markdown-css": "^5.1.0",
+    "install": "^0.13.0",
+    "npm": "^9.2.0",
     "vue": "^3.2.45"
   },
   "devDependencies": {

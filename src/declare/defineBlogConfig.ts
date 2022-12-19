@@ -186,11 +186,7 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
           title: '博客'
         }
       },
-      'about': {
-        header: {
-          title: '关于'
-        }
-      },
+      'about': {},
       'article': {},
       'custom': {},
       'friends': {

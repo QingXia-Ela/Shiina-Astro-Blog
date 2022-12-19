@@ -16,6 +16,7 @@ export default defineBlogConfig({
   },
   UserInfo: {
     name: 'Shiinafan',
+    introduction: '有钱终成眷属，没钱亲眼目睹',
     avatar: '/source/avatar2.jpg'
   },
   WebsiteSettings: {
