@@ -23,7 +23,8 @@ import spin from '@/assets/svg/spin.svg'
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  margin: 4rem 0;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
 
   .icon {
     font-size: 3rem;
