@@ -1,0 +1,37 @@
+---
+const list = [
+  ["文章", 114514],
+  ["标签", 114514],
+  ["分类", 114514],
+];
+---
+
+<div class="status">
+  {
+    list.map((val) => (
+      <div class="status_item">
+        <div class="title">{val[0]}</div>
+        <div class="count">{val[1]}</div>
+      </div>
+    ))
+  }
+</div>
+
+<style lang="scss">
+  .status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .status_item {
+      text-align: center;
+
+      .title {
+      }
+      .count {
+        font-weight: 700;
+      }
+    }
+  }
+</style>

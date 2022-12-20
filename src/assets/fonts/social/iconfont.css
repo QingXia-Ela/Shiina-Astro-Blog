@@ -1,0 +1,117 @@
+@font-face {
+  font-family: "iconfont"; /* Project id  */
+  src: url('iconfont.ttf?t=1671505912416') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-facebook:before {
+  content: "\f012a";
+}
+
+.icon-tumblr:before {
+  content: "\e885";
+}
+
+.icon-baidu:before {
+  content: "\e650";
+}
+
+.icon-twitch:before {
+  content: "\e84a";
+}
+
+.icon-zhihu:before {
+  content: "\e69a";
+}
+
+.icon-telegram:before {
+  content: "\e731";
+}
+
+.icon-gitlab:before {
+  content: "\e61c";
+}
+
+.icon-codeforces:before {
+  content: "\e657";
+}
+
+.icon-discord:before {
+  content: "\e66e";
+}
+
+.icon-steam:before {
+  content: "\e686";
+}
+
+.icon-reddit:before {
+  content: "\e87f";
+}
+
+.icon-skype-fill:before {
+  content: "\e882";
+}
+
+.icon-wechat-fill:before {
+  content: "\e883";
+}
+
+.icon-whatsapp:before {
+  content: "\e8ea";
+}
+
+.icon-youtube:before {
+  content: "\e711";
+}
+
+.icon-github:before {
+  content: "\e50e";
+}
+
+.icon-tuite:before {
+  content: "\e652";
+}
+
+.icon-bilibili-line:before {
+  content: "\e75d";
+}
+
+.icon-gitee-fill-round:before {
+  content: "\e687";
+}
+
+.icon-leetcode:before {
+  content: "\ebf2";
+}
+
+.icon-qq:before {
+  content: "\e8d4";
+}
+
+.icon-dingtalk:before {
+  content: "\e8d6";
+}
+
+.icon-fly-letter:before {
+  content: "\e8d7";
+}
+
+.icon-momo:before {
+  content: "\e8d9";
+}
+
+.icon-microblog:before {
+  content: "\e8da";
+}
+
+.icon-linkedin-fill:before {
+  content: "\eab1";
+}
+

@@ -1,2 +1,50 @@
 ---
+export interface Props {
+  horizontal?: boolean;
+}
+const { horizontal } = Astro.props;
 ---
+
+<div class={`recent_article ${horizontal ? "horizontal" : "vertical"}`}>
+  <a class="item">
+    <div class="title text_nowrap w100">Test</div>
+    <div class="time text_nowrap w100">1919-8-10</div>
+  </a>
+</div>
+
+<style lang="scss">
+  .recent_article {
+    display: flex;
+    flex-flow: column nowrap;
+    height: 100%;
+
+    &.horizontal {
+    }
+    &.vertical {
+      .item {
+        height: 3.6rem;
+      }
+    }
+    .item {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-between;
+      height: 33.33%;
+      padding: 0.2rem 0.4rem;
+      transition: background-color 0.1s;
+
+      .title {
+        color: var(--text-default);
+      }
+      .time {
+        color: #888;
+        font-size: 0.86rem;
+      }
+
+      &:hover {
+        background-color: var(--background-active-default);
+        cursor: pointer;
+      }
+    }
+  }
+</style>

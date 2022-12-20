@@ -1,5 +1,7 @@
 ---
 import ModuleLayout from "@/components/Module/ModuleLayout/index.astro";
+import RecentArticles from "./Module/RecentArticles.astro";
+import PersonalInfo from "./Module/PersonalInfo/index.astro";
 export interface Props {
   horizontal?: boolean;
 }
@@ -8,8 +10,12 @@ const { horizontal } = Astro.props;
 ---
 
 <div class={`blog_info ${horizontal ? "horizontal" : "vertical"}`}>
-  <ModuleLayout horizontal={horizontal} title={"个人信息"} />
-  <ModuleLayout horizontal={horizontal} title={"近期文章"} />
+  <ModuleLayout horizontal={horizontal} title={"个人信息"}>
+    <PersonalInfo horizontal={horizontal} />
+  </ModuleLayout>
+  <ModuleLayout horizontal={horizontal} title={"近期文章"}>
+    <RecentArticles horizontal={horizontal} />
+  </ModuleLayout>
 </div>
 
 <style lang="scss">
@@ -22,7 +28,7 @@ const { horizontal } = Astro.props;
       justify-content: space-between;
       align-items: center;
       align-content: center;
-      height: 12rem;
+      height: 13rem;
       margin: 1rem 0;
     }
 
