@@ -1,0 +1,24 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <div class="blog">
+    <div class="wrapper">11</div>
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+  .blog {
+    display: flex;
+    justify-content: center;
+    padding-top: 5rem;
+
+    .wrapper {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+      width: 55%;
+    }
+  }
+</style>
