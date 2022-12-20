@@ -35,7 +35,15 @@ const { horizontal } = Astro.props;
     }
 
     &.vertical {
+      flex-flow: column nowrap;
+      text-align: center;
+
+      .img_wrapper {
+        height: 12rem;
+        padding: 0.6rem 1rem;
+      }
     }
+
     .img_wrapper {
       display: flex;
       justify-content: center;
@@ -54,7 +62,7 @@ const { horizontal } = Astro.props;
       display: flex;
       flex-flow: column nowrap;
       justify-content: space-between;
-      padding: 1rem;
+      gap: 0.8rem;
 
       .name {
         font-size: 1.2rem;

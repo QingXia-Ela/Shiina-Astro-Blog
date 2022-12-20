@@ -2,8 +2,8 @@ import _ from 'lodash'
 
 // 外链配置
 interface BasicLinkConfig {
-  sitename: string,
-  link: string,
+  sitename?: string,
+  link?: string,
   class: string
 }
 
@@ -13,7 +13,7 @@ interface BasicPersonalConfig {
   introduction?: string,
   /** 头像路径，从项目根目录开始查找，如：`/source/avatar.jpg`，如果文件位于 `/public` 下可以将其省略 */
   avatar?: string,
-  link?: BasicLinkConfig[]
+  link: BasicLinkConfig[]
 }
 
 /**
@@ -159,7 +159,8 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
     UserInfo: {
       name: 'Shiinafan',
       introduction: '有钱终成眷属，没钱亲眼目睹',
-      avatar: '/source/avatar.jpg'
+      avatar: '/source/avatar.jpg',
+      link: []
     },
     color: {
       light: {
