@@ -1,23 +1,29 @@
 ---
+import { PAGE_SIZE } from "@/constant/Pagination";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import SortArticle from "@/utils/SortArticle";
+import ArticleList from "./ArticleList.astro";
+
 export async function getStaticPaths({ paginate }: any) {
   // 用 fetch()、Astro.glob() 等加载你的数据
-  const res = await Astro.glob("/source/_Post/*/*.md");
+  const res = SortArticle(await Astro.glob("/source/_Post/*/*.md"));
 
   // 返回包含分页的所有帖子的路由集合
-  return paginate(res, { pageSize: 10 });
+  return paginate(res, { pageSize: PAGE_SIZE });
 }
-// const res = await Astro.glob("/source/_Post/*/*.md");
+const res = SortArticle(await Astro.glob("/source/_Post/*/*.md"));
 // console.log(res.map((val) => console.log(val.frontmatter)));
 
 const { page } = Astro.props;
-console.log(page);
+const FinalList = page ? page.data : res.slice(0, PAGE_SIZE);
 ---
 
 <BaseLayout>
   <div class="blog">
     <div class="wrapper">
-      <div class="left_list"></div>
+      <div class="left_list">
+        <ArticleList data={FinalList} />
+      </div>
       <div class="right_info"></div>
     </div>
   </div>
@@ -42,6 +48,23 @@ console.log(page);
       .right_info {
         width: 26%;
         margin-left: 2%;
+      }
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .blog {
+      .wrapper {
+        width: 90%;
+        min-width: 10rem;
+
+        .left_list {
+          width: 100%;
+        }
+
+        .right_info {
+          display: none;
+        }
       }
     }
   }

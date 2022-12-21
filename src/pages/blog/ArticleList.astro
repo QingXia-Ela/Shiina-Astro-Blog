@@ -1,0 +1,157 @@
+---
+import type Frontmatter from "@/declare/Frontmatter";
+import ParseTime from "@/utils/ParseTime";
+import type { MarkdownInstance } from "astro";
+export interface Props {
+  data: MarkdownInstance<Frontmatter>[];
+}
+const { data } = Astro.props;
+---
+
+{
+  data.map((val) => {
+    return (
+      <div class="item">
+        <div class="img_wrapper">
+          <img src="/source/Images/bg2.jpg" />
+        </div>
+        <div class="info">
+          <div class="title">{val.frontmatter.title}</div>
+          <div class="brief">{val.frontmatter.description}</div>
+          <div class="class_info">
+            <div class="time">
+              // <i class="iconfont" />
+              {ParseTime(val.frontmatter.date)}
+            </div>
+            <div class="tags">
+              {val.frontmatter.tags?.map((val, i) => {
+                if (i > 6) return null;
+                return (
+                  <div class="tag_item">
+                    <i class="iconfont icon-24gl-tags2" />
+                    <span>{val}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  })
+}
+
+<style lang="scss">
+  .item {
+    display: flex;
+    height: 12rem;
+    margin-bottom: 1.4rem;
+    padding: 0;
+    background-color: var(--background-default);
+    border-radius: 0.6rem;
+    overflow: hidden;
+    box-shadow: 0 0 10px 5px hsla(0, 0%, 37%, 0.3);
+
+    .img_wrapper {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+
+      img {
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .info {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-between;
+      width: 61.8%;
+      padding: 0.8rem 1.2rem;
+      color: var(--text-default);
+
+      .title {
+        width: 100%;
+        font-weight: 700;
+        font-size: 1.4rem;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      .brief {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        opacity: 0.8;
+      }
+
+      .class_info {
+        .time {
+          margin-bottom: 0.1rem;
+          font-size: 0.9em;
+          opacity: 0.7;
+        }
+
+        .tags {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          width: 100%;
+          column-gap: 0.4rem;
+
+          .tag_item {
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+
+            .iconfont {
+              position: relative;
+              top: 0.06rem;
+              font-size: 0.9em;
+            }
+
+            span {
+              font-size: 0.96em;
+            }
+          }
+        }
+      }
+    }
+
+    &.empty_img {
+      height: 10rem;
+
+      .img_wrapper {
+        width: 0;
+      }
+
+      .info {
+        width: 100%;
+      }
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .item {
+      flex-flow: column nowrap;
+      height: 20rem;
+
+      .img_wrapper {
+        img {
+          width: 100%;
+        }
+      }
+
+      .info {
+        width: 100%;
+        height: 10rem;
+      }
+    }
+  }
+</style>
