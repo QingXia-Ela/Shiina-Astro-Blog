@@ -4,7 +4,7 @@ date: 2022-11-29 22:21:15
 tags: [vue, petite-vue, 前端, 插件, 音乐播放器, 项目]
 categories: 项目记录
 index_img: cover/一个基于petite-vue的简易播放器.jpg
-description: 极简播放器，上手易用，即插即用.jpg
+description: 极简播放器，上手易用，即插即用.jpg，接下来的内容都是填充填充填充填充填充填充填充填充填充填充填充填充填充填充填充填充
 ---
 
 # 一个基于petite-vue的简易播放器

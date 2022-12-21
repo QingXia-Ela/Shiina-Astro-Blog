@@ -94,7 +94,6 @@ const { data } = Astro.props;
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
-        min-height: 3rem;
         text-overflow: ellipsis;
         overflow: hidden;
         opacity: 0.8;
@@ -153,7 +152,7 @@ const { data } = Astro.props;
   @media screen and (max-width: 992px) {
     .item {
       flex-flow: column nowrap;
-      height: 20rem;
+      height: 22rem;
 
       .img_wrapper {
         img {
@@ -163,7 +162,11 @@ const { data } = Astro.props;
 
       .info {
         width: 100%;
-        height: 10rem;
+        height: 12rem;
+
+        .brief {
+          margin: 0.4rem 0;
+        }
       }
     }
   }
