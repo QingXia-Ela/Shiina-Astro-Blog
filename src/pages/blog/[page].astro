@@ -3,6 +3,7 @@ import { PAGE_SIZE } from "@/constant/Pagination";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import SortArticle from "@/utils/SortArticle";
 import ArticleList from "./ArticleList.astro";
+import BlogInfo from "@/components/BlogInfo.astro";
 
 export async function getStaticPaths({ paginate }: any) {
   // 用 fetch()、Astro.glob() 等加载你的数据
@@ -24,7 +25,9 @@ const FinalList = page ? page.data : res.slice(0, PAGE_SIZE);
       <div class="left_list">
         <ArticleList data={FinalList} />
       </div>
-      <div class="right_info"></div>
+      <div class="right_info">
+        <BlogInfo />
+      </div>
     </div>
   </div>
 </BaseLayout>
