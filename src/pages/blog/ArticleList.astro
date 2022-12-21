@@ -2,6 +2,7 @@
 import type Frontmatter from "@/declare/Frontmatter";
 import ParseTime from "@/utils/ParseTime";
 import type { MarkdownInstance } from "astro";
+import "@/assets/fonts/article/iconfont.css";
 export interface Props {
   data: MarkdownInstance<Frontmatter>[];
 }
@@ -12,25 +13,29 @@ const { data } = Astro.props;
   data.map((val) => {
     return (
       <div class="item">
-        <div class="img_wrapper">
+        <a class="img_wrapper" href="/">
           <img src="/source/Images/bg2.jpg" />
-        </div>
+        </a>
         <div class="info">
-          <div class="title">{val.frontmatter.title}</div>
-          <div class="brief">{val.frontmatter.description}</div>
+          <a class="title" href="/">
+            {val.frontmatter.title}
+          </a>
+          <a class="brief" href="/">
+            {val.frontmatter.description}
+          </a>
           <div class="class_info">
             <div class="time">
-              // <i class="iconfont" />
+              <i class="iconfont icon-24gl-calendar " />
               {ParseTime(val.frontmatter.date)}
             </div>
             <div class="tags">
               {val.frontmatter.tags?.map((val, i) => {
                 if (i > 6) return null;
                 return (
-                  <div class="tag_item">
+                  <a class="tag_item" href={`/tags/${val}`}>
                     <i class="iconfont icon-24gl-tags2" />
                     <span>{val}</span>
-                  </div>
+                  </a>
                 );
               })}
             </div>
@@ -49,14 +54,16 @@ const { data } = Astro.props;
     padding: 0;
     background-color: var(--background-default);
     border-radius: 0.6rem;
-    overflow: hidden;
     box-shadow: 0 0 10px 5px hsla(0, 0%, 37%, 0.3);
+    transition: box-shadow 0.3s;
+    overflow: hidden;
 
     .img_wrapper {
       flex: 1;
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 0;
       overflow: hidden;
 
       img {
@@ -80,12 +87,14 @@ const { data } = Astro.props;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+        cursor: pointer;
       }
 
       .brief {
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
+        min-height: 3rem;
         text-overflow: ellipsis;
         overflow: hidden;
         opacity: 0.8;
@@ -134,6 +143,10 @@ const { data } = Astro.props;
       .info {
         width: 100%;
       }
+    }
+
+    &:hover {
+      box-shadow: 0 0 10px 5px hsla(0, 0%, 37%, 0.6);
     }
   }
 
