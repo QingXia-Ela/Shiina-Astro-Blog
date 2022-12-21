@@ -1,0 +1,48 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+export async function getStaticPaths({ paginate }: any) {
+  // 用 fetch()、Astro.glob() 等加载你的数据
+  const res = await Astro.glob("/source/_Post/*/*.md");
+
+  // 返回包含分页的所有帖子的路由集合
+  return paginate(res, { pageSize: 10 });
+}
+// const res = await Astro.glob("/source/_Post/*/*.md");
+// console.log(res.map((val) => console.log(val.frontmatter)));
+
+const { page } = Astro.props;
+console.log(page);
+---
+
+<BaseLayout>
+  <div class="blog">
+    <div class="wrapper">
+      <div class="left_list"></div>
+      <div class="right_info"></div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+  .blog {
+    display: flex;
+    justify-content: center;
+    padding-top: 2rem;
+
+    .wrapper {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+      width: 55%;
+      min-width: 60rem;
+
+      .left_list {
+        width: 72%;
+      }
+      .right_info {
+        width: 26%;
+        margin-left: 2%;
+      }
+    }
+  }
+</style>
