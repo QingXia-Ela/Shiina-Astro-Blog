@@ -1,8 +1,18 @@
 ---
+import type Frontmatter from "@/declare/Frontmatter";
+
+const ArticleList = await Astro.glob<Frontmatter>("/source/_Post/*/*.md");
+let tagSet = new Set(),
+  categorySet = new Set();
+
+ArticleList.forEach(({ frontmatter: { tags, categories } }) => {
+  if (tags) tags.forEach((val) => tagSet.add(val));
+  if (categories) categorySet.add(categories);
+});
 const list = [
-  ["文章", 114514],
-  ["标签", 114514],
-  ["分类", 114514],
+  ["文章", ArticleList.length],
+  ["标签", tagSet.size],
+  ["分类", categorySet.size],
 ];
 ---
 

@@ -10,6 +10,7 @@ let { ListData } = Astro.props;
 ---
 
 {
+  /** 这个 map 会有 bug，(Cannot read properties of undefined (reading 'map'))，考虑用其他方式循环导出 */
   ListData.map((val) => {
     return (
       <div class="item">

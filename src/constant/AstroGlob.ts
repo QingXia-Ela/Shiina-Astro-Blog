@@ -1,0 +1,1 @@
+export const ARTICLE_PATH = '/source/_Post/*/*.md'
