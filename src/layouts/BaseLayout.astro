@@ -7,9 +7,16 @@ import Footer from "@/components/Footer/index.astro";
 import cfg from "blog.config";
 import GetCurrentPageSetting from "@/utils/GetCurrentPageSetting";
 
+export interface Props {
+  /** 当前页面标题 */
+  title?: string;
+}
+
 const { header, footer, background, setMinHeight } = GetCurrentPageSetting(
   Astro.url
 );
+
+const { title } = Astro.props;
 
 const {
   color: { light, dark },
@@ -52,10 +59,10 @@ const {
 
 <html lang="en" class="dark">
   <head>
-    <HeadMeta />
+    <HeadMeta title={title} />
   </head>
   <body>
-    {header!.hidden ? null : <Header />}
+    {header!.hidden ? null : <Header PositionTitle={title} />}
     <main class={`${setMinHeight ? "get_min_height" : ""}`}>
       <slot />
     </main>

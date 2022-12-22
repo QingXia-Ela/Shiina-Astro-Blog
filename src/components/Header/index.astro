@@ -3,17 +3,21 @@ import cfg from "blog.config";
 import GetCurrentPageSetting from "@/utils/GetCurrentPageSetting";
 import RightMenu from "./RightMenu/index.astro";
 import RightMenuMobile from "./RightMenu/mobile.astro";
+export interface Props {
+  PositionTitle?: string;
+}
 
-const { header } = GetCurrentPageSetting(Astro.url);
-const KeepBGColor = header!.keepBackgroundColor,
-  Pos = header!.title ? `${header!.title} - ` : "",
+const { header } = GetCurrentPageSetting(Astro.url),
+  { PositionTitle } = Astro.props,
+  KeepBGColor = header!.keepBackgroundColor,
+  Pos = PositionTitle ? PositionTitle : "",
   {
     WebsiteSettings: { title },
   } = cfg;
 ---
 
 <header>
-  <div class={`wrapper ${KeepBGColor ? "keep_bg" : ""} show_menu`}>
+  <div class={`wrapper ${KeepBGColor ? "keep_bg" : ""} `}>
     <div class="full_item full_title text_nowrap">{Pos + title}</div>
     <div class="full_item list">
       <div class="title">{title}</div>

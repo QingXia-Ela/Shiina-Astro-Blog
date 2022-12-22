@@ -122,10 +122,10 @@ const {
 
 <html lang="en" class="dark">
   <head>
-    <HeadMeta title={`${content.title} - ${cfg.WebsiteSettings.title}`} />
+    <HeadMeta title={`${content.title} - `} />
   </head>
   <body>
-    {header!.hidden ? null : <Header />}
+    {header!.hidden ? null : <Header PositionTitle={`${content.title} - `} />}
     <main class={`${setMinHeight ? "get_min_height" : ""} md-wrapper`}>
       <slot name="before-markdown" />
       <WhiteModule>

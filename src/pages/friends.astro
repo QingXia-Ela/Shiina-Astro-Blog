@@ -4,7 +4,7 @@ import WhiteModule from "@/components/WhiteModule.astro";
 const Content = (await Astro.glob("/source/_Protect/friends.md"))[0].Content;
 ---
 
-<BaseLayout>
+<BaseLayout title={`友链 - `}>
   <div class="friends">
     <WhiteModule>
       <h1>友情链接</h1>

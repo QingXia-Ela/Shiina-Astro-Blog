@@ -13,8 +13,15 @@ const PathList: PathListProps = {
 }
 
 export default function (url: URL): BasicPageConfig {
-  for (const i in PathList) {
-    if (url.pathname.indexOf(i) !== -1) return cfg.pages[PathList[i]]!
+  for (let i in PathList) {
+    if (i == '/') i = '/index'
+    // console.log(url.pathname, i);
+
+    if (url.pathname.indexOf(i) !== -1) {
+      // console.log(cfg.pages[PathList[i]]!);
+
+      return cfg.pages[PathList[i]]!
+    }
   }
   return cfg.pages[PathList[url.pathname]]!
 }
