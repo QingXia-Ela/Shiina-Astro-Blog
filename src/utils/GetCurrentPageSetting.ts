@@ -1,4 +1,4 @@
-import type { PageConfig, PageList } from "@/declare/defineBlogConfig";
+import type { BasicPageConfig, PageList } from "@/declare/defineBlogConfig";
 import cfg from "blog.config";
 
 type PathListProps = Record<string, PageList>
@@ -12,7 +12,7 @@ const PathList: PathListProps = {
   '/friends': 'friends'
 }
 
-export default function (url: URL): PageConfig {
+export default function (url: URL): BasicPageConfig {
   for (const i in PathList) {
     if (url.pathname.indexOf(i) !== -1) return cfg.pages[PathList[i]]!
   }

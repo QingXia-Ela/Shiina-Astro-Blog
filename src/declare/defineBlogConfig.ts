@@ -90,7 +90,7 @@ type LightThemeColorConfig = BasicThemeColorConfig
 type DarkThemeColorConfig = BasicThemeColorConfig
 
 // 页面配置
-interface BasicPageConfig {
+export interface BasicPageConfig {
   header?: PageHeaderConfig
   background?: Partial<BasicBackgroundConfig>
   footer?: PageFooterConfig
@@ -98,7 +98,10 @@ interface BasicPageConfig {
   setMinHeight?: boolean
 }
 
-export type PageConfig = BasicPageConfig
+interface BlogPageConfig extends BasicPageConfig {
+  /** 博客页中每页展示的文章数量，默认5 */
+  PageArticleCount?: number
+}
 
 // 网站配置
 interface BasicWebsiteConfig {
@@ -119,7 +122,9 @@ interface BlogConfig extends Record<any, any> {
     light: LightThemeColorConfig
     dark: DarkThemeColorConfig
   }
-  pages: Partial<Record<PageList, PageConfig>>
+  pages: Partial<Record<PageList, BasicPageConfig>> & {
+    'blog': BlogPageConfig
+  }
   UserInfo: BasicPersonalConfig
   /** 
    * 搜索配置
@@ -185,7 +190,8 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
       'blog': {
         header: {
           title: '博客'
-        }
+        },
+        PageArticleCount: 5
       },
       'about': {},
       'article': {},

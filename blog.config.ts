@@ -31,6 +31,11 @@ export default defineBlogConfig({
       }
     ]
   },
+  pages: {
+    'blog': {
+      PageArticleCount: 4
+    }
+  },
   WebsiteSettings: {
     title: `Shiina's Blog`,
     description: '',
