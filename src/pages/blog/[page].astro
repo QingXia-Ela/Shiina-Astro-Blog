@@ -9,6 +9,7 @@ import Pagination from "./Pagination.astro";
 export async function getStaticPaths({ paginate }: any) {
   // 用 fetch()、Astro.glob() 等加载你的数据
   const res = SortArticle(await Astro.glob("/source/_Post/*/*.md"));
+  console.log(res);
 
   // 返回包含分页的所有帖子的路由集合
   return paginate(res, { pageSize: PAGE_SIZE });
@@ -16,8 +17,16 @@ export async function getStaticPaths({ paginate }: any) {
 const res = SortArticle(await Astro.glob("/source/_Post/*/*.md"));
 // console.log(res.map((val) => console.log(val.frontmatter)));
 
-const { page } = Astro.props;
-const FinalList = page ? page.data : res.slice(0, PAGE_SIZE);
+const { page } = Astro.props,
+  { page: RoutePage } = Astro.params,
+  paramsCurrentPage = parseInt(RoutePage!);
+
+const FinalList = page
+  ? page.data
+  : res.slice(
+      (paramsCurrentPage - 1) * PAGE_SIZE,
+      paramsCurrentPage * PAGE_SIZE
+    );
 ---
 
 <BaseLayout title={`博客 - `}>
@@ -30,7 +39,7 @@ const FinalList = page ? page.data : res.slice(0, PAGE_SIZE);
         <BlogInfo />
       </div>
       <Pagination
-        currentPage={page ? page.currentPage : 1}
+        currentPage={page ? page.currentPage : paramsCurrentPage}
         maxPage={Math.ceil(res.length / PAGE_SIZE)}
       />
     </div>

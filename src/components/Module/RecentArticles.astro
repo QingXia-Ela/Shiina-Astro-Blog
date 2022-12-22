@@ -1,15 +1,30 @@
 ---
+import type Frontmatter from "@/declare/Frontmatter";
+import ParseTime from "@/utils/ParseTime";
+import SortArticle from "@/utils/SortArticle";
+
 export interface Props {
   horizontal?: boolean;
 }
 const { horizontal } = Astro.props;
+const ArticleList = SortArticle(
+  await Astro.glob<Frontmatter>("/source/_Post/*/*.md")
+).slice(0, horizontal ? 3 : 5);
 ---
 
 <div class={`recent_article ${horizontal ? "horizontal" : "vertical"}`}>
-  <a class="item" href="/">
-    <div class="title text_nowrap w100">Test</div>
-    <div class="time text_nowrap w100">1919-8-10</div>
-  </a>
+  {
+    ArticleList.map((val) => {
+      return (
+        <a class="item" href="/">
+          <div class="title text_nowrap w100">{val.frontmatter.title}</div>
+          <div class="time text_nowrap w100">
+            {ParseTime(val.frontmatter.date)}
+          </div>
+        </a>
+      );
+    })
+  }
 </div>
 
 <style lang="scss">
@@ -30,7 +45,7 @@ const { horizontal } = Astro.props;
       flex-flow: column nowrap;
       justify-content: space-between;
       height: 33.33%;
-      padding: 0.2rem 0.4rem;
+      padding: 0.4rem;
       transition: background-color 0.1s;
 
       .title {
