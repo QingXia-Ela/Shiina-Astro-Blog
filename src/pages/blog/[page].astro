@@ -19,7 +19,7 @@ const res = SortArticle(await Astro.glob("/source/_Post/*/*.md"));
 
 const { page } = Astro.props,
   { page: RoutePage } = Astro.params,
-  paramsCurrentPage = parseInt(RoutePage!);
+  paramsCurrentPage = parseInt(RoutePage!) | 1;
 
 const FinalList = page
   ? page.data
