@@ -4,13 +4,13 @@ import ParseTime from "@/utils/ParseTime";
 import type { MarkdownInstance } from "astro";
 import "@/assets/fonts/article/iconfont.css";
 export interface Props {
-  data: MarkdownInstance<Frontmatter>[];
+  ListData: MarkdownInstance<Frontmatter>[];
 }
-const { data } = Astro.props;
+let { ListData } = Astro.props;
 ---
 
 {
-  data.map((val) => {
+  ListData.map((val) => {
     return (
       <div class="item">
         <a class="img_wrapper" href="/">
@@ -25,7 +25,7 @@ const { data } = Astro.props;
           </a>
           <div class="class_info">
             <div class="time">
-              <i class="iconfont icon-24gl-calendar " />
+              <i class="iconfont icon-24gl-calendar" />
               {ParseTime(val.frontmatter.date)}
             </div>
             <div class="tags">

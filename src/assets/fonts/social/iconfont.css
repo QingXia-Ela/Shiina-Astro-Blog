@@ -1,5 +1,6 @@
 @font-face {
-  font-family: "iconfont"; /* Project id  */
+  font-family: "iconfont";
+  /* Project id  */
   src: url('iconfont.ttf?t=1671505912416') format('truetype');
 }
 
@@ -36,7 +37,7 @@
 }
 
 .icon-gitlab:before {
-  content: "\e61c";
+  content: "\e333c";
 }
 
 .icon-codeforces:before {
@@ -114,4 +115,3 @@
 .icon-linkedin-fill:before {
   content: "\eab1";
 }
-

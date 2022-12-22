@@ -1,0 +1,109 @@
+---
+import PaginationItemFactory from "./PaginationItemFactory";
+
+export interface Props {
+  currentPage: number;
+  maxPage: number;
+}
+const { currentPage, maxPage } = Astro.props;
+const ListData = PaginationItemFactory(currentPage, maxPage);
+---
+
+<div class="pagination">
+  <a
+    class={`arrow${currentPage == 1 ? " disabled" : ""}`}
+    href={currentPage == 1 ? undefined : `/blog/${currentPage - 1}`}
+  >
+    <i class="iconfont icon-arrowleft"></i>
+  </a>
+  {
+    ListData.map((val) => {
+      return (
+        <a
+          class={`page_item${currentPage == val.index ? " active" : ""}`}
+          href={`/blog/${val.index}`}
+        >
+          {val.content}
+        </a>
+      );
+    })
+  }
+  <a
+    class={`arrow${currentPage == maxPage ? " disabled" : ""}`}
+    href={currentPage == maxPage ? undefined : `/blog/${currentPage + 1}`}
+  >
+    <i class="iconfont icon-arrowright"></i>
+  </a>
+</div>
+
+<!-- (() => {
+  const res = [];
+  // 倒数第三个
+  if (maxPage - currentPage == 2) {
+                res.push(
+      <a
+        class={`page_item${currentPage == 1 ? " active" : ""}`}
+        href={`/blog/${1}`}
+      >
+        {1}
+      </a>
+    )
+    res.push(<a
+        class={`page_item`}
+        href={`/blog/${Math.ceil((maxPage / 2 + 1) / 2)}`}
+      >
+        ...
+      </a>);
+    for (let i = maxPage - currentPage - 1; i <= maxPage; i++) {
+      res.push(<a
+        class={`page_item${currentPage == i ? " active" : ""}`}
+        href={`/blog/${i}`}
+      >
+        {i}
+      </a>)
+    }
+  }
+  // 正数第三个
+  else if (currentPage == 3) {
+  }
+  return res;
+})().map((val)=> val) -->
+
+<style lang="scss">
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 4rem;
+    margin-bottom: 1rem;
+    border-radius: 0.6rem;
+    color: var(--text-default);
+    background-color: var(--background-default);
+    box-shadow: 0 0 10px 5px hsla(0deg, 0%, 37%, 0.3);
+
+    .page_item {
+      width: 2rem;
+      height: 2rem;
+      line-height: 2rem;
+      margin: 0 0.2rem;
+      text-align: center;
+      font-size: 0.9rem;
+
+      &.active {
+        background-color: var(--background-active-default);
+      }
+    }
+
+    .arrow {
+      .iconfont {
+        font-size: 1.2rem;
+      }
+
+      &.disabled {
+        color: #888 !important;
+        cursor: not-allowed;
+      }
+    }
+  }
+</style>
