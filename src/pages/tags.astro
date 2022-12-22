@@ -1,43 +1,38 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import type Frontmatter from "@/declare/Frontmatter";
+const ArticleList = await Astro.glob<Frontmatter>("/source/_Post/*/*.md");
 
-const TestWord = [];
+let tagMap: Record<string, any> = {},
+  max = 0,
+  min = Infinity;
 
-const wordList = [
-  "烫烫烫",
-  "锟斤拷",
-  "前端",
-  "Astro",
-  "后端",
-  "vue",
-  "react",
-  "先辈",
-  "李田所",
-  "114514",
-  "1919810",
-  "下北泽",
-  "会员制餐厅",
-  "好好好",
-  "mysql",
-  "pinia",
-  "番剧",
-  "生活",
-  "棍之勇者",
-  "明日方舟",
-  "hiiro",
-  "压缩毛巾",
-  "threejs",
-  "tailwind",
-  "UI",
-  "java",
-];
+function SizeFactory(n: number) {
+  const len = Math.abs(max - min),
+    chunk = len / 4;
+  if (chunk * 3 < n) return "xl";
+  else if (chunk * 2 < n) return "l";
+  else if (chunk * 1 < n) return "m";
+  return "s";
+}
 
-const sizelist = ["s", "m", "l", "xl"];
+ArticleList.forEach(({ frontmatter: { tags, categories } }) => {
+  if (tags) {
+    tags.forEach((val) => (tagMap[val] ? tagMap[val]++ : (tagMap[val] = 1)));
+    for (let i in tagMap) {
+      let n = tagMap[i];
+      if (n > max) max = n;
+      if (n < min) min = n;
+    }
+  }
+});
 
-for (let i = 0; i < 100; i++) {
-  TestWord.push({
-    content: wordList[i % (wordList.length - 1)],
-    size: sizelist[Math.round((sizelist.length - 1) * Math.random())],
+const Word = [];
+
+for (const i in tagMap) {
+  Word.push({
+    content: i,
+    size: SizeFactory(tagMap[i]),
   });
 }
 ---
@@ -46,13 +41,17 @@ for (let i = 0; i < 100; i++) {
   <div class="tags flex_center">
     <div class="wrapper white_module">
       {
-        TestWord.map((val) => {
-          return (
-            <a href="/" class={`word ${val.size}`}>
-              {val.content}
-            </a>
-          );
-        })
+        Object.keys(tagMap).length ? (
+          Word.map((val) => {
+            return (
+              <a href="/" class={`word ${val.size}`}>
+                {val.content}
+              </a>
+            );
+          })
+        ) : (
+          <h3>没有更多内容，太伤感了...</h3>
+        )
       }
     </div>
   </div>
