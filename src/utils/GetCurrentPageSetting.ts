@@ -9,7 +9,8 @@ const PathList: PathListProps = {
   '/about': 'about',
   '/search': 'search',
   '/tags': 'tags',
-  '/friends': 'friends'
+  '/friends': 'friends',
+  '/posts': 'posts'
 }
 
 export default function (url: URL): BasicPageConfig {

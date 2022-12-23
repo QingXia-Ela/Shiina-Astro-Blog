@@ -9,6 +9,10 @@ import GetCurrentPageSetting from "@/utils/GetCurrentPageSetting";
 import WhiteModule from "@/components/WhiteModule.astro";
 import "github-markdown-css/github-markdown.css";
 
+export interface Props {
+  content: Record<string, any>;
+}
+
 const { header, footer, background, setMinHeight } = GetCurrentPageSetting(
   Astro.url
 );

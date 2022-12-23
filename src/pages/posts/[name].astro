@@ -1,0 +1,24 @@
+---
+import MarkdownLayout from "@/layouts/MarkdownLayout.astro";
+import BlogInfo from "@/components/BlogInfo.astro";
+import type Frontmatter from "@/declare/Frontmatter";
+
+const { name } = Astro.params;
+if (!name) Astro.redirect("/404");
+
+const ListData = await Astro.glob<Frontmatter>("/source/_Post/*/*.md");
+let target = null;
+
+for (const i of ListData) {
+  if (i.frontmatter.title == name) {
+    target = i;
+    break;
+  }
+}
+
+if (!target) Astro.redirect("/404");
+---
+
+<MarkdownLayout content={target ? target!.frontmatter : {}}>
+  <BlogInfo slot="after-markdown" horizontal={true} />
+</MarkdownLayout>
