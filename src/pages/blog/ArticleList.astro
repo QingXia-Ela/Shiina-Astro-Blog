@@ -14,14 +14,14 @@ let { ListData } = Astro.props;
   ListData.map((val) => {
     return (
       <div class="item">
-        <a class="img_wrapper" href="/">
+        <a class="img_wrapper" href={`/posts/${val.frontmatter.title}`}>
           <img src="/source/Images/bg2.jpg" />
         </a>
         <div class="info">
-          <a class="title" href="/">
+          <a class="title" href={`/posts/${val.frontmatter.title}`}>
             {val.frontmatter.title}
           </a>
-          <a class="brief" href="/">
+          <a class="brief" href={`/posts/${val.frontmatter.title}`}>
             {val.frontmatter.description}
           </a>
           <div class="class_info">

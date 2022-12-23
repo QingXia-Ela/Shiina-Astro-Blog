@@ -16,7 +16,7 @@ const ArticleList = SortArticle(
   {
     ArticleList.map((val) => {
       return (
-        <a class="item" href="/">
+        <a class="item" href={`/posts/${val.frontmatter.title}`}>
           <div class="title text_nowrap w100">{val.frontmatter.title}</div>
           <div class="time text_nowrap w100">
             {ParseTime(val.frontmatter.date)}
