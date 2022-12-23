@@ -36,39 +36,6 @@ const ListData = PaginationItemFactory(currentPage, maxPage);
   </a>
 </div>
 
-<!-- (() => {
-  const res = [];
-  // 倒数第三个
-  if (maxPage - currentPage == 2) {
-                res.push(
-      <a
-        class={`page_item${currentPage == 1 ? " active" : ""}`}
-        href={`/blog/${1}`}
-      >
-        {1}
-      </a>
-    )
-    res.push(<a
-        class={`page_item`}
-        href={`/blog/${Math.ceil((maxPage / 2 + 1) / 2)}`}
-      >
-        ...
-      </a>);
-    for (let i = maxPage - currentPage - 1; i <= maxPage; i++) {
-      res.push(<a
-        class={`page_item${currentPage == i ? " active" : ""}`}
-        href={`/blog/${i}`}
-      >
-        {i}
-      </a>)
-    }
-  }
-  // 正数第三个
-  else if (currentPage == 3) {
-  }
-  return res;
-})().map((val)=> val) -->
-
 <style lang="scss">
   .pagination {
     display: flex;

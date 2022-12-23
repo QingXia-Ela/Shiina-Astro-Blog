@@ -9,17 +9,15 @@ import Pagination from "./Pagination.astro";
 export async function getStaticPaths({ paginate }: any) {
   // 用 fetch()、Astro.glob() 等加载你的数据
   const res = SortArticle(await Astro.glob("/source/_Post/*/*.md"));
-  console.log(res);
 
   // 返回包含分页的所有帖子的路由集合
   return paginate(res, { pageSize: PAGE_SIZE });
 }
 const res = SortArticle(await Astro.glob("/source/_Post/*/*.md"));
-// console.log(res.map((val) => console.log(val.frontmatter)));
 
 const { page } = Astro.props,
   { page: RoutePage } = Astro.params,
-  paramsCurrentPage = parseInt(RoutePage!) | 1;
+  paramsCurrentPage = parseInt(RoutePage!) ? parseInt(RoutePage!) : 1;
 
 const FinalList = page
   ? page.data
