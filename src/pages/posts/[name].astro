@@ -17,8 +17,18 @@ for (const i of ListData) {
 }
 
 if (!target) Astro.redirect("/404");
+
+const MD = target?.Content;
 ---
 
 <MarkdownLayout content={target ? target!.frontmatter : {}}>
+  {
+    target ? (
+      // @ts-expect-error
+      <MD />
+    ) : (
+      <></>
+    )
+  }
   <BlogInfo slot="after-markdown" horizontal={true} />
 </MarkdownLayout>
