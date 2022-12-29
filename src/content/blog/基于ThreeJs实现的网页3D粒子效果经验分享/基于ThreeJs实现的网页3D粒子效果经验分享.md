@@ -82,6 +82,7 @@ https://up.qq.com/act/a20170301pre/index.html# (**需要手动复制粘贴网址
 
 这反而比较好，因为这边的话 Blender 就有直接导出 obj 模型的选项，原文还是专门安装了插件去将模型处理成 json 格式的
 
+
 ![](export.jpg)
 
 在模板中我们添加了自定义 Loader 选项，这样子就不会强制使用 OBJLoader 去加载模型了，可以选用 GLTF 模型更利于网页加载

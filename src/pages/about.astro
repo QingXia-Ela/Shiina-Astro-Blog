@@ -1,6 +1,9 @@
 ---
-import AboutMe from "/source/_Protect/about.md";
 import BlogInfo from "@/components/BlogInfo.astro";
+import { getEntry } from "astro:content";
+
+const p = await getEntry("about", "about.mdx");
+const { Content } = await p.render();
 ---
 
-<AboutMe />
+<Content />
