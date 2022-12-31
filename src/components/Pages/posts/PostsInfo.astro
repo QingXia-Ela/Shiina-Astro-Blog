@@ -1,25 +1,25 @@
 ---
+import "@/assets/fonts/posts/iconfont.css";
 ---
 
 <div class="posts_info">
   <h1 class="title">昏睡雷普！野兽化的先辈！</h1>
   <div class="time">
-    <i class="iconfont icon-calendar2"></i>
+    <i class="iconfont icon-24gl-calendar"></i>
     1919年8月10日 11:45:14
   </div>
   <div class="info">
     <i class="iconfont icon-editor"></i>
     114K字
-    <i class="iconfont icon-schedule"></i>
+    <i class="iconfont icon-24gl-clockCircle"></i>
     514分钟
   </div>
   <div class="categories">
-    <i class="iconfont icon-menu"></i>
-    生活
+    <i class="iconfont icon-categories">
+      <span>生活</span>
+    </i>
     <div class="label">
-      <i class="iconfont icon-label_fill">
-        <a href="#">测试</a>
-      </i>
+      <i class="iconfont icon-24gl-tags2"><a href="#">测试</a></i>
     </div>
   </div>
   <div class="tips">
@@ -58,7 +58,13 @@
 
       a {
         color: var(--text-default);
-        margin: 0 0.2rem;
+      }
+
+      .iconfont.icon-categories {
+        margin-right: 0.4rem;
+        span {
+          margin: 0 0.1rem;
+        }
       }
     }
 
