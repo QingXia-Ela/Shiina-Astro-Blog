@@ -169,7 +169,7 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
     },
     color: {
       light: {
-        backgroundDefault: '#f5f5f5',
+        backgroundDefault: '#fcfcfc',
         backgroundActiveDefault: '#ddd',
         textDefault: '#222',
         tipsDefault: '#3F5EFB'

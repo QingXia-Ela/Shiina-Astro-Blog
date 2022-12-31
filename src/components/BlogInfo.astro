@@ -41,4 +41,12 @@ const { horizontal } = Astro.props;
       width: 100%;
     }
   }
+
+  @media screen and (max-width: 992px) {
+    .blog_info {
+      &.horizontal {
+        height: unset;
+      }
+    }
+  }
 </style>

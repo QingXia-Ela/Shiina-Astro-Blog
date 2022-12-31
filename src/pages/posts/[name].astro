@@ -2,6 +2,8 @@
 import MarkdownLayout from "@/layouts/MarkdownLayout.astro";
 import BlogInfo from "@/components/BlogInfo.astro";
 import type Frontmatter from "@/declare/Frontmatter";
+import PostsInfo from "@/components/Pages/posts/PostsInfo.astro";
+import WhiteModule from "@/components/WhiteModule.astro";
 
 const { name } = Astro.params;
 if (!name) Astro.redirect("/404");
@@ -22,6 +24,9 @@ const MD = target?.Content;
 ---
 
 <MarkdownLayout content={target ? target!.frontmatter : {}}>
+  <WhiteModule  slot="before-markdown" >
+    <PostsInfo/>
+  </WhiteModule>
   {
     target ? (
       // @ts-expect-error
@@ -32,3 +37,9 @@ const MD = target?.Content;
   }
   <BlogInfo slot="after-markdown" horizontal={true} />
 </MarkdownLayout>
+
+<style lang="scss" is:global>
+  .white_module {
+    margin-bottom: 1rem;
+  }
+</style>
