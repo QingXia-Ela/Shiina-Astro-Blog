@@ -51,6 +51,15 @@ declare module 'astro:content' {
   data: any
 },
 },
+"friends": {
+"friends.md": {
+  id: "friends.md",
+  slug: "friends",
+  body: string,
+  collection: "friends",
+  data: any
+},
+},
 
 	};
 

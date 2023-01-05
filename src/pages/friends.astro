@@ -1,7 +1,8 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import WhiteModule from "@/components/WhiteModule.astro";
-const Content = (await Astro.glob("/source/_Protect/friends.md"))[0].Content;
+import { getEntry } from "astro:content";
+const { Content } = await (await getEntry("friends", "friends.md")).render();
 ---
 
 <BaseLayout title={`友链 - `}>
@@ -31,9 +32,13 @@ const Content = (await Astro.glob("/source/_Protect/friends.md"))[0].Content;
           })()
         }
       </div>
-      <div class="md">
-        <Content />
-      </div>
+      {
+        Content ? (
+          <div class="md">
+            <Content />
+          </div>
+        ) : null
+      }
     </WhiteModule>
   </div>
 </BaseLayout>
