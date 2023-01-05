@@ -1,6 +1,34 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import _List from "./_List.astro";
+import List from "./_List.astro";
+import Pagination from "@/components/Pagination/Pagination.astro";
 ---
 
-<BaseLayout>test</BaseLayout>
+<BaseLayout>
+  <div class="list flex_center">
+    <div class="white_module">
+      <h2>标签 <span>前端</span> 下的所有文章</h2>
+      <List />
+    </div>
+    <Pagination currentPage={1} maxPage={10} path="/collect/tags/前端" />
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+  .list {
+    flex-flow: column nowrap;
+    width: 70%;
+    margin: 3rem auto;
+
+    .white_module {
+      margin-bottom: 1rem;
+      h2 {
+        text-align: center;
+
+        span {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+</style>

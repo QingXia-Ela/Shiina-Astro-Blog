@@ -1,21 +1,30 @@
 ---
-import type { PaginationItem } from '@/declare/Pagination';
+import type { PaginationItem } from "@/declare/Pagination";
+import BasePaginationItemFactory from "./PaginationItemFactory";
+import "@/assets/fonts/posts/iconfont.css";
 
 export interface Props {
   currentPage: number;
   maxPage: number;
-  PaginationItemFactory: (currentPage: number, maxPage: number) => PaginationItem[]
+  /** 路径前缀，以 `/` 开头 */
+  path: string;
+  PaginationItemFactory?: (
+    currentPage: number,
+    maxPage: number
+  ) => PaginationItem[];
 }
 
-
-const { currentPage, maxPage, PaginationItemFactory } = Astro.props;
-const ListData = PaginationItemFactory(currentPage, maxPage);
+const { currentPage, maxPage, PaginationItemFactory, path } = Astro.props,
+  FinalFactory = PaginationItemFactory
+    ? PaginationItemFactory
+    : BasePaginationItemFactory;
+const ListData = FinalFactory(currentPage, maxPage);
 ---
 
 <div class="pagination">
   <a
     class={`arrow${currentPage == 1 ? " disabled" : ""}`}
-    href={currentPage == 1 ? undefined : `/blog/${currentPage - 1}`}
+    href={currentPage == 1 ? undefined : `${path}/${currentPage - 1}`}
   >
     <i class="iconfont icon-arrowleft"></i>
   </a>
@@ -24,7 +33,7 @@ const ListData = PaginationItemFactory(currentPage, maxPage);
       return (
         <a
           class={`page_item${currentPage == val.index ? " active" : ""}`}
-          href={`/blog/${val.index}`}
+          href={`${path}/${val.index}`}
         >
           {val.content}
         </a>
@@ -33,7 +42,7 @@ const ListData = PaginationItemFactory(currentPage, maxPage);
   }
   <a
     class={`arrow${currentPage == maxPage ? " disabled" : ""}`}
-    href={currentPage == maxPage ? undefined : `/blog/${currentPage + 1}`}
+    href={currentPage == maxPage ? undefined : `${path}/${currentPage + 1}`}
   >
     <i class="iconfont icon-arrowright"></i>
   </a>

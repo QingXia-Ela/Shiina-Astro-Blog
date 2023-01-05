@@ -1,2 +1,50 @@
 ---
 ---
+
+<div class="list_area">
+  <h3 class="count">共计 114514 篇文章，当前展示 1919 - 810 篇文章</h3>
+  <ul>
+    {
+      (() => {
+        const l = [];
+        for (let i = 0; i < 15; i++) {
+          l.push(
+            <li>
+              <a href="#">
+                <span>test</span>
+                <div class="time">2022-11-14</div>
+              </a>
+            </li>
+          );
+        }
+
+        return l;
+      })().map((val) => val)
+    }
+  </ul>
+</div>
+
+<style lang="scss">
+  .list_area {
+    margin: 2rem 3rem;
+
+    ul {
+      margin: 1.6rem 4rem;
+
+      li {
+        list-style: none;
+        transition: background-color 0.3s;
+
+        a {
+          display: flex;
+          justify-content: space-between;
+          padding: 0.6rem 1.2rem;
+        }
+
+        &:hover {
+          background-color: #eee;
+        }
+      }
+    }
+  }
+</style>
