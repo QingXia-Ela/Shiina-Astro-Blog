@@ -11,7 +11,7 @@
           l.push(
             <li>
               <a href="#">
-                <span>test</span>
+                <span class="text_nowrap w70">test</span>
                 <div class="time">2022-11-14</div>
               </a>
             </li>
@@ -29,7 +29,7 @@
     margin: 2rem 3rem;
 
     ul {
-      margin: 1.6rem 4rem;
+      margin: 1.6rem 2rem;
 
       li {
         list-style: none;
@@ -39,6 +39,11 @@
           display: flex;
           justify-content: space-between;
           padding: 0.6rem 1.2rem;
+
+          .time {
+            width: 12%;
+            text-align: right;
+          }
         }
 
         &:hover {
