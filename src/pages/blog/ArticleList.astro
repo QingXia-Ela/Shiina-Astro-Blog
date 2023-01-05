@@ -3,6 +3,7 @@ import type Frontmatter from "@/declare/Frontmatter";
 import ParseTime from "@/utils/ParseTime";
 import type { MarkdownInstance } from "astro";
 import "@/assets/fonts/posts/iconfont.css";
+import { COLLECT_TAGS } from "@/constant/Collect";
 export interface Props {
   ListData: MarkdownInstance<Frontmatter>[];
 }
@@ -33,7 +34,7 @@ let { ListData } = Astro.props;
               {val.frontmatter.tags?.map((val, i) => {
                 if (i > 6) return null;
                 return (
-                  <a class="tag_item" href={`/tags/${val}`}>
+                  <a class="tag_item" href={`/collect/${COLLECT_TAGS}/${val}`}>
                     <i class="iconfont icon-24gl-tags2" />
                     <span>{val}</span>
                   </a>
