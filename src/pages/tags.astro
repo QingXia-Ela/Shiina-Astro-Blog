@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import type Frontmatter from "@/declare/Frontmatter";
+import { COLLECT_TAGS } from "@/constant/Collect";
 const ArticleList = await Astro.glob<Frontmatter>("/source/_Post/*/*.md");
 
 let tagMap: Record<string, any> = {},
@@ -44,7 +45,10 @@ for (const i in tagMap) {
         Object.keys(tagMap).length ? (
           Word.map((val) => {
             return (
-              <a href="/" class={`word ${val.size}`}>
+              <a
+                href={`/collect/${COLLECT_TAGS}/${val.content}`}
+                class={`word ${val.size}`}
+              >
                 {val.content}
               </a>
             );
