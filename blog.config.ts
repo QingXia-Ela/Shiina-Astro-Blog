@@ -10,7 +10,7 @@ export default defineBlogConfig({
       content: [
         '<div>Copyright © 2022 - 2023 Shiinafan</div>',
         '<div>Powered by Astro & Vue</div>',
-        '<div>粤ICP备2022085367号</div>',
+        '<a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2022085367号</a>',
       ]
     }
   },

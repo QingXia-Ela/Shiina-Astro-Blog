@@ -1,7 +1,4 @@
-interface PaginationItem {
-  content: string
-  index: number
-}
+import type { PaginationItem } from '@/declare/Pagination';
 
 function getItem(content: string, index: number) {
   return {

@@ -1,11 +1,14 @@
 ---
-import PaginationItemFactory from "./PaginationItemFactory";
+import type { PaginationItem } from '@/declare/Pagination';
 
 export interface Props {
   currentPage: number;
   maxPage: number;
+  PaginationItemFactory: (currentPage: number, maxPage: number) => PaginationItem[]
 }
-const { currentPage, maxPage } = Astro.props;
+
+
+const { currentPage, maxPage, PaginationItemFactory } = Astro.props;
 const ListData = PaginationItemFactory(currentPage, maxPage);
 ---
 

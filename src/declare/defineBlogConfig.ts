@@ -113,7 +113,7 @@ interface BasicWebsiteConfig {
   url: string
 }
 
-export type PageList = 'index' | 'blog' | 'tags' | 'about' | 'friends' | 'posts' | 'custom' | 'search'
+export type PageList = 'index' | 'blog' | 'tags' | 'about' | 'friends' | 'posts' | 'custom' | 'search' | 'collect'
 
 interface BlogConfig extends Record<any, any> {
   PageDefaultSettings: BasicPageConfig
@@ -196,6 +196,11 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
       'about': {},
       'posts': {},
       'custom': {},
+      'collect': {
+        header: {
+          title: '集合'
+        }
+      },
       'friends': {
         header: {
           title: '友链'
