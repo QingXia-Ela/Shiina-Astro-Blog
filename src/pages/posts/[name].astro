@@ -42,7 +42,7 @@ let Content = r?.Content
 
 <MarkdownLayout content={target ? target.data : {}}>
   <WhiteModule slot="before-markdown">
-    <PostsInfo />
+    <PostsInfo data={target ? target.data : {}} body={target ? target.body : ''} />
   </WhiteModule>
   {
     Content ? (

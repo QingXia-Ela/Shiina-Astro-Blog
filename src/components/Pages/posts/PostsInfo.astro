@@ -1,31 +1,61 @@
 ---
 import "@/assets/fonts/posts/iconfont.css";
+import { COLLECT_CATEGORIES, COLLECT_TAGS } from "@/constant/Collect";
+import { PostsPublicTime } from "@/utils/ParseTime";
+import type { CollectionEntry } from "astro:content";
+interface Props {
+  data: CollectionEntry<"blog"> | {};
+  body: string;
+}
+
+const { data, body } = Astro.props as CollectionEntry<"blog">,
+  PassTime = parseInt(
+    ((+new Date() - +new Date(data.date)) / 24 / 3600 / 1000).toFixed(0)
+  );
 ---
 
-<div class="posts_info">
-  <h1 class="title">昏睡雷普！野兽化的先辈！</h1>
-  <div class="time">
-    <i class="iconfont icon-24gl-calendar"></i>
-    1919年8月10日 11:45:14
-  </div>
-  <div class="info">
-    <i class="iconfont icon-editor"></i>
-    114K字
-    <i class="iconfont icon-24gl-clockCircle"></i>
-    514分钟
-  </div>
-  <div class="categories">
-    <i class="iconfont icon-categories">
-      <span>生活</span>
-    </i>
-    <div class="label">
-      <i class="iconfont icon-24gl-tags2"><a href="#">测试</a></i>
+{
+  Object.keys(data).length ? (
+    <div class="posts_info">
+      <h1 class="title">{data.title}</h1>
+      <div class="time">
+        <i class="iconfont icon-24gl-calendar" />
+        {PostsPublicTime(data.date)}
+      </div>
+      <div class="info">
+        <i class="iconfont icon-editor" />
+        {(body.length / 1000).toFixed(1)}K 字
+        <i class="iconfont icon-24gl-clockCircle" />
+        {parseInt(body.length / 300 + "") + 1}分钟
+      </div>
+      <div class="categories">
+        {data.categories ? (
+          <i class="iconfont icon-categories">
+            <a href={`/collect/${COLLECT_CATEGORIES}/${data.categories}`}>
+              {data.categories}
+            </a>
+          </i>
+        ) : undefined}
+        {data.tags
+          ? data.tags.map((val) => (
+              <div class="label">
+                <i class="iconfont icon-24gl-tags2">
+                  <a href={`/collect/${COLLECT_TAGS}/${val}`}>{val}</a>
+                </i>
+              </div>
+            ))
+          : undefined}
+      </div>
+      {PassTime > 30 ? (
+        <div class="tips">
+          本文距离首次发布已经过去了{" "}
+          {((+new Date() - +new Date(data.date)) / 24 / 3600 / 1000).toFixed(0)}
+          天，请注意文章的时效性！
+        </div>
+      ) : undefined}
     </div>
-  </div>
-  <div class="tips">
-    本文距离上次发布更新已经过去了 114514 天，请注意文章的时效性！
-  </div>
-</div>
+  ) : undefined
+}
 
 <style lang="scss">
   .posts_info {
@@ -53,15 +83,19 @@ import "@/assets/fonts/posts/iconfont.css";
 
     .categories {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       align-items: center;
       gap: 0.5rem;
 
       a {
         color: var(--text-default);
+        white-space: nowrap;
       }
 
       .iconfont.icon-categories {
         margin-right: 0.4rem;
+
         span {
           margin: 0 0.1rem;
         }
