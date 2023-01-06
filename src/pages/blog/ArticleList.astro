@@ -1,37 +1,36 @@
 ---
-import type Frontmatter from "@/declare/Frontmatter";
 import ParseTime from "@/utils/ParseTime";
-import type { MarkdownInstance } from "astro";
 import "@/assets/fonts/posts/iconfont.css";
 import { COLLECT_TAGS } from "@/constant/Collect";
+import type { CollectionEntry } from "astro:content";
 export interface Props {
-  ListData: MarkdownInstance<Frontmatter>[];
+  ListData: CollectionEntry<"blog">[];
 }
 let { ListData } = Astro.props;
 ---
 
 {
   /** 这个 map 会有 bug，(Cannot read properties of undefined (reading 'map'))，考虑用其他方式循环导出 */
-  ListData.map((val) => {
+  ListData.map(({ data }) => {
     return (
       <div class="item">
-        <a class="img_wrapper" href={`/posts/${val.frontmatter.title}`}>
+        <a class="img_wrapper" href={`/posts/${data.title}`}>
           <img src="/source/Images/bg2.jpg" />
         </a>
         <div class="info">
-          <a class="title" href={`/posts/${val.frontmatter.title}`}>
-            {val.frontmatter.title}
+          <a class="title" href={`/posts/${data.title}`}>
+            {data.title}
           </a>
-          <a class="brief" href={`/posts/${val.frontmatter.title}`}>
-            {val.frontmatter.description}
+          <a class="brief" href={`/posts/${data.title}`}>
+            {data.description}
           </a>
           <div class="class_info">
             <div class="time">
               <i class="iconfont icon-24gl-calendar" />
-              {ParseTime(val.frontmatter.date)}
+              {ParseTime(data.date)}
             </div>
             <div class="tags">
-              {val.frontmatter.tags?.map((val, i) => {
+              {data.tags?.map((val: string, i: number) => {
                 if (i > 6) return null;
                 return (
                   <a class="tag_item" href={`/collect/${COLLECT_TAGS}/${val}`}>
