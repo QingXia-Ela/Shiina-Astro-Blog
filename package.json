@@ -11,11 +11,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^0.12.1",
+    "@astrojs/image": "^0.12.1",
+    "@astrojs/mdx": "^0.14.0",
     "@astrojs/node": "^3.1.0",
     "@astrojs/sitemap": "^1.0.0",
     "@astrojs/vue": "^1.2.1",
-    "astro": "1.7.2",
+    "astro": "1.9.1",
     "github-markdown-css": "^5.1.0",
     "install": "^0.13.0",
     "npm": "^9.2.0",

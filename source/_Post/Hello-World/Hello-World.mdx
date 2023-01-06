@@ -7,6 +7,8 @@ banner_img: cover/Hello-World.jpg
 categories: '技术'
 ---
 
+import { Image } from '@astrojs/image/components';
+
 # Hello World
 
 {% note success %}
@@ -23,4 +25,6 @@ categories: '技术'
 
 封面
 
-![](../cover.jpg)
+<div class='tac'>
+<Image src={import('./cover.jpg')} width={1200} height='unset' />
+</div>

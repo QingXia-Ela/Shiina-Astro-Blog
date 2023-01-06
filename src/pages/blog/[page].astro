@@ -7,6 +7,7 @@ import BlogInfo from "@/components/BlogInfo.astro";
 import Pagination from "@/components/Pagination/Pagination.astro";
 import type Frontmatter from "@/declare/Frontmatter";
 import PaginationItemFactory from "@/components/Pagination/PaginationItemFactory";
+import { getCollection } from "astro:content";
 
 export async function getStaticPaths({ paginate }: any) {
   // 用 fetch()、Astro.glob() 等加载你的数据
@@ -18,6 +19,8 @@ export async function getStaticPaths({ paginate }: any) {
   return paginate(res, { pageSize: PAGE_SIZE });
 }
 const res = SortArticle(await Astro.glob<Frontmatter>("/source/_Post/*/*.md"));
+
+// const e = await getCollection('blog')
 
 const { page } = Astro.props,
   { page: RoutePage } = Astro.params,

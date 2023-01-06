@@ -4,6 +4,7 @@ date: 2022-09-16 17:33:15
 tags: [技术,canvas,前端,总结,Js]
 categories: '技术'
 ---
+import { Image } from '@astrojs/image/components';
 
 # 记一次前端Canvas粒子效果实战-1
 
@@ -29,7 +30,9 @@ categories: '技术'
 
 ### 图片散开 / 组合
 
-![](effect1.gif)
+<div class='tac'>
+<Image src={import('./effect1.gif')} width={1200} height='unset' />
+</div>
 
 ### 图片切换
 

@@ -4,33 +4,49 @@ import BlogInfo from "@/components/BlogInfo.astro";
 import type Frontmatter from "@/declare/Frontmatter";
 import PostsInfo from "@/components/Pages/posts/PostsInfo.astro";
 import WhiteModule from "@/components/WhiteModule.astro";
+import { CollectionEntry, getCollection, getEntry } from "astro:content";
 
-const { name } = Astro.params;
-if (!name) Astro.redirect("/404");
+export async function getStaticPaths() {
+  const blog = await getCollection("blog");
+  return blog.map((entry) => ({
+    // Pass blog entry via props
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
 
-const ListData = await Astro.glob<Frontmatter>("/source/_Post/*/*.md");
+interface Props {
+  // Optionally use `CollectionEntry` for type safety
+  entry: CollectionEntry<"blog">;
+}
+
+const blog = await getCollection("blog");
+
+
+const { entry } = Astro.props,
+  { name } = Astro.params;
+
 let target = null;
-
-for (const i of ListData) {
-  if (i.frontmatter.title == name) {
-    target = i;
-    break;
+for (let i = 0; i < blog.length; i++) {
+  const e = blog[i]
+  if (new RegExp(name!).test(e.id)) {
+    target = e
+    break
   }
 }
 
-if (!target) Astro.redirect("/404");
+const r = await target?.render()
+let Content = r?.Content
 
-const MD = target?.Content;
 ---
 
-<MarkdownLayout content={target ? target!.frontmatter : {}}>
-  <WhiteModule  slot="before-markdown" >
-    <PostsInfo/>
+<MarkdownLayout content={target ? r?.injectedFrontmatter : {}}>
+  <WhiteModule slot="before-markdown">
+    <PostsInfo />
   </WhiteModule>
   {
-    target ? (
-      // @ts-expect-error
-      <MD />
+    Content ? (
+      <Content />
     ) : (
       <></>
     )

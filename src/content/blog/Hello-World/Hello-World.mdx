@@ -7,13 +7,9 @@ banner_img: cover/Hello-World.jpg
 categories: '技术'
 ---
 
+import { Image } from '@astrojs/image/components';
+
 # Hello World
-
-{% note success %}
-标签测试
-{% endnote %}
-
-行内标签{% label success @text %}
 
 这是一篇测试文章
 
@@ -23,4 +19,6 @@ categories: '技术'
 
 封面
 
-![](../cover.jpg)
+<div class='tac'>
+<Image src={import('./cover.jpg')} width={1200} height='unset' />
+</div>

@@ -6,6 +6,7 @@ index_img: cover/基于ThreeJs实现的网页3D粒子效果分享.jpg
 banner_img: cover/基于ThreeJs实现的网页3D粒子效果分享.jpg
 categories: '技术'
 ---
+import { Image } from '@astrojs/image/components';
 
 # 基于ThreeJs实现的网页3D粒子效果经验分享
 
@@ -64,13 +65,18 @@ https://up.qq.com/act/a20170301pre/index.html# (**需要手动复制粘贴网址
 
 队标是 UI 提供的 SVG 图标，然后导入到 Blender 转换为网格然后进行细分操作，勾勒出基本的图案
 
-![](logo.jpg)
+
+<div class="tac">
+  <Image src={import('./logo.jpg')} width={1200} height="unset" />
+</div>
 
 波浪的话直接用腾讯那个的 json 模型了，这边没有进行处理
 
 二维码的话是进行的平面建模，就单独的平面网格进行勾勒（勾这个就是要耐心，没啥技术含量）
 
-![](qr.jpg)
+<div class='tac'>
+<Image src={import('./qr.jpg')} width={1200} height='unset' />
+</div>
 
 ### json 模型的导入
 
@@ -82,7 +88,9 @@ https://up.qq.com/act/a20170301pre/index.html# (**需要手动复制粘贴网址
 
 这反而比较好，因为这边的话 Blender 就有直接导出 obj 模型的选项，原文还是专门安装了插件去将模型处理成 json 格式的
 
-![](export.jpg)
+<div class='tac'>
+<Image src={import('./export.jpg')} width={1200} height='unset' />
+</div>
 
 在模板中我们添加了自定义 Loader 选项，这样子就不会强制使用 OBJLoader 去加载模型了，可以选用 GLTF 模型更利于网页加载
 
@@ -96,11 +104,15 @@ https://up.qq.com/act/a20170301pre/index.html# (**需要手动复制粘贴网址
 
 这个问题挺离谱的，我在测试导入模型功能的时候在控制台输出了一下测试用的几何体，一个普通的 2 * 2 正方体导入到场景中有 36 个顶点：
 
-![](cube1.jpg)
+<div class='tac'>
+<Image src={import('./cube1.jpg')} width={1200} height='unset' />
+</div>
 
 但是通过 threejs 加载器加载后却有 144 个顶点：
 
-![](cube2.jpg)
+<div class='tac'>
+<Image src={import('./cube2.jpg')} width={1200} height='unset' />
+</div>
 
 这个问题想了一段时间，还拜托了一位会建模的大佬与他进行了一段时间的讨论。
 
@@ -118,7 +130,9 @@ https://github.com/QingXia-Ela/Up2017-Particles-Effect-Template/commit/1cf859eaf
 
 写了个很简单的方法，但是效果很好：
 
-![](remove.png)
+<div class='tac'>
+<Image src={import('./remove.png')} width={1200} height='unset' />
+</div>
 
 当然这个去重不推荐在其他项目使用，因为其本身是破坏了原有的网格结构，只是本次项目只需要顶点信息，所以比较特殊。
 
@@ -146,13 +160,17 @@ https://github.com/QingXia-Ela/Up2017-Particles-Effect-Template/commit/1cf859eaf
 
 看原文章又提到优化手段是对 tween 实例进行复用，这个不难，用一个数组将所有的 tween 实例存起来，然后每次要用的时候遍历数组对每个实例指定一下终点再启动一下就可以了，但是这个时候就遇到了一个百思不得其解的问题，复用后在切换模型的时候粒子位置出现了问题。
 
-![](tween1.gif)
+<div class='tac'>
+<Image src={import('./tween1.gif')} width={1200} height='unset' />
+</div>
 
 粒子并没有从方块原来的位置移动到指定的地方，而是从最开始的随机位置进行移动，这个问题说实话想了两三天都没想明白，因为自己的代码怎么找都没找到到底是有啥问题，所以最后决定去翻一下插件的源码，是不是插件内对数据进行了一些处理，导致他没按着源数据进行变化。
 
 运气很好，在 tween 的源码中大概半小时就找到了这样一行：
 
-![](tween2.jpg)
+<div class='tac'>
+<Image src={import('./tween2.jpg')} width={1200} height='unset' />
+</div>
 
 GitHub 原地址：https://github.com/tweenjs/tween.js/blob/main/src/Tween.ts#L172
 
@@ -160,7 +178,9 @@ GitHub 原地址：https://github.com/tweenjs/tween.js/blob/main/src/Tween.ts#L1
 
 还好 js 对于对象并没有公有和私有的概念，只是在 ts 上进行了一个判断，如果 js 也有公有私有那估计只能改源码然后弄一个专用的补间库了。随后我在 tween 补间过程和 tween 补间完成的时候进行了一个强制赋值：
 
-![](tween3.jpg)
+<div class='tac'>
+<Image src={import('./tween3.jpg')} width={1200} height='unset' />
+</div>
 
 这样改的时候 ts 会一直爆红，所以加了忽略错误的注释
 
@@ -184,14 +204,17 @@ GitHub 原地址：https://github.com/tweenjs/tween.js/blob/main/src/Tween.ts#L1
 
 本来是没有这个想法的，但是后面做着做着就也有这个需求了，官方的效果如下：
 
-![](kv1.gif)
+<div class='tac'>
+<Image src={import('./kv1.gif')} width={1200} height='unset' />
+</div>
 
 看了一下官方反混淆的源码，发现他的思路是在每个点实例上安插一个 `isPlaying` 的标记，当处于模型切换期间的时候该项为 true，反之为 false，在 false 期间的时候就可以对几何体坐标进行自定义修改。
 
 于是我们在这基础上在模板中导出了 `onAnimationFrameUpdate` 这一个钩子，在每一帧更新的时候均可触发。
 
-![](kv2.jpg)
-
+<div class='tac'>
+<Image src={import('./kv2.jpg')} width={1200} height='unset' />
+</div>
 模板的预置页面的 `wave` 代码用例如上。
 
 **这个钩子的使用需要特别小心，在某些不可预见的情况下出现的 bug 可能是因为这个钩子的代码没有合理编写！**
