@@ -1,4 +1,5 @@
-- [ ] blog 页面对接 content 数据
+- [x] blog 页面对接 content 数据
+- [ ] collect 数据对接
 - [ ] header 的白天、夜间模式切换同步
 - [ ] header 分类数据切换
 - [ ] search 接口处理
