@@ -192,9 +192,9 @@ declare module 'astro:content' {
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"记一次Gitblit-Jenkins实现前端自动化部署上线经历/记一次Gitblit-Jenkins实现前端自动化部署上线经历.md": {
-  id: "记一次Gitblit-Jenkins实现前端自动化部署上线经历/记一次Gitblit-Jenkins实现前端自动化部署上线经历.md",
-  slug: "记一次gitblit-jenkins实现前端自动化部署上线经历/记一次gitblit-jenkins实现前端自动化部署上线经历",
+"记一次Gitblit+Jenkins实现前端自动化部署上线经历/记一次Gitblit+Jenkins实现前端自动化部署上线经历.md": {
+  id: "记一次Gitblit+Jenkins实现前端自动化部署上线经历/记一次Gitblit+Jenkins实现前端自动化部署上线经历.md",
+  slug: "记一次gitblitjenkins实现前端自动化部署上线经历/记一次gitblitjenkins实现前端自动化部署上线经历",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
