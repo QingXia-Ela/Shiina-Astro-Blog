@@ -6,14 +6,14 @@ import PostsInfo from "@/components/Pages/posts/PostsInfo.astro";
 import WhiteModule from "@/components/WhiteModule.astro";
 import { CollectionEntry, getCollection, getEntry } from "astro:content";
 
-export async function getStaticPaths() {
-  const blog = await getCollection("blog");
-  return blog.map((entry) => ({
-    // Pass blog entry via props
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
-}
+// export async function getStaticPaths() {
+//   const blog = await getCollection("blog");
+//   return blog.map((entry) => ({
+//     // Pass blog entry via props
+//     params: { slug: entry.slug },
+//     props: { entry },
+//   }));
+// }
 
 interface Props {
   // Optionally use `CollectionEntry` for type safety
@@ -40,7 +40,7 @@ let Content = r?.Content
 
 ---
 
-<MarkdownLayout content={target ? r?.injectedFrontmatter : {}}>
+<MarkdownLayout content={target ? target.data : {}}>
   <WhiteModule slot="before-markdown">
     <PostsInfo />
   </WhiteModule>
