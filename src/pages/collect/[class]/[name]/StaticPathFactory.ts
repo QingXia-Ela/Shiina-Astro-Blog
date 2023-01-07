@@ -1,0 +1,82 @@
+import { COLLECT_POSITION_MAP } from '@/constant/Collect'
+import type { CollectionEntry } from 'astro:content'
+
+interface PathType {
+  params: Record<string, string | number>
+  props?: Record<string, any>
+}
+
+type ClassKeyList = keyof typeof COLLECT_POSITION_MAP
+
+const ClassList = Object.keys(COLLECT_POSITION_MAP)
+
+const EntryList: Record<string, CollectionEntry<"blog">[]> = {}
+
+ClassList.forEach((v) => {
+  EntryList[v] = []
+})
+
+function Map2Path(m: Map<string, number>, classify: ClassKeyList, PageMaxCount = 15): PathType[] {
+  const path: PathType[] = []
+  m.forEach((n, k) => {
+    const m = Math.ceil(n / PageMaxCount), p: PathType = {
+      params: {
+        class: classify,
+        name: k
+      }
+    };
+    for (let i = 1; i <= m; i++) if (i > 1) p.params.page = i;
+  })
+  return path
+}
+
+function CategoriesPathFactory(l: CollectionEntry<"blog">[], PageMaxCount = 15): PathType[] {
+  const CategoriesMap = new Map<string, number>();
+  l.forEach(({ data: { categories } }) => {
+    CategoriesMap.set(categories!, CategoriesMap.has(categories!) ? CategoriesMap.get(categories!)! + 1 : 1)
+  })
+  return Map2Path(CategoriesMap, "categories", PageMaxCount)
+}
+
+function TagPathFactory(l: CollectionEntry<"blog">[], PageMaxCount = 15): PathType[] {
+  const TagMap = new Map<string, number>();
+  l.forEach(({ data: { tags } }) => {
+    tags!.forEach((v) => {
+      TagMap.set(v, TagMap.has(v) ? TagMap.get(v)! + 1 : 1)
+    })
+  })
+  return Map2Path(TagMap, "tags", PageMaxCount)
+}
+
+export default function (l: CollectionEntry<"blog">[], PageMaxCount = 15): PathType[] {
+  const path: PathType[] = []
+  // 集合数组循环
+  l.forEach((e) => {
+    // 判断是否包含有 COLLECT_POSITION_MAP 携带的 key
+    ClassList.forEach((k: string) => {
+      // @ts-expect-error: Limit key to COLLECT_POSITION_MAP
+      if (e.data[k]) {
+        // 根据 key 推入对应 list
+        EntryList[k].push(e)
+      }
+    })
+  });
+
+  // 循环 key，处理对应列表
+  for (const i in EntryList) {
+    switch (i as ClassKeyList) {
+      case 'tags':
+        path.concat(TagPathFactory(EntryList[i], PageMaxCount))
+        break;
+
+      case 'categories':
+        path.concat(CategoriesPathFactory(EntryList[i], PageMaxCount))
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  return path
+}

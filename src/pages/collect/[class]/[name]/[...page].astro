@@ -2,12 +2,36 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import List from "./_List.astro";
 import Pagination from "@/components/Pagination/Pagination.astro";
+import { COLLECT_POSITION_MAP } from "@/constant/Collect";
+import { getCollection } from "astro:content";
+import StaticPathFactory from "./StaticPathFactory";
+
+const LIST_MAX_ITEM_COUNT = 15;
+
+export async function getStaticPaths() {
+  const l = await getCollection("blog");
+  return StaticPathFactory(l, 15);
+}
+
+interface Params {
+  class: keyof typeof COLLECT_POSITION_MAP;
+  name: string;
+  page: number;
+}
+
+const { class: classify, name, page } = Astro.params as unknown as Params;
+
+if (Object.keys(COLLECT_POSITION_MAP).indexOf(classify) == -1 || !name)
+  Astro.redirect("/404");
 ---
 
 <BaseLayout>
   <div class="list flex_center">
     <div class="white_module">
-      <h2>标签 <span>前端</span> 下的所有文章</h2>
+      <h2>
+        {COLLECT_POSITION_MAP[classify]}
+        <span>{name}</span> 下的所有文章
+      </h2>
       <List />
     </div>
     <Pagination currentPage={1} maxPage={10} path="/collect/tags/前端" />
