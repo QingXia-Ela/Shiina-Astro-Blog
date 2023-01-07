@@ -26,10 +26,10 @@
 
 <style lang="scss">
   .list_area {
-    margin: 2rem 3rem;
+    margin: 2rem;
 
     ul {
-      margin: 1.6rem 2rem;
+      margin: 1.6rem;
 
       li {
         list-style: none;
@@ -38,16 +38,31 @@
         a {
           display: flex;
           justify-content: space-between;
+          width: 100%;
           padding: 0.6rem 1.2rem;
 
           .time {
-            width: 12%;
+            width: 30%;
             text-align: right;
           }
         }
 
         &:hover {
           background-color: #eee;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .list_area {
+      ul {
+        margin: 1.6rem 0;
+
+        li {
+          a {
+            padding: 0.6rem 0;
+          }
         }
       }
     }
