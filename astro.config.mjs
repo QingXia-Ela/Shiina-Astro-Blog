@@ -26,10 +26,10 @@ export default defineConfig({
       wrap: true
     }
   },
-  output: 'server',
-  adapter: node({
-    mode: 'standalone'
-  }),
+  // output: 'server',
+  // adapter: node({
+  //   mode: 'standalone'
+  // }),
   experimental: {
     contentCollections: true
   }

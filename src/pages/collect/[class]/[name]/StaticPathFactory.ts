@@ -1,5 +1,6 @@
 import { COLLECT_POSITION_MAP } from '@/constant/Collect'
 import type { CollectionEntry } from 'astro:content'
+import { cloneDeep } from 'lodash'
 
 interface PathType {
   params: Record<string, string | number>
@@ -25,8 +26,13 @@ function Map2Path(m: Map<string, number>, classify: ClassKeyList, PageMaxCount =
         name: k
       }
     };
-    for (let i = 1; i <= m; i++) if (i > 1) p.params.page = i;
+    for (let i = 1; i <= m; i++) {
+      if (i == 1) path.push(cloneDeep(p))
+      p.params.page = i;
+    }
+    path.push(p)
   })
+
   return path
 }
 
@@ -49,7 +55,7 @@ function TagPathFactory(l: CollectionEntry<"blog">[], PageMaxCount = 15): PathTy
 }
 
 export default function (l: CollectionEntry<"blog">[], PageMaxCount = 15): PathType[] {
-  const path: PathType[] = []
+  let path: PathType[] = []
   // 集合数组循环
   l.forEach((e) => {
     // 判断是否包含有 COLLECT_POSITION_MAP 携带的 key
@@ -66,11 +72,11 @@ export default function (l: CollectionEntry<"blog">[], PageMaxCount = 15): PathT
   for (const i in EntryList) {
     switch (i as ClassKeyList) {
       case 'tags':
-        path.concat(TagPathFactory(EntryList[i], PageMaxCount))
+        path = path.concat(TagPathFactory(EntryList[i], PageMaxCount))
         break;
 
       case 'categories':
-        path.concat(CategoriesPathFactory(EntryList[i], PageMaxCount))
+        path = path.concat(CategoriesPathFactory(EntryList[i], PageMaxCount))
         break;
 
       default:
