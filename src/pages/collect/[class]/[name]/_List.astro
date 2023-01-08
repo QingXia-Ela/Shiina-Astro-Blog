@@ -10,16 +10,18 @@ interface Props {
 }
 const LIST_MAX_ITEM_COUNT = cfg.pages.collect!.PageArticleCount!,
   { data, currentIndex } = Astro.props,
-  finalData = data.splice(
-    (currentIndex - 1) * LIST_MAX_ITEM_COUNT,
-    LIST_MAX_ITEM_COUNT
-  );
+  articleFrom = (currentIndex - 1) * LIST_MAX_ITEM_COUNT,
+  finalData = data.slice(articleFrom, articleFrom + LIST_MAX_ITEM_COUNT);
 
 if (finalData.length < 1) Astro.redirect("/404");
 ---
 
 <div class="list_area">
-  <h3 class="count">共计 114514 篇文章，当前展示 1919 - 810 篇文章</h3>
+  <h3 class="count">
+    共计 {data.length} 篇文章，当前展示 {articleFrom + 1} - {
+      articleFrom + finalData.length
+    } 篇文章
+  </h3>
   <ul>
     {
       finalData.map(({ data: { title, date } }) => (
