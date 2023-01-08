@@ -1,4 +1,5 @@
 import type { ClassKeyList } from "@/declare/Collect";
+import { SortCollectArticles } from "@/utils/SortArticle";
 import type { CollectionEntry } from "astro:content";
 
 function CategoryItemFactory(l: CollectionEntry<"blog">[], name: string) {
@@ -12,10 +13,10 @@ function TagItemFactory(l: CollectionEntry<"blog">[], name: string) {
 export default function (l: CollectionEntry<"blog">[], classify: ClassKeyList, name: string) {
   switch (classify as ClassKeyList) {
     case 'tags':
-      return TagItemFactory(l, name)
+      return SortCollectArticles(TagItemFactory(l, name))
 
     case 'categories':
-      return CategoryItemFactory(l, name)
+      return SortCollectArticles(CategoryItemFactory(l, name))
 
     default:
       break;
