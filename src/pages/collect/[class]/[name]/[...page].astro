@@ -19,7 +19,8 @@ interface Params {
   page: number;
 }
 
-const { class: classify, name, page } = Astro.params as unknown as Params;
+const { class: classify, name, page } = Astro.params as unknown as Params,
+  finalPage = page > 0 ? page : 1;
 
 if (Object.keys(COLLECT_POSITION_MAP).indexOf(classify) == -1 || !name)
   Astro.redirect("/404");
@@ -34,7 +35,11 @@ if (Object.keys(COLLECT_POSITION_MAP).indexOf(classify) == -1 || !name)
       </h2>
       <List />
     </div>
-    <Pagination currentPage={1} maxPage={10} path="/collect/tags/前端" />
+    <Pagination
+      currentPage={finalPage}
+      maxPage={10}
+      path="/collect/tags/前端"
+    />
   </div>
 </BaseLayout>
 

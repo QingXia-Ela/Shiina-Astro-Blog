@@ -1,4 +1,5 @@
 import { COLLECT_POSITION_MAP } from '@/constant/Collect'
+import type { ClassKeyList } from '@/declare/Collect'
 import type { CollectionEntry } from 'astro:content'
 import { cloneDeep } from 'lodash'
 
@@ -6,8 +7,6 @@ interface PathType {
   params: Record<string, string | number>
   props?: Record<string, any>
 }
-
-type ClassKeyList = keyof typeof COLLECT_POSITION_MAP
 
 const ClassList = Object.keys(COLLECT_POSITION_MAP)
 
