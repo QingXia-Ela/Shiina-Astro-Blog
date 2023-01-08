@@ -6,8 +6,7 @@ import { COLLECT_POSITION_MAP } from "@/constant/Collect";
 import { getCollection } from "astro:content";
 import StaticPathFactory from "./utils/StaticPathFactory";
 import GetClassNamePosts from "./utils/GetClassNamePosts";
-
-const LIST_MAX_ITEM_COUNT = 15;
+import cfg from "blog.config";
 
 export async function getStaticPaths() {
   const l = await getCollection("blog");
@@ -19,11 +18,10 @@ interface Params {
   name: string;
   page: string;
 }
-
-const { class: classify, name, page } = Astro.params as unknown as Params,
-  finalPage = parseInt(parseInt(page) > 0 ? page : 1);
-
-const PathItem = GetClassNamePosts(await getCollection("blog"), classify, name);
+const LIST_MAX_ITEM_COUNT = cfg.pages.collect!.PageArticleCount!,
+  { class: classify, name, page } = Astro.params as unknown as Params,
+  finalPage = parseInt(parseInt(page) > 0 ? page : "1"),
+  PathItem = GetClassNamePosts(await getCollection("blog"), classify, name);
 
 if (
   Object.keys(COLLECT_POSITION_MAP).indexOf(classify) == -1 ||
@@ -43,11 +41,11 @@ if (
         {COLLECT_POSITION_MAP[classify]}
         <span>{name}</span> 下的所有文章
       </h2>
-      <List />
+      <List data={PathItem!} currentIndex={finalPage} />
     </div>
     <Pagination
       currentPage={finalPage}
-      maxPage={10}
+      maxPage={Math.ceil(PathItem!.length / LIST_MAX_ITEM_COUNT)}
       path={`/collect/${classify}/${name}`}
     />
   </div>

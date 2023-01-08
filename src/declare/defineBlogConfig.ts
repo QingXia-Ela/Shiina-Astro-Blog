@@ -103,6 +103,11 @@ interface BlogPageConfig extends BasicPageConfig {
   PageArticleCount?: number
 }
 
+interface CollectPageConfig extends BasicPageConfig {
+  /** 集合页中每页展示的文章数量，默认10 */
+  PageArticleCount?: number
+}
+
 // 网站配置
 interface BasicWebsiteConfig {
   /** 网站默认标题，会被放入 head 标签内的 title 部分，header 处也会使用 */
@@ -122,9 +127,10 @@ interface BlogConfig extends Record<any, any> {
     light: LightThemeColorConfig
     dark: DarkThemeColorConfig
   }
-  pages: Partial<Record<PageList, BasicPageConfig>> & {
-    'blog': BlogPageConfig
-  }
+  pages: Partial<Record<PageList, BasicPageConfig>> & Partial<{
+    'blog': BlogPageConfig,
+    'collect': CollectPageConfig
+  }>
   UserInfo: BasicPersonalConfig
   /** 
    * 搜索配置
@@ -199,7 +205,8 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
       'collect': {
         header: {
           title: '集合'
-        }
+        },
+        PageArticleCount: 10
       },
       'friends': {
         header: {

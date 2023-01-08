@@ -1,25 +1,35 @@
 ---
+import type { CollectionEntry } from "astro:content";
+import ParseTime from "@/utils/ParseTime";
+import cfg from "blog.config";
+
+// maybe need to update when add new collect
+interface Props {
+  data: CollectionEntry<"blog">[];
+  currentIndex: number;
+}
+const LIST_MAX_ITEM_COUNT = cfg.pages.collect!.PageArticleCount!,
+  { data, currentIndex } = Astro.props,
+  finalData = data.splice(
+    (currentIndex - 1) * LIST_MAX_ITEM_COUNT,
+    LIST_MAX_ITEM_COUNT
+  );
+
+if (finalData.length < 1) Astro.redirect("/404");
 ---
 
 <div class="list_area">
   <h3 class="count">共计 114514 篇文章，当前展示 1919 - 810 篇文章</h3>
   <ul>
     {
-      (() => {
-        const l = [];
-        for (let i = 0; i < 15; i++) {
-          l.push(
-            <li>
-              <a href="#">
-                <span class="text_nowrap w70">test</span>
-                <div class="time">2022-11-14</div>
-              </a>
-            </li>
-          );
-        }
-
-        return l;
-      })().map((val) => val)
+      finalData.map(({ data: { title, date } }) => (
+        <li>
+          <a href="#">
+            <span class="text_nowrap w70">{title}</span>
+            <div class="time">{ParseTime(date)}</div>
+          </a>
+        </li>
+      ))
     }
   </ul>
 </div>
