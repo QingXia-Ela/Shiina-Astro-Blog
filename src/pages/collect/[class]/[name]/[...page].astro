@@ -4,7 +4,8 @@ import List from "./_List.astro";
 import Pagination from "@/components/Pagination/Pagination.astro";
 import { COLLECT_POSITION_MAP } from "@/constant/Collect";
 import { getCollection } from "astro:content";
-import StaticPathFactory from "./StaticPathFactory";
+import StaticPathFactory from "./utils/StaticPathFactory";
+import GetClassNamePosts from "./utils/GetClassNamePosts";
 
 const LIST_MAX_ITEM_COUNT = 15;
 
@@ -16,13 +17,22 @@ export async function getStaticPaths() {
 interface Params {
   class: keyof typeof COLLECT_POSITION_MAP;
   name: string;
-  page: number;
+  page: string;
 }
 
 const { class: classify, name, page } = Astro.params as unknown as Params,
-  finalPage = page > 0 ? page : 1;
+  finalPage = parseInt(parseInt(page) > 0 ? page : 1);
 
-if (Object.keys(COLLECT_POSITION_MAP).indexOf(classify) == -1 || !name)
+const PathItem = GetClassNamePosts(await getCollection("blog"), classify, name);
+
+if (
+  Object.keys(COLLECT_POSITION_MAP).indexOf(classify) == -1 ||
+  !name ||
+  !PathItem ||
+  !PathItem.length ||
+  !page ||
+  parseInt(page) < 1
+)
   Astro.redirect("/404");
 ---
 
@@ -38,7 +48,7 @@ if (Object.keys(COLLECT_POSITION_MAP).indexOf(classify) == -1 || !name)
     <Pagination
       currentPage={finalPage}
       maxPage={10}
-      path="/collect/tags/前端"
+      path={`/collect/${classify}/${name}`}
     />
   </div>
 </BaseLayout>
