@@ -8,6 +8,11 @@ await import('./GlobalTest/index')
  */
 if (window.location.pathname == '/') {
   const h = document.querySelector('html'), p = document.createElement('script')
+  /**
+   * inject by `<script></script>` element because this progress couldn't finish in module mode
+   * 
+   * it's a sync progress
+   */
   p.setAttribute('src', 'https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js')
   h.appendChild(p)
   await import('./MiniPlayer/index')

@@ -5,7 +5,7 @@ export default function (): AstroIntegration {
     name: 'InjectJSCSS',
     hooks: {
       'astro:config:setup': ({ injectScript }) => {
-        injectScript('page', 'import "source/_inject/JS/_page.js"')
+        injectScript('page', 'import "source/_inject/_page.js"')
       }
     }
   }
