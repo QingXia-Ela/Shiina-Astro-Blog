@@ -2,7 +2,13 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import WhiteModule from "@/components/WhiteModule.astro";
 import { getEntry } from "astro:content";
-const { Content } = await (await getEntry("friends", "friends.md")).render();
+import cfg from "blog.config";
+const e = await getEntry("friends", "friends.md"),
+  { Content } = await e.render(),
+  {
+    pages: { friends },
+  } = cfg,
+  { FriendList } = friends!;
 ---
 
 <BaseLayout title={`友链 - `}>
@@ -11,29 +17,25 @@ const { Content } = await (await getEntry("friends", "friends.md")).render();
       <h1>友情链接</h1>
       <div class="friends_list">
         {
-          (() => {
-            let res = [];
-            for (let i = 0; i < 10; i++) {
-              res.push(
-                <div class="friend_item">
-                  <div class="avatar_wrapper">
-                    <img src="/favicon.svg" alt="" />
-                  </div>
-                  <div class="info">
-                    <div class="name">Shiina</div>
-                    <div class="autograph">
-                      烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫烫
-                    </div>
-                  </div>
+          FriendList?.length ? (
+            FriendList?.map(({ description, name, link, avatar }) => (
+              <div class="friend_item">
+                <div class="avatar_wrapper">
+                  <img class="w100 h100" src={avatar} alt={name} />
                 </div>
-              );
-            }
-            return res;
-          })()
+                <div class="info">
+                  <div class="name text_nowrap">{name}</div>
+                  <div class="autograph text_nowrap">{description}</div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <h3>这里啥都没有...</h3>
+          )
         }
       </div>
       {
-        Content ? (
+        e.body.length ? (
           <div class="md">
             <Content />
           </div>
@@ -58,7 +60,7 @@ const { Content } = await (await getEntry("friends", "friends.md")).render();
     }
 
     .friends_list {
-      width: fit-content;
+      width: 100%;
       display: flex;
       justify-content: start;
       align-items: center;
@@ -70,7 +72,7 @@ const { Content } = await (await getEntry("friends", "friends.md")).render();
         display: flex;
         width: 33.33%;
         height: 5rem;
-        padding: 0 3rem;
+        padding: 0 2rem;
         align-items: center;
         transition: background-color 0.1s;
         cursor: pointer;
@@ -82,14 +84,14 @@ const { Content } = await (await getEntry("friends", "friends.md")).render();
         .avatar_wrapper {
           width: 4rem;
           height: 4rem;
+          margin-right: 1rem;
           border-radius: 100vh;
           overflow: hidden;
           box-shadow: 0 0 5px 2px #5e5e5e4d;
         }
 
         .info {
-          flex: 1;
-          margin-left: 1rem;
+          width: 60%;
           text-align: left;
 
           .name {
@@ -97,10 +99,10 @@ const { Content } = await (await getEntry("friends", "friends.md")).render();
           }
 
           .autograph {
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
             width: 100%;
+            // display: -webkit-box;
+            // -webkit-box-orient: vertical;
+            // -webkit-line-clamp: 2;
             max-height: 2.8rem;
             color: #888;
             font-size: 0.9rem;

@@ -108,6 +108,17 @@ interface CollectPageConfig extends BasicPageConfig {
   PageArticleCount?: number
 }
 
+interface FriendItem {
+  name: string
+  link: string
+  avatar?: string
+  description?: string
+}
+
+interface FriendsPageConfig extends BasicPageConfig {
+  FriendList?: FriendItem[]
+}
+
 // 网站配置
 interface BasicWebsiteConfig {
   /** 网站默认标题，会被放入 head 标签内的 title 部分，header 处也会使用 */
@@ -128,8 +139,9 @@ interface BlogConfig extends Record<any, any> {
     dark: DarkThemeColorConfig
   }
   pages: Partial<Record<PageList, BasicPageConfig>> & Partial<{
-    'blog': BlogPageConfig,
+    'blog': BlogPageConfig
     'collect': CollectPageConfig
+    'friends': FriendsPageConfig
   }>
   UserInfo: BasicPersonalConfig
   /** 
@@ -211,7 +223,8 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
       'friends': {
         header: {
           title: '友链'
-        }
+        },
+        FriendList: []
       },
       'tags': {
         header: {
