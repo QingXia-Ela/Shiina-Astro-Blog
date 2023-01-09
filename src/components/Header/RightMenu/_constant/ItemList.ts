@@ -1,13 +1,27 @@
+import type { ListItemProps } from "@/declare/Header/Header";
 import cfg from "blog.config";
-const { SearchConfig } = cfg;
+import { CategoriesMapFactory } from "@/pages/collect/[class]/[name]/utils/StaticPathFactory";
+import { getCollection } from "astro:content";
+import { COLLECT_CATEGORIES } from "@/constant/Collect";
 
 interface MenuItemProps extends Record<string, any> {
   name?: string;
   href?: string;
   type?: "normal" | "list";
   iconfont?: string;
-  data?: any[];
+  data?: ListItemProps[];
 }
+
+const { SearchConfig } = cfg;
+const CategoriesMap = CategoriesMapFactory(await getCollection("blog")), CategoriesList: ListItemProps[] = []
+
+CategoriesMap.forEach((v, k) => {
+  CategoriesList.push({
+    name: k,
+    href: `/collect/${COLLECT_CATEGORIES}/${k}`
+  })
+})
+
 
 const ItemList: MenuItemProps[] = [
   {
@@ -26,6 +40,7 @@ const ItemList: MenuItemProps[] = [
     name: "归档",
     type: "list",
     iconfont: "iconfont icon-24gl-banknotes",
+    data: CategoriesList
   },
   {
     name: "标签",
@@ -42,7 +57,6 @@ const ItemList: MenuItemProps[] = [
     href: "/about",
     iconfont: "iconfont icon-24gl-user",
   }
-
 ];
 
 if (SearchConfig) {

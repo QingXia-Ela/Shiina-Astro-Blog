@@ -1,4 +1,5 @@
 ---
+import type { ListItemProps } from "@/declare/Header/Header";
 import _ from "lodash";
 /**
  * import  { MobileMenuId } from "@/constant/Header"
@@ -8,14 +9,15 @@ export interface Props {
   ItemName?: string;
   type?: "normal" | "list";
   iconfont?: string;
-  data?: Array<{ href: string; name: string }>;
+  data?: ListItemProps[];
 }
 
 const _DEFAULT_PROPS_: Props = {
-  ItemName: "",
-  type: "list",
-  iconfont: "",
-};
+    ItemName: "",
+    type: "list",
+    iconfont: "",
+  },
+  { data } = Astro.props;
 
 let { ItemName, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
 ---
@@ -25,10 +27,15 @@ let { ItemName, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
     {iconfont.length ? <i class={iconfont} /> : undefined}
     {ItemName}
   </div>
-  <div class="list_item column_flex default_box_shadow">
-    <a href="/">技术</a>
-    <a href="/">随笔</a>
-  </div>
+  {
+    data ? (
+      <div class="list_item column_flex default_box_shadow">
+        {data.map(({ name, href }) => (
+          <a href={href}>{name}</a>
+        ))}
+      </div>
+    ) : undefined
+  }
 </div>
 
 <script type="module">

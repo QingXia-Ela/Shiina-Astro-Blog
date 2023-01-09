@@ -14,14 +14,19 @@ import { MobileMenuId } from "@/constant/Header";
   </div>
   <div class="list">
     {
-      ItemList.map(({ href, name, type, iconfont }) => {
+      ItemList.map(({ href, name, type, iconfont, data }) => {
         return !type || type === "normal" ? (
           <a href={href} class="h100 flex_center list_item">
             <MenuItem ItemName={name} type={type} iconfont={iconfont} />
           </a>
         ) : (
           <div class="list_menu_item">
-            <ListMenuItem ItemName={name} type={type} iconfont={iconfont} />
+            <ListMenuItem
+              ItemName={name}
+              type={type}
+              iconfont={iconfont}
+              data={data}
+            />
           </div>
         );
       })

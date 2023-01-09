@@ -9,13 +9,18 @@ import ItemList from "./_constant/ItemList";
 
 <div class="menu">
   {
-    ItemList.map(({ href, name, type, iconfont }) => {
+    ItemList.map(({ href, name, type, iconfont, data }) => {
       return !type || type === "normal" ? (
         <a href={href} class="h100 flex_center">
           <MenuItem ItemName={name} type={type} iconfont={iconfont} />
         </a>
       ) : (
-        <ListMenuItem ItemName={name} type={type} iconfont={iconfont} />
+        <ListMenuItem
+          ItemName={name}
+          type={type}
+          iconfont={iconfont}
+          data={data}
+        />
       );
     })
   }

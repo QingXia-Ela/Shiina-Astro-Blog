@@ -35,22 +35,24 @@ function Map2Path(m: Map<string, number>, classify: ClassKeyList, PageMaxCount =
   return path
 }
 
-function CategoriesPathFactory(l: CollectionEntry<"blog">[], PageMaxCount = 15): PathType[] {
+export function CategoriesMapFactory(l: CollectionEntry<"blog">[]): Map<string, number> {
   const CategoriesMap = new Map<string, number>();
   l.forEach(({ data: { categories } }) => {
-    CategoriesMap.set(categories!, CategoriesMap.has(categories!) ? CategoriesMap.get(categories!)! + 1 : 1)
+    if (categories != undefined)
+      CategoriesMap.set(categories!, CategoriesMap.has(categories!) ? CategoriesMap.get(categories!)! + 1 : 1)
   })
-  return Map2Path(CategoriesMap, "categories", PageMaxCount)
+  return CategoriesMap
 }
 
-function TagPathFactory(l: CollectionEntry<"blog">[], PageMaxCount = 15): PathType[] {
+export function TagMapFactory(l: CollectionEntry<"blog">[]): Map<string, number> {
   const TagMap = new Map<string, number>();
   l.forEach(({ data: { tags } }) => {
     tags!.forEach((v) => {
-      TagMap.set(v, TagMap.has(v) ? TagMap.get(v)! + 1 : 1)
+      if (tags != undefined)
+        TagMap.set(v, TagMap.has(v) ? TagMap.get(v)! + 1 : 1)
     })
   })
-  return Map2Path(TagMap, "tags", PageMaxCount)
+  return TagMap
 }
 
 export default function (l: CollectionEntry<"blog">[], PageMaxCount = 15): PathType[] {
@@ -71,11 +73,11 @@ export default function (l: CollectionEntry<"blog">[], PageMaxCount = 15): PathT
   for (const i in EntryList) {
     switch (i as ClassKeyList) {
       case 'tags':
-        path = path.concat(TagPathFactory(EntryList[i], PageMaxCount))
+        path = path.concat(Map2Path(TagMapFactory(EntryList[i]), "tags", PageMaxCount))
         break;
 
       case 'categories':
-        path = path.concat(CategoriesPathFactory(EntryList[i], PageMaxCount))
+        path = path.concat(Map2Path(CategoriesMapFactory(EntryList[i]), "categories", PageMaxCount))
         break;
 
       default:
