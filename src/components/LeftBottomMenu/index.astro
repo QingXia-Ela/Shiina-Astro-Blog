@@ -1,0 +1,55 @@
+---
+import BackToTop from "./components/BackToTop.astro";
+const { class: className } = Astro.props;
+---
+
+<div class="corner" id="Corner" data-astro-class={className}>
+  <div class="list_item">
+    <BackToTop />
+  </div>
+</div>
+
+<script>
+  const observerOptions: IntersectionObserverInit = {
+    // Negative top margin accounts for `scroll-margin`.
+    // Negative bottom margin means heading needs to be towards top of viewport to trigger intersection.
+    rootMargin: "300px 0px 0px 0px",
+    threshold: 1,
+  };
+
+  const headingsObserver = new IntersectionObserver((e) => {
+    document.getElementById("Corner")?.setAttribute(
+      "class",
+      `corner
+        ${document.getElementById("Corner")?.getAttribute("data-astro-class")}
+        ${document.querySelector("html")!.scrollTop > 300 ? "" : " hidden"}`
+    );
+  }, observerOptions);
+
+  // Observe all the headings in the main page content.
+  headingsObserver.observe(document.body);
+</script>
+
+<style lang="scss" is:global>
+  #Corner {
+    z-index: 5000;
+    position: fixed;
+    right: 1rem;
+    bottom: 0.4rem;
+    width: 2.2rem;
+    transition: transform 0.3s;
+
+    .list_item {
+      width: 100%;
+      height: 1.8rem;
+      margin: 0.4rem 0;
+      background-color: #fff;
+      border-radius: 0.2rem;
+      box-shadow: 0 0 5px rgba(62, 62, 62, 0.5);
+    }
+
+    &.hidden {
+      transform: translateX(150%);
+    }
+  }
+</style>
