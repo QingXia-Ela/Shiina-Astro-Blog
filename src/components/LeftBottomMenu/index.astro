@@ -22,7 +22,7 @@ const { class: className } = Astro.props;
       "class",
       `corner
         ${document.getElementById("Corner")?.getAttribute("data-astro-class")}
-        ${document.querySelector("html")!.scrollTop > 300 ? "" : " hidden"}`
+        ${document.querySelector("html")!.scrollTop < 300 ? "" : " show"}`
     );
   }, observerOptions);
 
@@ -37,6 +37,7 @@ const { class: className } = Astro.props;
     right: 1rem;
     bottom: 0.4rem;
     width: 2.2rem;
+    transform: translateX(150%);
     transition: transform 0.3s;
 
     .list_item {
@@ -48,8 +49,8 @@ const { class: className } = Astro.props;
       box-shadow: 0 0 5px rgba(62, 62, 62, 0.5);
     }
 
-    &.hidden {
-      transform: translateX(150%);
+    &.show {
+      transform: translateX(0);
     }
   }
 </style>
