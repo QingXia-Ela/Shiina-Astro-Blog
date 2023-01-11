@@ -1,26 +1,25 @@
 ---
 import type Frontmatter from "@/declare/Frontmatter";
 import ParseTime from "@/utils/ParseTime";
-import SortArticle from "@/utils/SortArticle";
+import { SortCollectArticles } from "@/utils/SortArticle";
+import { getCollection } from "astro:content";
 
 export interface Props {
   horizontal?: boolean;
 }
 const { horizontal } = Astro.props;
-const ArticleList = SortArticle(
-  await Astro.glob<Frontmatter>("/source/_Post/*/*.md")
-).slice(0, horizontal ? 3 : 5);
+const ArticleList = SortCollectArticles<"blog">(
+  await getCollection("blog")
+).slice(3);
 ---
 
 <div class={`recent_article ${horizontal ? "horizontal" : "vertical"}`}>
   {
     ArticleList.map((val) => {
       return (
-        <a class="item" href={`/posts/${val.frontmatter.title}`}>
-          <div class="title text_nowrap w100">{val.frontmatter.title}</div>
-          <div class="time text_nowrap w100">
-            {ParseTime(val.frontmatter.date)}
-          </div>
+        <a class="item" href={`/posts/${val.data.title}`}>
+          <div class="title text_nowrap w100">{val.data.title}</div>
+          <div class="time text_nowrap w100">{ParseTime(val.data.date)}</div>
         </a>
       );
     })

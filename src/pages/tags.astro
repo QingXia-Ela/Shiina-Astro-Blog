@@ -2,7 +2,8 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import type Frontmatter from "@/declare/Frontmatter";
 import { COLLECT_TAGS } from "@/constant/Collect";
-const ArticleList = await Astro.glob<Frontmatter>("/source/_Post/*/*.md");
+import { getCollection } from "astro:content";
+const ArticleList = await getCollection("blog");
 
 let tagMap: Record<string, any> = {},
   max = 0,
@@ -17,7 +18,7 @@ function SizeFactory(n: number) {
   return "s";
 }
 
-ArticleList.forEach(({ frontmatter: { tags, categories } }) => {
+ArticleList.forEach(({ data: { tags, categories } }) => {
   if (tags) {
     tags.forEach((val) => (tagMap[val] ? tagMap[val]++ : (tagMap[val] = 1)));
     for (let i in tagMap) {

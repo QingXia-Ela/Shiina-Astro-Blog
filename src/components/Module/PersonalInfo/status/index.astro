@@ -1,11 +1,12 @@
 ---
 import type Frontmatter from "@/declare/Frontmatter";
+import { getCollection } from "astro:content";
 
-const ArticleList = await Astro.glob<Frontmatter>("/source/_Post/*/*.md");
+const ArticleList = await getCollection("blog");
 let tagSet = new Set(),
   categorySet = new Set();
 
-ArticleList.forEach(({ frontmatter: { tags, categories } }) => {
+ArticleList.forEach(({ data: { tags, categories } }) => {
   if (tags) tags.forEach((val) => tagSet.add(val));
   if (categories) categorySet.add(categories);
 });
