@@ -1,21 +1,19 @@
 ---
+import RoundButton from "./RoundButton.astro";
 ---
 
 <div class="toc">
-  <div class="icon"></div>
+  <RoundButton>
+    <i class="iconfont icon-sort"></i>
+  </RoundButton>
 </div>
 
 <style lang="scss">
   .toc {
     position: sticky;
-    top: 5rem;
+    top: 4rem;
     right: 0;
     height: 0;
-
-    .icon {
-      position: absolute;
-      top: 0;
-      right: -3rem;
-    }
+    bottom: 4rem;
   }
 </style>

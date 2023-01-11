@@ -1,0 +1,30 @@
+---
+---
+
+<div class="round_button">
+  <slot />
+</div>
+
+<style lang="scss">
+  .round_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 1.8rem;
+    right: -3rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100vh;
+    background-color: var(--color-canvas-default);
+    box-shadow: 0 0 3px var(--color-fg-default);
+    transform: translateX(1rem);
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--color-canvas-default);
+      background-color: var(--color-fg-default);
+    }
+  }
+</style>
