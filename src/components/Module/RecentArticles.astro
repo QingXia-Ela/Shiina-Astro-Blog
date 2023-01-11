@@ -10,7 +10,7 @@ export interface Props {
 const { horizontal } = Astro.props;
 const ArticleList = SortCollectArticles<"blog">(
   await getCollection("blog")
-).slice(3);
+).slice(0, horizontal ? 3 : 5);
 ---
 
 <div class={`recent_article ${horizontal ? "horizontal" : "vertical"}`}>
