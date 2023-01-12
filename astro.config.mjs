@@ -5,6 +5,9 @@ import sitemap from '@astrojs/sitemap';
 import image from '@astrojs/image'
 import node from '@astrojs/node';
 import InjectJSCSS from './src/_intergration/InjectJSCSS'
+import dns from 'dns'
+
+dns.setDefaultResultOrder('verbatim')
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,6 +21,9 @@ export default defineConfig({
           replacement: 'src/'
         }
       ]
+    },
+    server: {
+      host: true,
     }
   },
   markdown: {
