@@ -13,16 +13,18 @@ const { class: className } = Astro.props;
   const observerOptions: IntersectionObserverInit = {
     // Negative top margin accounts for `scroll-margin`.
     // Negative bottom margin means heading needs to be towards top of viewport to trigger intersection.
-    rootMargin: "300px 0px 0px 0px",
-    threshold: 1,
+    rootMargin: "0px 0px 0px 0px",
   };
 
   const headingsObserver = new IntersectionObserver((e) => {
+    let isShow = true;
+    if (e[0].intersectionRatio <= 0) isShow = false;
+
     document.getElementById("Corner")?.setAttribute(
       "class",
       `corner
         ${document.getElementById("Corner")?.getAttribute("data-astro-class")}
-        ${document.querySelector("html")!.scrollTop < 300 ? "" : " show"}`
+        ${isShow ? "" : " show"}`
     );
   }, observerOptions);
 

@@ -1,14 +1,16 @@
 ---
 ---
 
-<a class="back_to_top w100 h100" href="#" id="BackToTopButton">
+<div class="back_to_top w100 h100" id="BackToTopButton">
   <div class="arrowup"></div>
-</a>
+</div>
 
 <script>
-  // document
-  //   .getElementById("BackToTopButton")
-  //   ?.addEventListener("click", () => (window.location.pathname  = window.location.pathname+ "/"));
+  document.getElementById("BackToTopButton")?.addEventListener("click", () => {
+    document.querySelector("html")!.scrollIntoView({
+      behavior: "smooth",
+    });
+  });
 </script>
 
 <style lang="scss">
@@ -16,6 +18,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 
     .arrowup {
       display: block;
