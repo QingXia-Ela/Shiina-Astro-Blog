@@ -1,6 +1,18 @@
 ---
+import { getCollection } from "astro:content";
 ---
 
 <div class="w100 h100 flex_center">
   <i class="iconfont icon-sort"></i>
+  <div class="toc_wrapper flex_center"></div>
 </div>
+
+<style lang="scss">
+  .toc_wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 100%;
+  }
+</style>

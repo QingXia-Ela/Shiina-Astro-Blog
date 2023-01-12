@@ -1,12 +1,39 @@
 ---
 import type { MarkdownHeading } from "astro";
+import { getCollection } from "astro:content";
+import WhiteModule from "@/components/WhiteModule.astro";
 import "tocbot/src/scss/tocbot.scss";
+
 interface Props {
   slugs?: MarkdownHeading[];
 }
+
+const blog = await getCollection("blog");
+
+const { name } = Astro.params,
+  { slugs: propSlugs } = Astro.props;
+
+let slugs = propSlugs,
+  target = null;
+if (!slugs) {
+  for (let i = 0; i < blog.length; i++) {
+    const e = blog[i];
+    if (e.data.title.indexOf(name!) != -1) {
+      target = e;
+      break;
+    }
+  }
+
+  const r = await target?.render();
+  slugs = r?.headings;
+}
 ---
 
-<div class="toc"></div>
+<div class="toc_list">
+  <div class="white_module">
+    <h3 class="module_title">导航</h3>
+  </div>
+</div>
 
 <script>
   // import * as tocbot from "tocbot";
@@ -23,12 +50,24 @@ interface Props {
 </script>
 
 <style lang="scss">
-  .toc {
+  .toc_list {
     position: absolute;
-    top: 1.6rem;
+    top: 50%;
     right: 0;
-    width: 10rem;
-    height: 20rem;
-    background-color: #000;
+    width: 12rem;
+    min-height: 10rem;
+    max-height: 30rem;
+    transform: translateX(0) translateY(-50%);
+
+    .white_module {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .toc_list {
+      right: 4rem;
+    }
   }
 </style>
