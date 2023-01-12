@@ -24,13 +24,19 @@
       display: block;
       width: 0.8rem;
       height: 0.8rem;
-      border: 0.1rem solid #555;
+      border: 0.1rem solid var(--text-default);
       border-top: none;
       border-top-width: medium;
       border-right: none;
       border-right-width: medium;
       transform: translateY(35%) rotate(135deg);
-      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+
+    &:hover {
+      .arrowup {
+        border-color: var(--tips-default);
+      }
     }
   }
 </style>

@@ -1,9 +1,13 @@
 ---
 import BackToTop from "./components/BackToTop.astro";
+import Toc from "./components/Toc.astro";
 const { class: className } = Astro.props;
 ---
 
 <div class="corner" id="Corner" data-astro-class={className}>
+  <div class="list_item">
+    <Toc />
+  </div>
   <div class="list_item">
     <BackToTop />
   </div>
@@ -46,9 +50,15 @@ const { class: className } = Astro.props;
       width: 100%;
       height: 1.8rem;
       margin: 0.4rem 0;
-      background-color: #fff;
+      background-color: var(--background-default);
       border-radius: 0.2rem;
       box-shadow: 0 0 5px rgba(62, 62, 62, 0.5);
+      transition: color 0.3s;
+      cursor: pointer;
+
+      &:hover {
+        color: var(--tips-default);
+      }
     }
 
     &.show {

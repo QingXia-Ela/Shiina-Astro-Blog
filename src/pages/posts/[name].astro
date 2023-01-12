@@ -3,7 +3,6 @@ import MarkdownLayout from "@/layouts/MarkdownLayout.astro";
 import BlogInfo from "@/components/BlogInfo.astro";
 import PostsInfo from "@/components/Pages/posts/PostsInfo.astro";
 import WhiteModule from "@/components/WhiteModule.astro";
-import Toc from "@/components/Pages/posts/toc.astro";
 import { CollectionEntry, getCollection, getEntry } from "astro:content";
 
 export async function getStaticPaths() {
@@ -36,7 +35,7 @@ for (let i = 0; i < blog.length; i++) {
 }
 
 const r = await target?.render()
-let Content = r?.Content
+let Content = r?.Content, slugs = r?.headings
 ---
 
 <MarkdownLayout content={target ? target.data : {}}>
@@ -45,7 +44,6 @@ let Content = r?.Content
   </WhiteModule>
   {
     Content ? (
-      <Toc />
       <Content />
     ) : (
       <></>

@@ -1,0 +1,34 @@
+---
+import type { MarkdownHeading } from "astro";
+import "tocbot/src/scss/tocbot.scss";
+interface Props {
+  slugs?: MarkdownHeading[];
+}
+---
+
+<div class="toc"></div>
+
+<script>
+  // import * as tocbot from "tocbot";
+  // tocbot.init({
+  //   // Where to render the table of contents.
+  //   tocSelector: ".js-toc",
+  //   // Where to grab the headings to build the table of contents.
+  //   contentSelector: ".js-toc-content",
+  //   // Which headings to grab inside of the contentSelector element.
+  //   headingSelector: "h1, h2, h3",
+  //   // For headings inside relative or absolute positioned containers within content.
+  //   hasInnerContainers: true,
+  // });
+</script>
+
+<style lang="scss">
+  .toc {
+    position: absolute;
+    top: 1.6rem;
+    right: 0;
+    width: 10rem;
+    height: 20rem;
+    background-color: #000;
+  }
+</style>
