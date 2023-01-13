@@ -1,0 +1,35 @@
+.toc_container {
+  .toc-list {
+    list-style: none;
+
+    .toc-list-item {
+
+      a {
+        margin: .1rem 0;
+        font-size: .9rem;
+
+        &::before {
+          width: 4px;
+          height: 1.3rem;
+          background-color: transparent;
+        }
+
+        &.is-active-link {
+          color: var(--tips-default);
+
+          &::before {
+            background-color: var(--tips-default);
+          }
+        }
+
+        display: block;
+        width: 100%;
+      }
+    }
+
+
+    &:first-child {
+      padding: 0;
+    }
+  }
+}

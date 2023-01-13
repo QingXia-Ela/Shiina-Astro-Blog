@@ -1,8 +1,8 @@
 ---
 import type { MarkdownHeading } from "astro";
 import { getCollection } from "astro:content";
-import WhiteModule from "@/components/WhiteModule.astro";
 import "tocbot/src/scss/tocbot.scss";
+import "@/styles/toc.scss";
 
 interface Props {
   slugs?: MarkdownHeading[];
@@ -32,21 +32,25 @@ if (!slugs) {
 <div class="toc_list">
   <div class="white_module">
     <h3 class="module_title">导航</h3>
+    <div class="toc_container"></div>
   </div>
 </div>
 
 <script>
-  // import * as tocbot from "tocbot";
-  // tocbot.init({
-  //   // Where to render the table of contents.
-  //   tocSelector: ".js-toc",
-  //   // Where to grab the headings to build the table of contents.
-  //   contentSelector: ".js-toc-content",
-  //   // Which headings to grab inside of the contentSelector element.
-  //   headingSelector: "h1, h2, h3",
-  //   // For headings inside relative or absolute positioned containers within content.
-  //   hasInnerContainers: true,
-  // });
+  import * as tocbot from "tocbot";
+  tocbot.init({
+    // Where to render the table of contents.
+    tocSelector: ".toc_container",
+    // Where to grab the headings to build the table of contents.
+    contentSelector: ".markdown-body",
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: "h1, h2, h3",
+    // For headings inside relative or absolute positioned containers within content.
+    hasInnerContainers: true,
+    headingsOffset: 80,
+    scrollSmoothOffset: -80,
+    includeTitleTags: true,
+  });
 </script>
 
 <style lang="scss">
@@ -54,20 +58,35 @@ if (!slugs) {
     position: absolute;
     top: 50%;
     right: 0;
-    width: 12rem;
+    width: 15rem;
     min-height: 10rem;
-    max-height: 30rem;
+    max-height: 25rem;
     transform: translateX(0) translateY(-50%);
 
     .white_module {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
-  }
 
-  @media screen and (max-width: 992px) {
-    .toc_list {
-      right: 4rem;
+    .toc_container {
+      overflow-y: scroll;
+      /* webkit */
+      &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
+
+      /* firefox */
+      scrollbar-width: none;
+
+      /* ie */
+      -ms-overflow-style: none;
+
+      :global(a) {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
     }
   }
 </style>
