@@ -29,7 +29,7 @@ if (!slugs) {
 }
 ---
 
-<div class="toc_list">
+<div class="toc_list" id="TocList" data-hidden="true">
   <div class="white_module">
     <h3 class="module_title">导航</h3>
     <div class="toc_container"></div>
@@ -61,7 +61,8 @@ if (!slugs) {
     width: 15rem;
     min-height: 10rem;
     max-height: 25rem;
-    transform: translateX(0) translateY(-50%);
+    transform: translateX(110%) translateY(-50%);
+    transition: transform 0.3s;
 
     .white_module {
       border-top-right-radius: 0;
@@ -87,6 +88,10 @@ if (!slugs) {
         white-space: nowrap;
         overflow: hidden;
       }
+    }
+
+    &.hidden {
+      transform: translateX(0) translateY(-50%);
     }
   }
 </style>

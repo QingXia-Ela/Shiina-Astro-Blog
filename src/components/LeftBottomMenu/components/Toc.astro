@@ -2,10 +2,29 @@
 import { getCollection } from "astro:content";
 ---
 
-<div class="w100 h100 flex_center">
+<div class="w100 h100 flex_center" id="TocButton">
   <i class="iconfont icon-sort"></i>
   <div class="toc_wrapper flex_center"></div>
 </div>
+
+<script>
+  import { throttle } from "lodash";
+
+  document.querySelector("#TocButton")?.addEventListener(
+    "click",
+    throttle(() => {
+      const t = document.querySelector("#TocList")!;
+      console.log(t);
+      if (t.getAttribute("data-hidden") === "false") {
+        t.setAttribute("class", `${t.getAttribute("class")} hidden`);
+        t.setAttribute("data-hidden", "true");
+      } else {
+        t.setAttribute("class", t.getAttribute("class")!.replace("hidden", ""));
+        t.setAttribute("data-hidden", "false");
+      }
+    }, 300)
+  );
+</script>
 
 <style lang="scss">
   .toc_wrapper {
