@@ -18,7 +18,7 @@ let { ItemName, type, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
 
 <div class={`item ${type === "list" ? "list" : ""}`}>
   {iconfont.length ? <i class={iconfont} /> : undefined}
-  {ItemName}
+  {ItemName ? ItemName : <slot />}
 </div>
 <style lang="scss">
   .item {
