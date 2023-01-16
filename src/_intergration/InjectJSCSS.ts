@@ -6,6 +6,7 @@ export default function (): AstroIntegration {
     hooks: {
       'astro:config:setup': ({ injectScript }) => {
         injectScript('page', 'import "source/_inject/_page.js"')
+        injectScript('page-ssr', 'import "source/_inject/_page-ssr.scss"')
       }
     }
   }
