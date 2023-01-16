@@ -37,7 +37,7 @@ const { class: className } = Astro.props;
   }, observerOptions);
 
   // Observe all the headings in the main page content.
-  headingsObserver.observe(document.body);
+  headingsObserver.observe(document.querySelector(".posts_info")!);
 </script>
 
 <style lang="scss" is:global>

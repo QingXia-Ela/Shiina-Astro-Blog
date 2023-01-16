@@ -29,7 +29,7 @@ if (!slugs) {
 }
 ---
 
-<div class="toc_list hidden" id="TocList" data-hidden="true">
+<div class="toc_list" id="TocList" data-hidden="true">
   <div class="white_module">
     <h3 class="module_title">导航</h3>
     <div class="toc_container"></div>
@@ -50,6 +50,16 @@ if (!slugs) {
     headingsOffset: 80,
     scrollSmoothOffset: -80,
     includeTitleTags: true,
+    onClick: () => {
+      const t = document.querySelector("#TocList")!;
+      if (
+        window.innerWidth < 992 &&
+        t.getAttribute("data-hidden") === "false"
+      ) {
+        t.setAttribute("class", t.getAttribute("class")!.replace("show", ""));
+        t.setAttribute("data-hidden", "true");
+      }
+    },
   });
 </script>
 
@@ -90,7 +100,7 @@ if (!slugs) {
       }
     }
 
-    &.hidden {
+    &.show {
       transform: translateX(0) translateY(-50%);
     }
   }

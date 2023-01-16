@@ -8,16 +8,14 @@ import { getCollection } from "astro:content";
 </div>
 
 <script>
-  import { throttle } from "lodash";
-
   document.querySelector("#TocButton")?.addEventListener("click", () => {
     const t = document.querySelector("#TocList")!;
     console.log(t);
     if (t.getAttribute("data-hidden") === "false") {
-      t.setAttribute("class", `${t.getAttribute("class")} hidden`);
+      t.setAttribute("class", t.getAttribute("class")!.replace("show", ""));
       t.setAttribute("data-hidden", "true");
     } else {
-      t.setAttribute("class", t.getAttribute("class")!.replace("hidden", ""));
+      t.setAttribute("class", `${t.getAttribute("class")} show`);
       t.setAttribute("data-hidden", "false");
     }
   });
