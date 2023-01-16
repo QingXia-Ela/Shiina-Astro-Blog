@@ -1,9 +1,15 @@
 ---
 import { getEntry } from "astro:content";
-
+import MarkdownLayout from "@/layouts/MarkdownLayout.astro";
 import BlogInfo from "@/components/BlogInfo.astro";
 const enterprise = await getEntry("about", "about.mdx");
 const { Content } = await enterprise.render();
 ---
 
-<Content />
+<MarkdownLayout
+  content={{
+    title: "关于",
+  }}
+>
+  <Content />
+</MarkdownLayout>

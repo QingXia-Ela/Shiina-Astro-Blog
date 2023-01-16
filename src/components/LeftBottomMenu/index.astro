@@ -2,31 +2,57 @@
 import BackToTop from "./components/BackToTop.astro";
 import Toc from "./components/Toc.astro";
 import TocList from "./components/Toc/TocList.astro";
-const { class: className } = Astro.props;
+
+type ComponentType = "BackToTop" | "Toc";
+
+interface Props {
+  class?: string;
+  components?: ComponentType[];
+}
+const { class: className, components } = Astro.props;
 ---
 
 <div class="corner" id="Corner" data-astro-class={className}>
-  <div class="list_item">
-    <Toc />
-  </div>
-  <div class="list_item">
-    <BackToTop />
-  </div>
+  {
+    components?.map((v) => (
+      <div class="list_item">
+        {(() => {
+          switch (v) {
+            case "BackToTop":
+              return <BackToTop />;
+            case "Toc":
+              return <Toc />;
+            default:
+              break;
+          }
+        })()}
+      </div>
+    ))
+  }
 </div>
 <div class="corner_menu_wrapper">
-  <TocList />
+  {
+    components?.map((v) => {
+      switch (v) {
+        case "Toc":
+          return <TocList />;
+        default:
+          break;
+      }
+    })
+  }
 </div>
 
 <script>
   const observerOptions: IntersectionObserverInit = {
     // Negative top margin accounts for `scroll-margin`.
     // Negative bottom margin means heading needs to be towards top of viewport to trigger intersection.
-    rootMargin: "0px 0px 0px 0px",
+    rootMargin: "100px 0px 0px 0px",
   };
 
   const headingsObserver = new IntersectionObserver((e) => {
     let isShow = true;
-    if (e[0].intersectionRatio <= 0) isShow = false;
+    if (e[0].intersectionRatio <= 0.1) isShow = false;
 
     document.getElementById("Corner")?.setAttribute(
       "class",
@@ -37,7 +63,9 @@ const { class: className } = Astro.props;
   }, observerOptions);
 
   // Observe all the headings in the main page content.
-  headingsObserver.observe(document.querySelector(".posts_info")!);
+  headingsObserver.observe(
+    document.querySelector("#ScrollMark") || document.body
+  );
 </script>
 
 <style lang="scss" is:global>

@@ -1,11 +1,11 @@
 - [x] blog 页面对接 content 数据
 - [x] collect 数据对接
 - [x] collect 页面修复
-- [ ] header 的白天、夜间模式切换同步
+- [x] header 的白天、夜间模式切换同步
 - [x] header 分类数据切换
 - [ ] search 接口处理
 - [ ] 评论区制作
-- [ ] posts 页面文章标题锚点跳转
+- [x] posts 页面文章标题锚点跳转
 - [x] 全局 js 注入
 - [ ] 全局 css 注入
 - [ ] UI 美化

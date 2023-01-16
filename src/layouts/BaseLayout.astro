@@ -65,11 +65,12 @@ const {
   </head>
   <body>
     {header!.hidden ? null : <Header PositionTitle={title} />}
+    <div id="ScrollMark"></div>
     <main class={`${setMinHeight ? "get_min_height" : ""}`}>
       <slot />
     </main>
     <Background cfg={background!} />
     {footer!.hidden ? null : <Footer content={footer!.content!} />}
-    <LeftBottomMenu />
+    <LeftBottomMenu components={["BackToTop"]} />
   </body>
 </html>
