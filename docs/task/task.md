@@ -10,4 +10,6 @@
 - [x] 全局 css 注入
 - [ ] UI 美化
 - [ ] 自定义主页制作
+- [ ] 修复 bug：`src\components\Header\RightMenu\_constant\ItemList.ts`
+- [ ] 修复 bug：生成静态路径时崩溃的问题
 - [ ] （可选）文章目录懒加载或根据条件加载

@@ -13,6 +13,7 @@ interface MenuItemProps extends Record<string, any> {
 }
 
 const { SearchConfig } = cfg;
+/** 疑似 bug，服务端渲染打包后启动服务器时在此处崩溃 */
 const CategoriesMap = CategoriesMapFactory(await getCollection("blog")), CategoriesList: ListItemProps[] = []
 
 CategoriesMap.forEach((v, k) => {
