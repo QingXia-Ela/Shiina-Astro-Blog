@@ -6,7 +6,7 @@ import Background from "@/components/Background/index.astro";
 import Footer from "@/components/Footer/index.astro";
 import cfg from "blog.config";
 import GetCurrentPageSetting from "@/utils/GetCurrentPageSetting";
-import LeftBottomMenu from "@/components/LeftBottomMenu/index.astro";
+import RightBottomMenu from "@/components/RightBottomMenu/index.astro";
 
 export interface Props {
   /** 当前页面标题 */
@@ -70,6 +70,6 @@ const {
     </main>
     <Background cfg={background!} />
     {footer!.hidden ? null : <Footer content={footer!.content!} />}
-    <LeftBottomMenu />
+    <RightBottomMenu />
   </body>
 </html>
