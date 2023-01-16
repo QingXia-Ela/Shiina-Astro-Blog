@@ -1,12 +1,20 @@
 ---
 import BackToTop from "./components/BackToTop.astro";
+import Toc from "./components/Toc.astro";
+import TocList from "./components/Toc/TocList.astro";
 const { class: className } = Astro.props;
 ---
 
 <div class="corner" id="Corner" data-astro-class={className}>
   <div class="list_item">
+    <Toc />
+  </div>
+  <div class="list_item">
     <BackToTop />
   </div>
+</div>
+<div class="corner_menu_wrapper">
+  <TocList />
 </div>
 
 <script>
@@ -60,5 +68,12 @@ const { class: className } = Astro.props;
     &.show {
       transform: translateX(0);
     }
+  }
+  .corner_menu_wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 100%;
   }
 </style>

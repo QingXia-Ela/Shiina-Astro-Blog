@@ -7,8 +7,7 @@ import Footer from "@/components/Footer/index.astro";
 import cfg from "blog.config";
 import GetCurrentPageSetting from "@/utils/GetCurrentPageSetting";
 import WhiteModule from "@/components/WhiteModule.astro";
-import RightBottomMenu from "@/components/RightBottomMenu/index.astro";
-import TocList from "@/components/Layout/MarkdownLayout/TocList.astro";
+import LeftBottomMenu from "@/components/LeftBottomMenu/index.astro";
 import "github-markdown-css/github-markdown.css";
 
 export interface Props {
@@ -52,30 +51,6 @@ const {
     --tips-default: var(--d-tips-default);
   }
 </style>
-
-<html lang="en" class="dark">
-  <head>
-    <HeadMeta title={`${content.title} - `} />
-  </head>
-  <body>
-    {header!.hidden ? null : <Header PositionTitle={`${content.title} - `} />}
-    <div class="right_menu_wrapper">
-      <TocList />
-    </div>
-    <main class={`${setMinHeight ? "get_min_height" : ""} md-wrapper`}>
-      <slot name="before-markdown" />
-      <WhiteModule>
-        <div class="markdown-body">
-          <slot />
-        </div>
-      </WhiteModule>
-      <slot name="after-markdown" />
-    </main>
-    <Background cfg={background!} />
-    {footer!.hidden ? null : <Footer content={footer!.content!} />}
-    <RightBottomMenu />
-  </body>
-</html>
 
 <style lang="scss">
   html.dark {
@@ -142,14 +117,6 @@ const {
     }
   }
 
-  .right_menu_wrapper {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 0;
-    height: 100%;
-  }
-
   @media screen and (max-width: 992px) {
     .md-wrapper {
       width: 90%;
@@ -161,3 +128,24 @@ const {
     }
   }
 </style>
+
+<html lang="en" class="dark">
+  <head>
+    <HeadMeta title={`${content.title} - `} />
+  </head>
+  <body>
+    {header!.hidden ? null : <Header PositionTitle={`${content.title} - `} />}
+    <main class={`${setMinHeight ? "get_min_height" : ""} md-wrapper`}>
+      <slot name="before-markdown" />
+      <WhiteModule>
+        <div class="markdown-body">
+          <slot />
+        </div>
+      </WhiteModule>
+      <slot name="after-markdown" />
+    </main>
+    <Background cfg={background!} />
+    {footer!.hidden ? null : <Footer content={footer!.content!} />}
+    <LeftBottomMenu />
+  </body>
+</html>
