@@ -35,8 +35,6 @@
 
   let FinalState = state === "true";
 
-  if (FinalState == true) SwitchState(true);
-
   t.forEach((v) =>
     v.addEventListener("click", () => {
       SwitchState((FinalState = !FinalState));

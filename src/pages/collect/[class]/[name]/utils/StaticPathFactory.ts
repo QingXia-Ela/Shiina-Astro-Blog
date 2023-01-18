@@ -1,7 +1,7 @@
 import { COLLECT_POSITION_MAP } from '@/constant/Collect'
 import type { ClassKeyList } from '@/declare/Collect'
 import type { CollectionEntry } from 'astro:content'
-import { cloneDeep } from 'lodash'
+import _ from 'lodash'
 
 interface PathType {
   params: Record<string, string | number>
@@ -26,7 +26,7 @@ function Map2Path(m: Map<string, number>, classify: ClassKeyList, PageMaxCount =
       }
     };
     for (let i = 1; i <= m; i++) {
-      if (i == 1) path.push(cloneDeep(p))
+      if (i == 1) path.push(_.cloneDeep(p))
       p.params.page = i;
     }
     path.push(p)
