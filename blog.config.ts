@@ -59,6 +59,18 @@ export default defineBlogConfig({
           avatar: "https://gravatar.junbo.wang/avatar/92f14fcd71bdc4008eb6d7f2e6ca50e8?s=128&r=R&d="
         }
       ]
+    },
+    index: {
+      header: {
+        hidden: true
+      },
+      background: {
+
+      },
+      footer: {
+        hidden: true
+      },
+      setMinHeight: 'fill'
     }
   }
 })

@@ -19,6 +19,19 @@ const { header, footer, background, setMinHeight } = GetCurrentPageSetting(
 
 const { title } = Astro.props;
 
+const SetMinHeightFactory = () => {
+  switch (setMinHeight) {
+    case "content":
+      return "get_min_height";
+
+    case "fill":
+      return "w100 h100";
+
+    default:
+      return "";
+  }
+};
+
 const {
   color: { light, dark },
 } = cfg;
@@ -68,14 +81,14 @@ const {
   }
 </style>
 
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <HeadMeta title={title} />
   </head>
   <body>
     {header!.hidden ? null : <Header PositionTitle={title} />}
     <div id="ScrollMark"></div>
-    <main class={`${setMinHeight ? "get_min_height" : ""}`}>
+    <main class={`${SetMinHeightFactory()}`}>
       <slot />
     </main>
     <Background cfg={background!} />
