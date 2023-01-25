@@ -1,11 +1,12 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import WhiteModule from "@/components/WhiteModule.astro";
-import { getEntry } from "astro:content";
+import { getEntryBySlug } from "astro:content";
 import cfg from "blog.config";
-const e = await getEntry("friends", "friends.md"),
-  { Content } = await e.render(),
-  {
+const e = await getEntryBySlug("friends", "friends");
+let r = await e?.render(),
+  { Content } = r ?? {};
+const {
     pages: { friends },
   } = cfg,
   { FriendList } = friends!;

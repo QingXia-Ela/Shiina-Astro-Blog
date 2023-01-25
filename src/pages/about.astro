@@ -1,8 +1,8 @@
 ---
-import { getEntry } from "astro:content";
+import { getEntryBySlug } from "astro:content";
 import MarkdownLayout from "@/layouts/MarkdownLayout.astro";
 import BlogInfo from "@/components/BlogInfo.astro";
-const enterprise = await getEntry("about", "about.mdx");
+const enterprise = await getEntryBySlug("about", "about");
 const { Content } = await enterprise.render();
 ---
 

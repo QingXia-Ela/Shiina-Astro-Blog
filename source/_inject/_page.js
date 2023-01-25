@@ -15,17 +15,18 @@ if (window.location.pathname == '/') {
    */
   p.setAttribute('src', 'https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js')
   h.appendChild(p)
-  await import('./MiniPlayer/index')
-  await import('./MiniPlayer/index.css')
-
-  const core = window._PlayerCore
-  const l = [{
-    id: 0,
-    name: 'I Got Love',
-    img: '/MiniPlayer/test.jpg',
-    src: '/MiniPlayer/test.mp3',
-  }]
-  for (const i of l) {
-    core.AppendSong(i)
+  if (window.PetiteVue) {
+    await import('./MiniPlayer/index')
+    await import('./MiniPlayer/index.css')
+    const core = window._PlayerCore
+    const l = [{
+      id: 0,
+      name: 'I Got Love',
+      img: '/MiniPlayer/test.jpg',
+      src: '/MiniPlayer/test.mp3',
+    }]
+    for (const i of l) {
+      core.AppendSong(i)
+    }
   }
 }
