@@ -20,3 +20,7 @@ export function SortCollectArticles<T extends "about" | "blog" | "friends">(List
     );
   });
 }
+
+export async function getStaticPaths() {
+  return [];
+}

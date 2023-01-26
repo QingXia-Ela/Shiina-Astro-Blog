@@ -69,7 +69,7 @@ https://up.qq.com/act/a20170301pre/index.html# (**需要手动复制粘贴网址
 
 
 <div class="tac">
-  <Image src={import('./logo.jpg')} width={1200} height="unset" />
+  <Image src={import('./logo.jpg')} />
 </div>
 
 波浪的话直接用腾讯那个的 json 模型了，这边没有进行处理
@@ -77,7 +77,7 @@ https://up.qq.com/act/a20170301pre/index.html# (**需要手动复制粘贴网址
 二维码的话是进行的平面建模，就单独的平面网格进行勾勒（勾这个就是要耐心，没啥技术含量）
 
 <div class='tac'>
-<Image src={import('./qr.jpg')} width={1200} height='unset' />
+<Image src={import('./qr.jpg')} />
 </div>
 
 ### json 模型的导入
@@ -91,7 +91,7 @@ https://up.qq.com/act/a20170301pre/index.html# (**需要手动复制粘贴网址
 这反而比较好，因为这边的话 Blender 就有直接导出 obj 模型的选项，原文还是专门安装了插件去将模型处理成 json 格式的
 
 <div class='tac'>
-<Image src={import('./export.jpg')} width={1200} height='unset' />
+<Image src={import('./export.jpg')} />
 </div>
 
 在模板中我们添加了自定义 Loader 选项，这样子就不会强制使用 OBJLoader 去加载模型了，可以选用 GLTF 模型更利于网页加载
@@ -107,13 +107,13 @@ https://up.qq.com/act/a20170301pre/index.html# (**需要手动复制粘贴网址
 这个问题挺离谱的，我在测试导入模型功能的时候在控制台输出了一下测试用的几何体，一个普通的 2 * 2 正方体导入到场景中有 36 个顶点：
 
 <div class='tac'>
-<Image src={import('./cube1.jpg')} width={1200} height='unset' />
+<Image src={import('./cube1.jpg')} />
 </div>
 
 但是通过 threejs 加载器加载后却有 144 个顶点：
 
 <div class='tac'>
-<Image src={import('./cube2.jpg')} width={1200} height='unset' />
+<Image src={import('./cube2.jpg')} />
 </div>
 
 这个问题想了一段时间，还拜托了一位会建模的大佬与他进行了一段时间的讨论。
@@ -133,7 +133,7 @@ https://github.com/QingXia-Ela/Up2017-Particles-Effect-Template/commit/1cf859eaf
 写了个很简单的方法，但是效果很好：
 
 <div class='tac'>
-<Image src={import('./remove.png')} width={1200} height='unset' />
+<Image src={import('./remove.png')} />
 </div>
 
 当然这个去重不推荐在其他项目使用，因为其本身是破坏了原有的网格结构，只是本次项目只需要顶点信息，所以比较特殊。
@@ -171,7 +171,7 @@ https://github.com/QingXia-Ela/Up2017-Particles-Effect-Template/commit/1cf859eaf
 运气很好，在 tween 的源码中大概半小时就找到了这样一行：
 
 <div class='tac'>
-<Image src={import('./tween2.jpg')} width={1200} height='unset' />
+<Image src={import('./tween2.jpg')} />
 </div>
 
 GitHub 原地址：https://github.com/tweenjs/tween.js/blob/main/src/Tween.ts#L172
@@ -181,7 +181,7 @@ GitHub 原地址：https://github.com/tweenjs/tween.js/blob/main/src/Tween.ts#L1
 还好 js 对于对象并没有公有和私有的概念，只是在 ts 上进行了一个判断，如果 js 也有公有私有那估计只能改源码然后弄一个专用的补间库了。随后我在 tween 补间过程和 tween 补间完成的时候进行了一个强制赋值：
 
 <div class='tac'>
-<Image src={import('./tween3.jpg')} width={500} height='unset' />
+<Image src={import('./tween3.jpg')} />
 </div>
 
 这样改的时候 ts 会一直爆红，所以加了忽略错误的注释
@@ -215,7 +215,7 @@ GitHub 原地址：https://github.com/tweenjs/tween.js/blob/main/src/Tween.ts#L1
 于是我们在这基础上在模板中导出了 `onAnimationFrameUpdate` 这一个钩子，在每一帧更新的时候均可触发。
 
 <div class='tac'>
-<Image src={import('./kv2.jpg')} width={1200} height='unset' />
+<Image src={import('./kv2.jpg')} />
 </div>
 模板的预置页面的 `wave` 代码用例如上。
 

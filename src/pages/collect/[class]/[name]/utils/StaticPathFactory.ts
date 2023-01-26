@@ -89,3 +89,7 @@ export default function (l: CollectionEntry<"blog">[], PageMaxCount = 15): PathT
 
   return path
 }
+
+export async function getStaticPaths() {
+  return [];
+}

@@ -11,8 +11,8 @@ dns.setDefaultResultOrder('verbatim')
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://shiinafan.top',
-  integrations: [mdx(), sitemap(), vue(), image(), InjectJSCSS()],
+  site: 'https://127.0.0.1:5500',
+  integrations: [mdx(), sitemap(), vue(), image({ serviceEntryPoint: '@astrojs/image/sharp' }), InjectJSCSS()],
   vite: {
     resolve: {
       alias: [

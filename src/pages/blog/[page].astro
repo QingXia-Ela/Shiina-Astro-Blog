@@ -24,12 +24,10 @@ const { page } = Astro.props,
   { page: RoutePage } = Astro.params,
   paramsCurrentPage = parseInt(RoutePage!) ? parseInt(RoutePage!) : 1;
 
-const FinalList = page
-  ? page.data
-  : res.slice(
-      (paramsCurrentPage - 1) * PAGE_SIZE,
-      paramsCurrentPage * PAGE_SIZE
-    );
+const FinalList = res.slice(
+  (paramsCurrentPage - 1) * PAGE_SIZE,
+  paramsCurrentPage * PAGE_SIZE
+);
 ---
 
 <BaseLayout title={`博客 - `}>

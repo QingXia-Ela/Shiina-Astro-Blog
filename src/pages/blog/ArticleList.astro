@@ -6,46 +6,51 @@ import type { CollectionEntry } from "astro:content";
 export interface Props {
   ListData: CollectionEntry<"blog">[];
 }
-let { ListData } = Astro.props;
+let { ListData = [] } = Astro.props;
 ---
 
-{
-  /** 这个 map 会有 bug，(Cannot read properties of undefined (reading 'map'))，考虑用其他方式循环导出 */
-  ListData.map(({ data }) => {
-    return (
-      <div class="item">
-        <a class="img_wrapper" href={`/posts/${data.title}`}>
-          <img src="/source/Images/bg2.jpg" />
-        </a>
-        <div class="info">
-          <a class="title" href={`/posts/${data.title}`}>
-            {data.title}
+<>
+  {
+    /** 这个 map 会有 bug，(Cannot read properties of undefined (reading 'map'))，考虑用其他方式循环导出 */
+    ListData.map(({ data }) => {
+      return (
+        <div class="item">
+          <a class="img_wrapper" href={`/posts/${data.title}`}>
+            <img src="/source/Images/bg2.jpg" />
           </a>
-          <a class="brief" href={`/posts/${data.title}`}>
-            {data.description}
-          </a>
-          <div class="class_info">
-            <div class="time">
-              <i class="iconfont icon-24gl-calendar" />
-              {ParseTime(data.date)}
-            </div>
-            <div class="tags">
-              {data.tags?.map((val: string, i: number) => {
-                if (i > 6) return null;
-                return (
-                  <a class="tag_item" href={`/collect/${COLLECT_TAGS}/${val}`}>
-                    <i class="iconfont icon-24gl-tags2" />
-                    <span>{val}</span>
-                  </a>
-                );
-              })}
+          <div class="info">
+            <a class="title" href={`/posts/${data.title}`}>
+              {data.title}
+            </a>
+            <a class="brief" href={`/posts/${data.title}`}>
+              {data.description}
+            </a>
+            <div class="class_info">
+              <div class="time">
+                <i class="iconfont icon-24gl-calendar" />
+                {ParseTime(data.date)}
+              </div>
+              <div class="tags">
+                {data.tags?.map((val: string, i: number) => {
+                  if (i > 6) return null;
+                  return (
+                    <a
+                      class="tag_item"
+                      href={`/collect/${COLLECT_TAGS}/${val}`}
+                    >
+                      <i class="iconfont icon-24gl-tags2" />
+                      <span>{val}</span>
+                    </a>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    );
-  })
-}
+      );
+    })
+  }
+</>
 
 <style lang="scss">
   .item {

@@ -19,9 +19,10 @@
     "astro": "2.0.1",
     "github-markdown-css": "^5.1.0",
     "install": "^0.13.0",
-    "npm": "^9.2.0",
-    "tocbot": "^4.20.0",
     "lodash": "^4.17.21",
+    "npm": "^9.2.0",
+    "sharp": "^0.31.3",
+    "tocbot": "^4.20.0",
     "vue": "^3.2.45"
   },
   "devDependencies": {

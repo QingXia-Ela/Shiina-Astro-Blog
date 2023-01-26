@@ -22,3 +22,7 @@ export default function (l: CollectionEntry<"blog">[], classify: ClassKeyList, n
       break;
   }
 }
+
+export async function getStaticPaths() {
+  return [];
+}
