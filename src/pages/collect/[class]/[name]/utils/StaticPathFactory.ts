@@ -1,7 +1,6 @@
 import { COLLECT_POSITION_MAP } from '@/constant/Collect'
 import type { ClassKeyList } from '@/declare/Collect'
 import type { CollectionEntry } from 'astro:content'
-import _ from 'lodash'
 
 interface PathType {
   params: Record<string, string | number>
@@ -18,18 +17,21 @@ ClassList.forEach((v) => {
 
 function Map2Path(m: Map<string, number>, classify: ClassKeyList, PageMaxCount = 15): PathType[] {
   const path: PathType[] = []
+
   m.forEach((n, k) => {
-    const m = Math.ceil(n / PageMaxCount), p: PathType = {
-      params: {
-        class: classify,
-        name: k
+    const maxPage = Math.ceil(n / PageMaxCount);
+
+    for (let i = 1; i <= maxPage; i++) {
+      const p: PathType = {
+        params: {
+          class: classify,
+          name: k
+        }
       }
-    };
-    for (let i = 1; i <= m; i++) {
-      if (i == 1) path.push(_.cloneDeep(p))
-      p.params.page = i;
+      if (i === 1) path.push(JSON.parse(JSON.stringify(p)))
+      p.params.page = i + '';
+      path.push(p)
     }
-    path.push(p)
   })
 
   return path

@@ -3,15 +3,15 @@ import MarkdownLayout from "@/layouts/MarkdownLayout.astro";
 import BlogInfo from "@/components/BlogInfo.astro";
 import PostsInfo from "@/components/Pages/posts/PostsInfo.astro";
 import WhiteModule from "@/components/WhiteModule.astro";
-import { CollectionEntry, getCollection, getEntry } from "astro:content";
+import { CollectionEntry, getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const blog = await getCollection("blog");
-  return blog.map((entry) => ({
-    // Pass blog entry via props
-    params: { slug: entry.slug },
+  const res = (await getCollection("blog")).map((entry) => ({
+    // @ts-expect-error
+    params: { name: entry.data.title },
     props: { entry },
-  }));
+  }));    
+  return res
 }
 
 interface Props {
@@ -28,6 +28,7 @@ const { entry } = Astro.props,
 let target = null;
 for (let i = 0; i < blog.length; i++) {
   const e = blog[i]
+  // @ts-expect-error
   if (e.data.title.indexOf(name!) != -1) {
     target = e
     break

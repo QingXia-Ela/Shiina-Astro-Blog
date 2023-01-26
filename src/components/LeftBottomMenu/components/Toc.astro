@@ -10,7 +10,6 @@ import { getCollection } from "astro:content";
 <script>
   document.querySelector("#TocButton")?.addEventListener("click", () => {
     const t = document.querySelector("#TocList")!;
-    console.log(t);
     if (t.getAttribute("data-hidden") === "false") {
       t.setAttribute("class", t.getAttribute("class")!.replace("show", ""));
       t.setAttribute("data-hidden", "true");

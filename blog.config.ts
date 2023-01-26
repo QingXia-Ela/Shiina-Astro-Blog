@@ -62,7 +62,7 @@ export default defineBlogConfig({
     },
     index: {
       header: {
-        hidden: true
+        hidden: false
       },
       background: {
 

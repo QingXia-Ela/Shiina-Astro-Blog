@@ -11,20 +11,20 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/image": "^0.12.1",
+    "@astrojs/image": "^0.13.0",
     "@astrojs/mdx": "^0.14.0",
     "@astrojs/node": "^3.1.0",
     "@astrojs/sitemap": "^1.0.0",
-    "@astrojs/vue": "^1.2.1",
+    "@astrojs/vue": "^2.0.0",
     "astro": "2.0.1",
     "github-markdown-css": "^5.1.0",
     "install": "^0.13.0",
     "npm": "^9.2.0",
     "tocbot": "^4.20.0",
+    "lodash": "^4.17.21",
     "vue": "^3.2.45"
   },
   "devDependencies": {
-    "@astrojs/vue": "^1.2.1",
     "@types/lodash": "^4.14.191",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
@@ -32,7 +32,6 @@
     "@typescript-eslint/visitor-keys": "^5.46.1",
     "eslint": "^8.30.0",
     "eslint-plugin-vue": "^9.8.0",
-    "lodash": "^4.17.21",
     "sass": "^1.56.2"
   }
 }

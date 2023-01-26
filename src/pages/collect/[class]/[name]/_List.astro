@@ -13,7 +13,7 @@ const LIST_MAX_ITEM_COUNT = cfg.pages.collect!.PageArticleCount!,
   articleFrom = (currentIndex - 1) * LIST_MAX_ITEM_COUNT,
   finalData = data.slice(articleFrom, articleFrom + LIST_MAX_ITEM_COUNT);
 
-if (finalData.length < 1) Astro.redirect("/404");
+// if (finalData.length < 1) Astro.redirect("/404");
 ---
 
 <div class="list_area">
