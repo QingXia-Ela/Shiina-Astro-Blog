@@ -3,7 +3,7 @@ title: 一个基于petite-vue的简易播放器
 date: 2022-11-29 22:21:15
 tags: [vue, petite-vue, 前端, 插件, 音乐播放器, 项目]
 categories: 项目记录
-index_img: cover/一个基于petite-vue的简易播放器.jpg
+index_img: ./banner.jpg
 description: 极简播放器，上手易用，即插即用.jpg，接下来的内容都是填充填充填充填充填充填充填充填充填充填充填充填充填充填充填充填充
 ---
 
@@ -13,7 +13,7 @@ description: 极简播放器，上手易用，即插即用.jpg，接下来的内
 
 这是对之前 React 播放器进行的填坑，其主要追求的是轻量化，体积小和方便引入操作
 
-![](banner.jpg)
+![](/src/content/blog/一个基于petite-vue的简易播放器/banner.jpg)
 
 项目地址：
 - GitHub: https://github.com/QingXia-Ela/vue-mini-player
@@ -46,7 +46,7 @@ app.mount(process.env.NODE_ENV === 'development' ? undefined : "#CorePlayer")
 
 一开始想着是独立字体图标文件的，说实话还是挺不方便，然后打包文件的时候一直发现 css 文件大小不对劲，原来没有压缩的文件也才 6kb ， vite 打包后居然达到了 10kb，说实话一开始很难理解，后面去看压缩文件的时候发现了一件好事：
 
-![](woff.jpg)
+![](/src/content/blog/一个基于petite-vue的简易播放器/woff.jpg)
 
 他将过小的资源处理成 base64 编码嵌入到 css 了，这个属实没有想到，于是我就把字体删的只剩 woff2 格式的字体了，虽然兼容性不是很好，但是当初说实话就没有想过要兼容 ie 等浏览器
 
@@ -64,7 +64,7 @@ app.mount(process.env.NODE_ENV === 'development' ? undefined : "#CorePlayer")
 
 然后就把播放列表的功能移植到了底边的小白条上，如果鼠标悬浮会有提示，但只是使得白条亮起来，其他的都没有明显的提示
 
-![](list.jpg)
+![](/src/content/blog/一个基于petite-vue的简易播放器/list.jpg)
 
 #### 镜像对称
 
@@ -74,7 +74,7 @@ app.mount(process.env.NODE_ENV === 'development' ? undefined : "#CorePlayer")
 
 大部分样式都是从原来的音乐网站弄过来的，如果你仔细注意原来的网站模块可以发现他们左上角都有个高光的白边
 
-![](highlight.jpg)
+![](/src/content/blog/一个基于petite-vue的简易播放器/highlight.jpg)
 
 这个小播放器也使用了这种高光，为的是突出立体感，虽然有这个高光，但是相应的右下角并没有浅浅的阴影，这也是做的不太够的地方
 

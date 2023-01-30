@@ -2,6 +2,7 @@
 import cfg from "blog.config";
 import StatusInfo from "./status/index.astro";
 import SocialLink from "./SocialLink/index.astro";
+import { Image } from "@astrojs/image/components";
 export interface Props {
   horizontal?: boolean;
 }
@@ -10,7 +11,14 @@ const { horizontal } = Astro.props;
 
 <div class={`personal_info ${horizontal ? "horizontal" : "vertical"}`}>
   <div class="img_wrapper">
-    <img class="default_box_shadow" src={cfg.UserInfo.avatar} />
+    <Image
+      class="default_box_shadow"
+      src={cfg.UserInfo.avatar!}
+      fit="contain"
+      {/* @ts-expect-error */}
+      width="fit-content"
+      aspectRatio={1}
+    />
   </div>
   <div class="info_wrapper">
     <div class="name">{cfg.UserInfo.name}</div>

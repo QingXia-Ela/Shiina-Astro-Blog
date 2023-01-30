@@ -2,10 +2,20 @@
 import ParseTime from "@/utils/ParseTime";
 import "@/assets/fonts/posts/iconfont.css";
 import { COLLECT_TAGS } from "@/constant/Collect";
+import { Image } from "@astrojs/image/components";
 import type { CollectionEntry } from "astro:content";
 export interface Props {
   ListData: CollectionEntry<"blog">[];
 }
+
+function ImgFactory(s?: string, data: Record<string, any>) {
+  if (!s) return "";
+  if (s && s[0] === ".") {
+    return `/src/content/blog/${data.title}/${s}`;
+  }
+  return s
+}
+
 let { ListData = [] } = Astro.props;
 ---
 
@@ -15,16 +25,27 @@ let { ListData = [] } = Astro.props;
     ListData.map(({ data }) => {
       return (
         <div class="item">
-          <a class="img_wrapper" href={`/posts/${data.title}`}>
-            <img src="/source/Images/bg2.jpg" />
-          </a>
+          {data.index_img ? (
+            <a class="img_wrapper" href={`/posts/${data.title}`}>
+              <Image
+                src={ImgFactory(data.index_img, data) ?? ""}
+                {/* @ts-ignore: css control */}
+                width="unset"
+                height="unset"
+              />
+            </a>
+          ) : undefined}
           <div class="info">
             <a class="title" href={`/posts/${data.title}`}>
               {data.title}
             </a>
-            <a class="brief" href={`/posts/${data.title}`}>
+            {
+              data.description ? (
+              <a class="brief" href={`/posts/${data.title}`}>
               {data.description}
             </a>
+              ) : undefined
+            }
             <div class="class_info">
               <div class="time">
                 <i class="iconfont icon-24gl-calendar" />
