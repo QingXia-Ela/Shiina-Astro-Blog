@@ -40,7 +40,7 @@ categories: 技术
 ### hexo 不存在
 
 <!-- {% asset_img 1.jpg This is an example image %} -->
-![](1.jpg)
+![](/src/content/blog/hexo-搭建个人博客记录/1.jpg)
 
 解决方法：
 1. 命令前加 npx : `npx hexo init`
@@ -74,12 +74,13 @@ marked:
 
 我个人习惯更有规律地进行博客资源的存储，所以使用了资源文件夹这种形式保持图片之类的东西。
 
-![](2.jpg)
+![](/src/content/blog/hexo-搭建个人博客记录/2.jpg)
 
 如果你的个人博客在网址中设置了资源路径，如下图：
 
-![](3.jpg)
-![](4.jpg)
+![](/src/content/blog/hexo-搭建个人博客记录/3.jpg)
+![](/src/content/blog/hexo-搭建个人博客记录/4.jpg)
+
 
 那么在 markdown 引入图片时需要这样子：`![](../name.jpg)`
 

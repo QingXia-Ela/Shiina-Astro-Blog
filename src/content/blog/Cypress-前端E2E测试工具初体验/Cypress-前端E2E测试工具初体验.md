@@ -3,8 +3,8 @@ title: Cypress-前端E2E测试工具初体验
 date: 2022-10-24 20:39:40
 tags: [Cypress,前端]
 categories: 技术
-index_img: cover/cypress.jpg
-banner_img: cover/cypress.jpg
+index_img: ./cypress.jpg
+banner_img: ./cypress.jpg
 ---
 
 # Cypress-前端E2E测试工具初体验
@@ -68,7 +68,7 @@ describe('My Second Test', () => {
 ```
 
 在 cypress 运行后结果如下：
-![](1.jpg)
+![](/src/content/blog/Cypress-前端E2E测试工具初体验/1.jpg)
 
 可以看到 cypress 捕获到了这个错误
 
@@ -101,7 +101,7 @@ describe('My First Test', () => {
 ```
 
 运行结果如下：
-![](2.jpg)
+![](/src/content/blog/Cypress-前端E2E测试工具初体验/2.jpg)
 
 在官方的示例页面中并没有含有 `hype` 这个单词的元素，因此抛出了错误
 

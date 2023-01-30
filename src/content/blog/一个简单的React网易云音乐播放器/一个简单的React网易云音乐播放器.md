@@ -2,8 +2,8 @@
 title: 一个简单的React网易云音乐播放器
 date: 2022-09-06 00:08:22
 tags: [React,项目经历,前端]
-index_img: cover/一个简单的React网易云音乐播放器.jpg
-banner_img: cover/一个简单的React网易云音乐播放器.jpg
+index_img: ./cover.jpg
+banner_img: ./cover.jpg
 categories: 项目记录
 ---
 
@@ -31,9 +31,9 @@ categories: 项目记录
 
 ## 应用截图
 
-![](web1.jpg)
-![](web2.jpg)
-![](web3.jpg)
+![](/src/content/blog/一个简单的React网易云音乐播放器/web1.jpg)
+![](/src/content/blog/一个简单的React网易云音乐播放器/web2.jpg)
+![](/src/content/blog/一个简单的React网易云音乐播放器/web3.jpg)
 
 页面不多，以后如果添加了会更新截图
 

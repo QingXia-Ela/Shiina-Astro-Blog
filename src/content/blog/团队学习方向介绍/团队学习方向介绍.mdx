@@ -41,21 +41,31 @@ import { Image } from '@astrojs/image/components';
 - **HTML**
   这是一种网页的超文本标记语言，他可以构成网页的骨架，是组成网页文字展示的核心与基础
   **下图为本站首页只有 Html 时的样子**
-  ![纯html构建起来的页面](Web1.webp)
+<div class='tac'>
+<Image src={import('./Web1.webp')} alt="纯html构建起来的页面" height="300" />
+</div>
+
 - **CSS**
   全名为 `层叠样式表` 用来对网页进行美化，是让网页变得更加美观的基础
   **下图为本站首页添加样式后的样子**
-  ![添加了CSS的页面](Web2.webp)
+<div class='tac'>
+<Image src={import('./Web2.webp')} alt="添加了CSS的页面" height="300" />
+</div>
+
 - **JavaScript**
   是一种面向 Web 应用开发的脚本语言，他是让网页动起来，可以让网页与用户进行友好交互的基础
   **下面的变化效果为通过 Javascript 控制 CSS 样式所得到的变化效果**
-  ![](unactive.webp)
+<div class='tac'>
+<Image src={import('./unactive.webp')} height="300" />
+</div>
+<div class='tac'>
+<Image src={import('./preload.webp')} height="300" />
+</div>
+<div class='tac'>
+<Image src={import('./done.webp')} height="300" />
+</div>
 
-  ![](preload.webp)
-
-  ![](done.webp)
-
-  可以点击这个链接体验上述效果：http://shiinafan.gitee.io/rhine-lab-theme-index-page/
+可以点击这个链接体验上述效果：http://shiinafan.gitee.io/rhine-lab-theme-index-page/
 
 学完以上三样基础我们就可以做个小游戏了，这里有一个贪吃蛇的游戏体验地址，就是使用了以上三种技术写的：https://shiinafan.top/snake
 
@@ -80,8 +90,6 @@ import { Image } from '@astrojs/image/components';
 #### Android开发是什么？
 
 ##### Android开发——手机应用程序开发
-
-
 
 手机应用程序开发即我们常说的app的开发工作，app开发又细分为3类：
 

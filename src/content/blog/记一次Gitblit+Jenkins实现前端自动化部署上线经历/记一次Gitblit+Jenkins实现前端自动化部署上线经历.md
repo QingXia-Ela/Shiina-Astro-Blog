@@ -3,8 +3,8 @@ title: 记一次Gitblit+Jenkins实现前端自动化部署上线经历
 date: 2022-11-06 17:52:56
 tags: [前端, 自动化, Gitblit, Jenkins]
 categories: '技术'
-index_img: cover/记一次Gitblit-Jenkins实现前端自动化部署上线经历.jpg
-banner_img: cover/记一次Gitblit-Jenkins实现前端自动化部署上线经历.jpg
+index_img: ./cover.jpg
+banner_img: ./cover.jpg
 ---
 
 # 记一次Gitblit+Jenkins实现前端自动化部署上线经历
@@ -13,7 +13,7 @@ banner_img: cover/记一次Gitblit-Jenkins实现前端自动化部署上线经�
 
 本博客从上线到现在大概也有 5 个月左右了，当初本来一早就有计划说是要实现推送到服务器后自动部署到生产环境的流程，但由于当时技术力实在是不够所以只好放弃了，当时最终提出的解决方案如下：
 
-![](1.jpg)
+![](/src/content/blog/记一次Gitblit+Jenkins实现前端自动化部署上线经历/1.jpg)
 
 然后就这样子用了 5 个月，每次推送后就登录服务器去执行一下手动拉取脚本。
 
@@ -21,7 +21,7 @@ banner_img: cover/记一次Gitblit-Jenkins实现前端自动化部署上线经�
 
 我们的目标流如下：
 
-![](target.jpg)
+![](/src/content/blog/记一次Gitblit+Jenkins实现前端自动化部署上线经历/target.jpg)
 
 
 ## 什么是 CI / CD
@@ -42,7 +42,7 @@ CD (Continuous Deploy) 是持续部署的意思，即基于某个工具或平台
 
 下载安装这里不多赘述，网上有很多教程，本次使用的是 Windows 平台的安装包，第一次使用的时候选择了自动安装推荐的插件，这样就不需要自己手动添加各种 git 管理插件，我们安装后直接开始使用。
 
-![](2.jpg)
+![](/src/content/blog/记一次Gitblit+Jenkins实现前端自动化部署上线经历/2.jpg)
 
 上面是主界面截图。
 
@@ -52,19 +52,19 @@ CD (Continuous Deploy) 是持续部署的意思，即基于某个工具或平台
 
 由于是从本地 Gitblit 的只读链接拉取的代码，所以在源码管理部分我直接进行了拉取而不需要任何认证凭据。拉取的时候要注意自己的分支是不是正确且存在内容的分支。
 
-![](3.jpg)
+![](/src/content/blog/记一次Gitblit+Jenkins实现前端自动化部署上线经历/3.jpg)
 
 如果是 GitHub 的私有仓库的话需要在认证部分设置自己的用户名和个人 token 以便拉取。
 
 我们希望 Jenkins 在拉取代码后进行构建，为此我们先将拉取的源码移动到一个文件夹先。在源码管理下的 `Additional Behaviours` 中新增一个 ` Check out to a sub-directory ` 行为，他的功能是将源码复制一份到指定的目录。
 
-![](4.jpg)
+![](/src/content/blog/记一次Gitblit+Jenkins实现前端自动化部署上线经历/4.jpg)
 
 在这里我直接将源码移动到 nginx 的博客文件夹目录下，并配置 nginx 的博客页面目录为打包构建后的目录，这样就不需要在后面的 Windows batch 做文件操作了。
 
 复制完源码后我们需要执行 batch 命令去构建博客，这一栏的操作在 `Build Steps` 下：
 
-![](5.jpg)
+![](/src/content/blog/记一次Gitblit+Jenkins实现前端自动化部署上线经历/5.jpg)
 
 由于是 Windows Server 环境，所以选择的构建步骤是执行 Windows batch 命令，如果是其他操作系统比如 Linux 则需要选择 `Execute Shell` 了（大概，因为笔者只是浅浅了解过 Linux，并没有长期使用过）。
 
@@ -78,7 +78,7 @@ CD (Continuous Deploy) 是持续部署的意思，即基于某个工具或平台
 
 接下来我们需要为这个构建添加一个触发的钩子，笔者在此处使用的是远程构建功能：
 
-![](6.jpg)
+![](/src/content/blog/记一次Gitblit+Jenkins实现前端自动化部署上线经历/6.jpg)
 
 当然还有其他触发器比如 GitHub hook，笔者猜是搭配 GitHub 仓库自带的 webhook 进行触发，这部分还有待探索。
 
@@ -100,7 +100,7 @@ http://${你的Jenkins地址}/job/${项目名字}/build?token=${你设置的toke
 
 在 gitblit 的安装目录下找到 `data/groovy` 文件夹，这个文件夹下面有很多 groovy 脚本，其中我们只需要使用 `jenkins.groovy`，对其拷贝一份，并重命名成 `jenkins.blog.groovy`：
 
-![](7.jpg)
+![](/src/content/blog/记一次Gitblit+Jenkins实现前端自动化部署上线经历/7.jpg)
 
 打开这个脚本，将最后一行的 `triggerUrl` 改为上文 Jenkins 的 url
 
@@ -113,17 +113,17 @@ new URL('${你的 Jenkins 构建链接}').getContent()
 
 登录你的 gitblit 管理页面，进入你的项目，并点击编辑按钮：
 
-![](8.jpg)
+![](/src/content/blog/记一次Gitblit+Jenkins实现前端自动化部署上线经历/8.jpg)
 
 选择 `接受` 一栏，找到 `post-receive 脚本`：
 
-![](9.jpg)
+![](/src/content/blog/记一次Gitblit+Jenkins实现前端自动化部署上线经历/9.jpg)
 
 这些脚本的执行时机是在仓库接受推送之后执行的脚本，功能非常强大。
 
 找到你刚刚编写的 `jenkins.blog.groovy` 脚本并移动到右侧：
 
-![](10.jpg)
+![](/src/content/blog/记一次Gitblit+Jenkins实现前端自动化部署上线经历/10.jpg)
 
 保存后，你的 gitblit 在监听到提交事件后就会触发脚本，并唤醒 Jenkins 进行构建了！这比手动登录服务器去拉取强多了！
 

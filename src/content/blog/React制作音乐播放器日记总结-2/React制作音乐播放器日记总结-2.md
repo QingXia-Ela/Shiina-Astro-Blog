@@ -17,11 +17,11 @@ tags: [技术, React, 总结, 经验, canvas]
 
 柱形图的音频可视化可能大家都有见过，在这里放个简单的图
 
-![](bar1.jpg)
+![](/src/content/blog/React制作音乐播放器日记总结-2/bar1.jpg)
 
 这种图一般用于实时展示音频频域，每一根柱子代表其频率对应的能量大小
 
-![](频域图1.png)
+![](/src/content/blog/React制作音乐播放器日记总结-2/频域图1.png)
 
 而在 Web Audio API 中，有这样一个 API 专门用于获取音频实时数据，专门用于处理音频可视化问题：
 
@@ -35,7 +35,7 @@ MDN 文档：https://developer.mozilla.org/zh-CN/docs/Web/API/AnalyserNode
 
 创建一个基本的音频上下文的流程如下（图摘自 MDN 官网）：
 
-![](流程.jpg)
+![](/src/content/blog/React制作音乐播放器日记总结-2/流程.jpg)
 
 在使用 `AnalyserNode` API 获取数据之前，我们首先需要创建一个音频上下文对象
 
@@ -66,11 +66,11 @@ eleSource.connect(analyser)
 analyser.connect(audioContext.destination)
 ```
 
-![](connect.jpg)
+![](/src/content/blog/React制作音乐播放器日记总结-2/connect.jpg)
 
 源码如下
 
-![](初始化1.jpg)
+![](/src/content/blog/React制作音乐播放器日记总结-2/初始化1.jpg)
 
 至此，我们完成了音频上下文的初始化
 
@@ -96,7 +96,7 @@ const getDataArray = (analyser: AnalyserNode) => {
 
 通过调用这个方法我们就可以看到想要的数据
 
-![](data1.jpg)
+![](/src/content/blog/React制作音乐播放器日记总结-2/data1.jpg)
 
 #### 注意事项
 {% note warning %}
@@ -167,11 +167,11 @@ let x = 0
 {% endnote %}
 
 为了让每个柱形条居中，我们需要决定其初始位置，即 `canvas` 元素自身高度的一半，但此时柱形条将以 `canvas` 中心进行渲染，会变成这样：
-![](bar2.jpg)
+![](/src/content/blog/React制作音乐播放器日记总结-2/bar2.jpg)
 
 因此我们还需要对起始位置的渲染进行调整，即再把 y 轴位置减去当前柱形条高度的一半，即可达到正常效果
 
-![](effection1.jpg)
+![](/src/content/blog/React制作音乐播放器日记总结-2/effection1.jpg)
 
 绘制代码如下：
 ```js

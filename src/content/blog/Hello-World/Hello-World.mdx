@@ -2,8 +2,8 @@
 title: Hello-World
 date: 2022-06-25 18:02:52
 tags: [技术, Hexo]
-index_img: cover/Hello-World.jpg
-banner_img: cover/Hello-World.jpg
+index_img: ./cover.jpg
+banner_img: ./cover.jpg
 categories: '技术'
 ---
 
@@ -20,5 +20,5 @@ import { Image } from '@astrojs/image/components';
 封面
 
 <div class='tac'>
-<Image src={import('./cover.jpg')} />
+<Image src={import('./cover.jpg')} height="400" />
 </div>

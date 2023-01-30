@@ -52,10 +52,9 @@ tags: [技术, React, 总结, 经验, Redux, Js, 坑]
 
 触发的机制是当歌曲播放的时候详细播放列表被打开后，再查看 redux 开发工具时就会出现浏览器内存高占用的情况
 
-![](SongList1.jpg)
-![](SongList2.jpg)
-
-![](SongList3.png)
+![](/src/content/blog/React制作音乐播放器日记总结-3/SongList1.jpg)
+![](/src/content/blog/React制作音乐播放器日记总结-3/SongList2.jpg)
+![](/src/content/blog/React制作音乐播放器日记总结-3/SongList3.png)
 
 此时 redux 开发工具也直接崩溃，换了 chrome 浏览器也是一样
 
@@ -121,11 +120,11 @@ export default createStore(combineReducer, enhancers)
 
 查了一天后就查到了，在 SongList 列表状态中有一项内容层次特别深，而且都是我没见过的数据
 
-![](redux1.jpg)
+![](/src/content/blog/React制作音乐播放器日记总结-3/redux1.jpg)
 
 于是就去查是哪里修改了这里的数据
 
-![](redux2.jpg)
+![](/src/content/blog/React制作音乐播放器日记总结-3/redux2.jpg)
 
 vscode 搜索了一下，只有这一个地方引用了 props 传进来的值，使用的值也是通过 map 遍历返回了一份新的值，但是在新值里面修改后却影响到了原通过 props 传入的全局值，因此怀疑解构赋值并不是深拷贝所有内容，所以把原来解构赋值的方法换成了 `JSON.parse(JSON.stringify())` 这种拷贝方法
 
@@ -154,7 +153,7 @@ vscode 搜索了一下，只有这一个地方引用了 props 传进来的值，
 
 至于为什么只有在播放的时候导致整个开发工具崩溃，个人认为是自己写的 action 在播放音频的时候频繁触发的原因，在音频播放时每秒钟 redux 都会更新当前播放的时间，短时间内 redux 开发工具进行了多次内容处理，导致内存被占满
 
-![](redux3.jpg)
+![](/src/content/blog/React制作音乐播放器日记总结-3/redux3.jpg)
 
 ### 总结
 

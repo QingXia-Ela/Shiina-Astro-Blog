@@ -3,8 +3,8 @@ title: Pinia-Vue全局状态管理的一种新方案
 date: 2022-09-21 20:59:11
 categories: 技术
 tags: [vue, Pinia, 前端, 浅谈, 笔记]
-index_img: cover/pinia.jpg
-banner_img: cover/pinia.jpg
+index_img: ./pinia.jpg
+banner_img: ./pinia.jpg
 ---
 
 # Pinia - Vue 全局状态管理的一种新方案
@@ -14,7 +14,7 @@ banner_img: cover/pinia.jpg
 如果你有学习过 Vuex 这个全局状态管理的插件，那么你肯定对他的使用方法有过很大的困惑，笔者当初学习使用 Vuex 的时候跟着视频一行行地敲代码，到完全熟练使用花了不少的事件，而且在这其中被其各种冗余的代码使用感到很头痛。
 
 为了解决这些问题，vue 官方的一位成员提出了下一代 vuex 要实现的目标，Github 截图如下：
-![](github1.jpg)
+![](/src/content/blog/Pinia-Vue全局状态管理的一种新方案/github1.jpg)
 
 PR 源地址：https://github.com/vuejs/rfcs/pull/271
 
@@ -161,7 +161,7 @@ onMounted(() => {
 
  - 代码量少了很多，而且与 vue3 的组合式 api 结合的更好，使用起来更方便。
  - 对 Typescript 的支持也是非常完善的，使用后都会有自动补全。
-    ![](ts提示.png)
+    ![](/src/content/blog/Pinia-Vue全局状态管理的一种新方案/ts提示.png)
  - 每个 store 直接独立，可以分开导用，组件中可以直接在 setup 函数下进行取用
  - 去除了 mutations, actions 支持同步和异步，不需要分别定义行为
 

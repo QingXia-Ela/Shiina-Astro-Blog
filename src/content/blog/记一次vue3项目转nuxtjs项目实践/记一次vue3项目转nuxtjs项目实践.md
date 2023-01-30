@@ -2,8 +2,8 @@
 title: 记一次vue3项目转nuxtjs项目实践
 date: 2022-09-28 11:49:12
 tags: [vue,nuxtjs,nuxt3,前端,总结]
-index_img: cover/记一次vue3项目转nuxtjs项目实践.jpg
-banner_img: cover/记一次vue3项目转nuxtjs项目实践.jpg
+index_img: ./cover.jpg
+banner_img: ./cover.jpg
 ---
 
 # 记一次vue3项目转nuxtjs项目实践
@@ -73,7 +73,7 @@ Nuxt3 的使用与现存的许多插件也都有一些出入与不符，本人�
 
 对于大部分插件，你都需要到他们官网下的 `服务端渲染` 来查看正确的引入方式，比如 Pinia 的文档如下：
 
-![](pinia.jpg)
+![](/src/content/blog/记一次vue3项目转nuxtjs项目实践/pinia.jpg)
 
 这个还算是比较简单的，官网只需要在配置文件下加上这些即可：
 
@@ -138,7 +138,7 @@ export default defineNuxtConfig({
 
 有一个问题就是如果直接进入有轮播图的页面中，Vue 会在控制台发出警告：
 
-![](warn.jpg)
+![](/src/content/blog/记一次vue3项目转nuxtjs项目实践/warn.jpg)
 
 大概的意思是服务端渲染的 Dom 与 客户端的节点不匹配，这个的原因我猜想是因为我设置了插件是 **只在客户端进行渲染** 的原因，本人去 GitHub Issue 上也找了一圈，但是并没有理想答案，所以猜想是轮播图插件的兼容性并不是很好，导致会有这种警告。不过并不影响正常使用，所以我也没有继续探究下去了。
 #### I18n 国际化
@@ -195,7 +195,7 @@ definePageMeta({
 
 项目在最后尝试打包的时候报了这样的一个错误：
 
-![](error1.jpg)
+![](/src/content/blog/记一次vue3项目转nuxtjs项目实践/error1.jpg)
 
 错误似乎是与一个顶层 await 特性有关，顶层 await 本人并不是很了解，以后可能会出一篇文章进行详细讨论，眼下是先解决这个问题
 
@@ -252,7 +252,7 @@ export default defineNuxtPlugin(nuxt => {
 
 整个使用体验还是不太好的，尤其是各种组件的引入，都需要花费很多时间处理兼容性问题，虽然官方已经于 `2022 年 4 月 21 日` 发布了正式版本，但是个人认为其 **广泛应用到生产环境** 中还需要相当一段长的时间进行打磨与处理，所以还需要一段时间进行观望，期待未来的时候 Nuxt3 能带给我们相对于 Nuxt2 更优质的开发体验与更友好的配置模式。
 
-![](devtip.jpg)
+![](/src/content/blog/记一次vue3项目转nuxtjs项目实践/devtip.jpg)
 
 ## 参考文章
 
