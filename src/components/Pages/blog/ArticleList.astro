@@ -13,63 +13,56 @@ function ImgFactory(s?: string, data: Record<string, any>) {
   if (s && s[0] === ".") {
     return `/content/blog/${data.title}/${s}`;
   }
-  return s
+  return s;
 }
 
 let { ListData = [], class: className } = Astro.props;
 ---
 
-  {
-    /** 这个 map 会有 bug，(Cannot read properties of undefined (reading 'map'))，考虑用其他方式循环导出 */
-    ListData.map(({ data }) => {
-      return (
-        <div class={`item ${data.index_img ?  'img' : ''} ${className}`}>
-          {data.index_img ? (
-            <a class="img_wrapper" href={`/posts/${data.title}`}>
-              <Image
-                src={ImgFactory(data.index_img, data) ?? ""}
-                {/* @ts-ignore: css control */}
-                width="unset"
-                height="unset"
-              />
-            </a>
-          ) : undefined}
-          <div class="info">
-            <a class="title" href={`/posts/${data.title}`}>
-              {data.title}
-            </a>
-            {
-              data.description ? (
-              <a class="brief" href={`/posts/${data.title}`}>
+{
+  /** 这个 map 会有 bug，(Cannot read properties of undefined (reading 'map'))，考虑用其他方式循环导出 */
+  ListData.map(({ data }) => {
+    return (
+      <div class={`item ${data.index_img ? "img" : ""} ${className}`}>
+        {data.index_img ? (
+          <a class="img_wrapper" href={`/posts/${data.title}`}>
+            <img
+              src={ImgFactory(data.index_img, data) ?? ""}
+              alt={data.title}
+            />
+          </a>
+        ) : undefined}
+        <div class="info">
+          <a class="title" href={`/posts/${data.title}`}>
+            {data.title}
+          </a>
+          {data.description ? (
+            <a class="brief" href={`/posts/${data.title}`}>
               {data.description}
             </a>
-              ) : undefined
-            }
-            <div class="class_info">
-              <div class="time">
-                <i class="iconfont icon-24gl-calendar" />
-                {ParseTime(data.date)}
-              </div>
-              <div class="tags">
-                {data.tags?.map((val: string, i: number) => {
-                  if (i > 6) return null;
-                  return (
-                    <a
-                      class="tag_item"
-                      href={`/collect/${COLLECT_TAGS}/${val}`}
-                    >
-                      <i class="iconfont icon-24gl-tags2" />
-                      <span>{val}</span>
-                    </a>
-                  );
-                })}
-              </div>
+          ) : undefined}
+          <div class="class_info">
+            <div class="time">
+              <i class="iconfont icon-24gl-calendar" />
+              {ParseTime(data.date)}
+            </div>
+            <div class="tags">
+              {data.tags?.map((val: string, i: number) => {
+                if (i > 6) return null;
+                return (
+                  <a class="tag_item" href={`/collect/${COLLECT_TAGS}/${val}`}>
+                    <i class="iconfont icon-24gl-tags2" />
+                    <span>{val}</span>
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>
-      );
-    })
-  }
+      </div>
+    );
+  })
+}
 
 <style lang="scss">
   .item {
