@@ -11,7 +11,7 @@ export interface Props {
 function ImgFactory(s?: string, data: Record<string, any>) {
   if (!s) return "";
   if (s && s[0] === ".") {
-    return `/src/content/blog/${data.title}/${s}`;
+    return `/content/blog/${data.title}/${s}`;
   }
   return s
 }

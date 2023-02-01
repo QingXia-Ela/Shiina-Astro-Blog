@@ -7,7 +7,8 @@ import ResultVue from './state/result.vue'
 
 <template>
   <div class="state_area">
-    <EmptyVue />
+    <!-- <EmptyVue /> -->
+    <ResultVue />
   </div>
 </template>
 

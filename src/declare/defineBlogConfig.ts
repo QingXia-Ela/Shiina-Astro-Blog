@@ -21,6 +21,7 @@ interface BasicPersonalConfig {
  * @deprecated 将会在新版本中启用
  */
 interface BasicSearchConfig {
+  active?: boolean
   useRequest?: boolean
   requestURL?: string
 }

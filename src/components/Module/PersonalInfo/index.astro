@@ -15,7 +15,7 @@ const { horizontal } = Astro.props;
       class="default_box_shadow"
       src={cfg.UserInfo.avatar!}
       fit="contain"
-      {/* @ts-expect-error */}
+      {/* @ts-ignore: fit-img */}
       width="fit-content"
       aspectRatio={1}
     />

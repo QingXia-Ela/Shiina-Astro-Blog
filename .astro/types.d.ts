@@ -44,10 +44,10 @@ declare module 'astro:content' {
 	): E extends ValidEntrySlug<C>
 		? Promise<CollectionEntry<C>>
 		: Promise<CollectionEntry<C> | undefined>;
-	export function getCollection<C extends keyof typeof entryMap>(
+	export function getCollection<C extends keyof typeof entryMap, E extends CollectionEntry<C>>(
 		collection: C,
-		filter?: (data: CollectionEntry<C>) => boolean
-	): Promise<CollectionEntry<C>[]>;
+		filter?: (entry: CollectionEntry<C>) => entry is E
+	): Promise<E[]>;
 
 	type InferEntrySchema<C extends keyof typeof entryMap> = import('astro/zod').infer<
 		Required<ContentConfig['collections'][C]>['schema']
@@ -72,86 +72,86 @@ declare module 'astro:content' {
 },
 },
 "blog": {
-"Cypress-前端E2E测试工具初体验/Cypress-前端E2E测试工具初体验.md": {
-  id: "Cypress-前端E2E测试工具初体验/Cypress-前端E2E测试工具初体验.md",
-  slug: "cypress-前端e2e测试工具初体验/cypress-前端e2e测试工具初体验",
+"Cypress-前端E2E测试工具初体验.md": {
+  id: "Cypress-前端E2E测试工具初体验.md",
+  slug: "cypress-前端e2e测试工具初体验",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"Hello-World/Hello-World.mdx": {
-  id: "Hello-World/Hello-World.mdx",
-  slug: "hello-world/hello-world",
+"Hello-World.md": {
+  id: "Hello-World.md",
+  slug: "hello-world",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"JS浅入学习笔记/JS浅入学习笔记.md": {
-  id: "JS浅入学习笔记/JS浅入学习笔记.md",
-  slug: "js浅入学习笔记/js浅入学习笔记",
+"JS浅入学习笔记.md": {
+  id: "JS浅入学习笔记.md",
+  slug: "js浅入学习笔记",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"Pinia-Vue全局状态管理的一种新方案/Pinia-Vue全局状态管理的一种新方案.md": {
-  id: "Pinia-Vue全局状态管理的一种新方案/Pinia-Vue全局状态管理的一种新方案.md",
-  slug: "pinia-vue全局状态管理的一种新方案/pinia-vue全局状态管理的一种新方案",
+"Pinia-Vue全局状态管理的一种新方案.md": {
+  id: "Pinia-Vue全局状态管理的一种新方案.md",
+  slug: "pinia-vue全局状态管理的一种新方案",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"React制作音乐播放器日记总结-1/React制作音乐播放器日记总结-1.md": {
-  id: "React制作音乐播放器日记总结-1/React制作音乐播放器日记总结-1.md",
-  slug: "react制作音乐播放器日记总结-1/react制作音乐播放器日记总结-1",
+"React制作音乐播放器日记总结-1.md": {
+  id: "React制作音乐播放器日记总结-1.md",
+  slug: "react制作音乐播放器日记总结-1",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"React制作音乐播放器日记总结-2/React制作音乐播放器日记总结-2.md": {
-  id: "React制作音乐播放器日记总结-2/React制作音乐播放器日记总结-2.md",
-  slug: "react制作音乐播放器日记总结-2/react制作音乐播放器日记总结-2",
+"React制作音乐播放器日记总结-2.md": {
+  id: "React制作音乐播放器日记总结-2.md",
+  slug: "react制作音乐播放器日记总结-2",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"React制作音乐播放器日记总结-3/React制作音乐播放器日记总结-3.md": {
-  id: "React制作音乐播放器日记总结-3/React制作音乐播放器日记总结-3.md",
-  slug: "react制作音乐播放器日记总结-3/react制作音乐播放器日记总结-3",
+"React制作音乐播放器日记总结-3.md": {
+  id: "React制作音乐播放器日记总结-3.md",
+  slug: "react制作音乐播放器日记总结-3",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"Typescript学习笔记/Typescript学习笔记.md": {
-  id: "Typescript学习笔记/Typescript学习笔记.md",
-  slug: "typescript学习笔记/typescript学习笔记",
+"Typescript学习笔记.md": {
+  id: "Typescript学习笔记.md",
+  slug: "typescript学习笔记",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"hexo-搭建个人博客记录/hexo-搭建个人博客记录.md": {
-  id: "hexo-搭建个人博客记录/hexo-搭建个人博客记录.md",
-  slug: "hexo-搭建个人博客记录/hexo-搭建个人博客记录",
+"hexo-搭建个人博客记录.md": {
+  id: "hexo-搭建个人博客记录.md",
+  slug: "hexo-搭建个人博客记录",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"一个基于petite-vue的简易播放器/一个基于petite-vue的简易播放器.md": {
-  id: "一个基于petite-vue的简易播放器/一个基于petite-vue的简易播放器.md",
-  slug: "一个基于petite-vue的简易播放器/一个基于petite-vue的简易播放器",
+"一个基于petite-vue的简易播放器.md": {
+  id: "一个基于petite-vue的简易播放器.md",
+  slug: "一个基于petite-vue的简易播放器",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"一个简单的React网易云音乐播放器/一个简单的React网易云音乐播放器.md": {
-  id: "一个简单的React网易云音乐播放器/一个简单的React网易云音乐播放器.md",
-  slug: "一个简单的react网易云音乐播放器/一个简单的react网易云音乐播放器",
+"一个简单的React网易云音乐播放器.md": {
+  id: "一个简单的React网易云音乐播放器.md",
+  slug: "一个简单的react网易云音乐播放器",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"个人的前端学习路线/个人的前端学习路线.md": {
-  id: "个人的前端学习路线/个人的前端学习路线.md",
-  slug: "个人的前端学习路线/个人的前端学习路线",
+"个人的前端学习路线.md": {
+  id: "个人的前端学习路线.md",
+  slug: "个人的前端学习路线",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
@@ -163,9 +163,9 @@ declare module 'astro:content' {
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"前端常用的小工具和插件总结/前端常用的小工具和插件总结.md": {
-  id: "前端常用的小工具和插件总结/前端常用的小工具和插件总结.md",
-  slug: "前端常用的小工具和插件总结/前端常用的小工具和插件总结",
+"前端常用的小工具和插件总结.md": {
+  id: "前端常用的小工具和插件总结.md",
+  slug: "前端常用的小工具和插件总结",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
@@ -184,44 +184,44 @@ declare module 'astro:content' {
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"对于未来的路的思考/对于未来的路的思考.md": {
-  id: "对于未来的路的思考/对于未来的路的思考.md",
-  slug: "对于未来的路的思考/对于未来的路的思考",
+"对于未来的路的思考.md": {
+  id: "对于未来的路的思考.md",
+  slug: "对于未来的路的思考",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"未来的一些计划/未来的一些计划.md": {
-  id: "未来的一些计划/未来的一些计划.md",
-  slug: "未来的一些计划/未来的一些计划",
+"未来的一些计划.md": {
+  id: "未来的一些计划.md",
+  slug: "未来的一些计划",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"网络协议学习笔记/网络协议学习笔记.md": {
-  id: "网络协议学习笔记/网络协议学习笔记.md",
-  slug: "网络协议学习笔记/网络协议学习笔记",
+"网络协议学习笔记.md": {
+  id: "网络协议学习笔记.md",
+  slug: "网络协议学习笔记",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"莱茵生命风格主页/莱茵生命风格主页.md": {
-  id: "莱茵生命风格主页/莱茵生命风格主页.md",
-  slug: "莱茵生命风格主页/莱茵生命风格主页",
+"莱茵生命风格主页.md": {
+  id: "莱茵生命风格主页.md",
+  slug: "莱茵生命风格主页",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"记一次Gitblit+Jenkins实现前端自动化部署上线经历/记一次Gitblit+Jenkins实现前端自动化部署上线经历.md": {
-  id: "记一次Gitblit+Jenkins实现前端自动化部署上线经历/记一次Gitblit+Jenkins实现前端自动化部署上线经历.md",
-  slug: "记一次gitblitjenkins实现前端自动化部署上线经历/记一次gitblitjenkins实现前端自动化部署上线经历",
+"记一次Gitblit+Jenkins实现前端自动化部署上线经历.md": {
+  id: "记一次Gitblit+Jenkins实现前端自动化部署上线经历.md",
+  slug: "记一次gitblitjenkins实现前端自动化部署上线经历",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"记一次vue3项目转nuxtjs项目实践/记一次vue3项目转nuxtjs项目实践.md": {
-  id: "记一次vue3项目转nuxtjs项目实践/记一次vue3项目转nuxtjs项目实践.md",
-  slug: "记一次vue3项目转nuxtjs项目实践/记一次vue3项目转nuxtjs项目实践",
+"记一次vue3项目转nuxtjs项目实践.md": {
+  id: "记一次vue3项目转nuxtjs项目实践.md",
+  slug: "记一次vue3项目转nuxtjs项目实践",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
@@ -233,16 +233,16 @@ declare module 'astro:content' {
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"记一次前端Canvas粒子效果实战-2/记一次前端Canvas粒子效果实战-2.md": {
-  id: "记一次前端Canvas粒子效果实战-2/记一次前端Canvas粒子效果实战-2.md",
-  slug: "记一次前端canvas粒子效果实战-2/记一次前端canvas粒子效果实战-2",
+"记一次前端Canvas粒子效果实战-2.md": {
+  id: "记一次前端Canvas粒子效果实战-2.md",
+  slug: "记一次前端canvas粒子效果实战-2",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">
 },
-"记一次前端Canvas粒子效果实战-3/记一次前端Canvas粒子效果实战-3.md": {
-  id: "记一次前端Canvas粒子效果实战-3/记一次前端Canvas粒子效果实战-3.md",
-  slug: "记一次前端canvas粒子效果实战-3/记一次前端canvas粒子效果实战-3",
+"记一次前端Canvas粒子效果实战-3.md": {
+  id: "记一次前端Canvas粒子效果实战-3.md",
+  slug: "记一次前端canvas粒子效果实战-3",
   body: string,
   collection: "blog",
   data: InferEntrySchema<"blog">

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
-const MoreTip = ref(3)
+const MoreTip = ref(1)
 
 /**
  * 改变展示

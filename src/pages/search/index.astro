@@ -2,13 +2,13 @@
 import SearchVue from "./search.vue";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import cfg from "blog.config";
-const { SearchConfig } = cfg;
+const { SearchConfig = {} } = cfg;
 ---
 
 <BaseLayout title={`搜索 - `}>
   <div class="search white_module">
     {
-      SearchConfig ? (
+      SearchConfig.active ? (
         <>
           <h1 class="tips">站内搜索</h1>
           <SearchVue client:load />
