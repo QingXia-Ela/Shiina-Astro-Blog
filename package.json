@@ -20,7 +20,6 @@
     "github-markdown-css": "^5.1.0",
     "install": "^0.13.0",
     "lodash": "^4.17.21",
-    "npm": "^9.2.0",
     "sharp": "^0.31.3",
     "tocbot": "^4.20.0",
     "vue": "^3.2.45"
@@ -33,6 +32,8 @@
     "@typescript-eslint/visitor-keys": "^5.46.1",
     "eslint": "^8.30.0",
     "eslint-plugin-vue": "^9.8.0",
-    "sass": "^1.56.2"
+    "markdown-it": "^13.0.1",
+    "sass": "^1.56.2",
+    "npm": "^9.2.0"
   }
 }
