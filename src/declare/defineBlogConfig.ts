@@ -21,8 +21,23 @@ interface BasicPersonalConfig {
  * @deprecated 将会在新版本中启用
  */
 interface BasicSearchConfig {
+  /**  激活搜索功能 */
   active?: boolean
-  useRequest?: boolean
+  /** 是否构建搜索索引，默认为 true */
+  buildSearchIndex?: boolean
+  /** 
+   * 输出搜索索引文件的路径，返回一个绝对路径来指定
+   * 
+   * 默认被设置到生产环境文件中的默认静态资源目录下
+   * @param rootDir 项目的根路径
+   */
+  searchIndexPath?: (rootDir: URL) => string | Promise<string>
+  /** 
+   * 网页处理搜索结果的模式，默认为 `static`
+   * @see `/docs/user/搜索.md` 了解更多
+   */
+  mode?: 'static' | 'server'
+  /** 请求的URL地址，默认是搜索索引被构建出来的位置 */
   requestURL?: string
 }
 
@@ -243,6 +258,11 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
           title: '搜索'
         }
       }
+    },
+    SearchConfig: {
+      active: false,
+      mode: 'static',
+      buildSearchIndex: true
     }
   }
 

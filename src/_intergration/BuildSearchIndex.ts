@@ -54,21 +54,21 @@ function subMarkdownTitle(path: string) {
 }
 
 
-export default function (options): AstroIntegration {
+export default function (options?: Record<string, any>): AstroIntegration {
 
   const PathSet = new Set<string>()
-  let clientURL: URL, buildOutput: string
+  let clientURL: URL, rootPath: URL, buildOutput: string
 
   return {
     name: 'BuildSearchIndex',
     hooks: {
       "astro:config:done": async ({ config }) => {
         clientURL = config.build.client
+        rootPath = config.root
         buildOutput = config.output
       },
 
       "astro:build:setup": async ({ vite }) => {
-        // console.log(args);
         await fileDisplay(`${vite.root}\\src\\content\\blog`, [".md", ".mdx"], PathSet)
       },
       "astro:build:ssr": () => {
