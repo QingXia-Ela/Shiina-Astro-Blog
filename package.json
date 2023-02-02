@@ -26,14 +26,16 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.191",
+    "@types/markdown-it": "^12.2.3",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
     "@typescript-eslint/utils": "^5.46.1",
     "@typescript-eslint/visitor-keys": "^5.46.1",
+    "chalk": "^5.2.0",
     "eslint": "^8.30.0",
     "eslint-plugin-vue": "^9.8.0",
     "markdown-it": "^13.0.1",
-    "sass": "^1.56.2",
-    "npm": "^9.2.0"
+    "npm": "^9.2.0",
+    "sass": "^1.56.2"
   }
 }

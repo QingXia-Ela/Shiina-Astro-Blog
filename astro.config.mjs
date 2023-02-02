@@ -5,15 +5,14 @@ import sitemap from '@astrojs/sitemap';
 import image from '@astrojs/image';
 import node from '@astrojs/node';
 import InjectJSCSS from './src/_intergration/InjectJSCSS';
-
-// https://astro.build/config
+import BuildSearchIndex from './src/_intergration/BuildSearchIndex'
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://127.0.0.1',
   integrations: [mdx(), sitemap(), vue(), image({
-    serviceEntryPoint: '@astrojs/image/squoosh'
-  }), InjectJSCSS()],
+    serviceEntryPoint: '@astrojs/image/sharp'
+  }), InjectJSCSS(), BuildSearchIndex()],
   vite: {
     resolve: {
       alias: [{
