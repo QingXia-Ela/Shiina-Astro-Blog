@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import type { SearchResult } from './Search'
 
 // 外链配置
 interface BasicLinkConfig {
@@ -26,7 +27,7 @@ interface BasicSearchConfig {
   /** 是否构建搜索索引，默认为 true */
   buildSearchIndex?: boolean
   /** 
-   * 输出搜索索引文件的路径，返回一个绝对路径来指定
+   * 输出搜索索引文件的路径，返回一个绝对路径来指定，返回内容为空时将不会输出文件
    * 
    * 默认被设置到生产环境文件中的默认静态资源目录下
    * @param rootDir 项目的根路径
@@ -37,8 +38,19 @@ interface BasicSearchConfig {
    * @see `/docs/user/搜索.md` 了解更多
    */
   mode?: 'static' | 'server'
-  /** 请求的URL地址，默认是搜索索引被构建出来的位置 */
+  /** 
+   * 请求的URL地址，默认是搜索索引被构建出来的位置
+   * 
+   * 静态生成的站点可无需修改，服务端渲染的博客如果将 `mode` 选项设置为 `server` 时需要设置为自己的接口
+   */
   requestURL?: string
+  /** 
+   * 静态搜索处理函数
+   * @param content 静态文件的字符串形式
+   * @param requestCount 已请求渲染的次数，可被视作分页
+   * @returns {SearchResult}
+   */
+  staticSearchHandler?: (content: string, requestCount: number) => SearchResult
 }
 
 // header 通用配置
