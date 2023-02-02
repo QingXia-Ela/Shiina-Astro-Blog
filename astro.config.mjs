@@ -12,7 +12,7 @@ import InjectJSCSS from './src/_intergration/InjectJSCSS';
 export default defineConfig({
   site: 'https://127.0.0.1',
   integrations: [mdx(), sitemap(), vue(), image({
-    serviceEntryPoint: '@astrojs/image/sharp'
+    serviceEntryPoint: '@astrojs/image/squoosh'
   }), InjectJSCSS()],
   vite: {
     resolve: {
@@ -32,8 +32,8 @@ export default defineConfig({
       wrap: true
     }
   },
-  // output: 'server',
-  // adapter: node({
-  //   mode: 'standalone'
-  // })
+  output: 'server',
+  adapter: node({
+    mode: 'standalone'
+  })
 });

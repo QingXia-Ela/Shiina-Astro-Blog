@@ -1,6 +1,7 @@
 @font-face {
-  font-family: "iconfont"; /* Project id  */
-  src: url('iconfont.ttf?t=1672454681370') format('truetype');
+  font-family: "iconfont";
+  /* Project id  */
+  src: url('iconfont.ttf') format('truetype');
 }
 
 .iconfont {
@@ -50,4 +51,3 @@
 .icon-24gl-calendar:before {
   content: "\eb40";
 }
-

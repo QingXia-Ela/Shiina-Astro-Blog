@@ -1,6 +1,7 @@
 @font-face {
-  font-family: "iconfont"; /* Project id  */
-  src: url('iconfont.ttf?t=1670903521474') format('truetype');
+  font-family: "iconfont";
+  /* Project id  */
+  src: url('iconfont.ttf') format('truetype');
 }
 
 .iconfont {
@@ -46,4 +47,3 @@
 .icon-24gl-user:before {
   content: "\eb24";
 }
-
