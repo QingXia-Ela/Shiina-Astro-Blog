@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import MI from 'markdown-it'
 import { fileURLToPath } from 'url'
-import chalk from 'chalk'
+import cfg from '../../blog.config'
 import { logSuccess } from "../utils/ChalkTips";
 
 /**
@@ -57,7 +57,7 @@ function subMarkdownTitle(path: string) {
 export default function (options?: Record<string, any>): AstroIntegration {
 
   const PathSet = new Set<string>()
-  let clientURL: URL, rootPath: URL, buildOutput: string
+  let clientURL: URL, rootPath: URL, buildOutput: "static" | "server", staticGeneratedPath: string
 
   return {
     name: 'BuildSearchIndex',
@@ -71,16 +71,22 @@ export default function (options?: Record<string, any>): AstroIntegration {
       "astro:build:setup": async ({ vite }) => {
         await fileDisplay(`${vite.root}\\src\\content\\blog`, [".md", ".mdx"], PathSet)
       },
+      // 
+      "astro:build:generated": async ({ dir }) => {
+        staticGeneratedPath = dir.href
+      },
       "astro:build:ssr": () => {
-        const mi = new MI()
-        const SearchIndex: Record<string, string> = {}
-        PathSet.forEach((path) => {
-          SearchIndex[subMarkdownTitle(path)] = mi.renderInline(fs.readFileSync(path, 'utf-8'))
-        })
-        if (buildOutput == "server") {
-          const p = fileURLToPath(`${clientURL.href}SearchIndex.json`)
+      },
+      'astro:build:done': async () => {
+        if (cfg.SearchConfig?.active) {
+          const mi = new MI()
+          const SearchIndex: Record<string, string> = {}
+          PathSet.forEach((path) => {
+            SearchIndex[subMarkdownTitle(path)] = mi.renderInline(fs.readFileSync(path, 'utf-8'))
+          })
+          const p = fileURLToPath(`${buildOutput === "static" ? staticGeneratedPath : clientURL.href}SearchIndex.json`)
           fs.writeFileSync(p, JSON.stringify(SearchIndex), 'utf-8')
-          logSuccess(`成功构建搜索索引：${p}，文件大小：${(fs.readFileSync(p).length / 1024).toFixed(2)}KB`)
+          logSuccess(`成功构建搜索索引: ${p},文件大小：${(fs.readFileSync(p).length / 1024).toFixed(2)}KB`)
         }
       }
     }

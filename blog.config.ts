@@ -1,4 +1,4 @@
-import defineBlogConfig from "@/declare/defineBlogConfig";
+import defineBlogConfig from "./src/declare/defineBlogConfig";
 
 export default defineBlogConfig({
   PageDefaultSettings: {
@@ -36,7 +36,9 @@ export default defineBlogConfig({
     description: '',
     url: 'https://blog.shiinafan.top'
   },
-  SearchConfig: {},
+  SearchConfig: {
+    active: true
+  },
   pages: {
     'friends': {
       FriendList: [
