@@ -6,29 +6,22 @@ import ResultVue from './state/result.vue'
 import { onMounted, ref } from 'vue';
 import cfg from 'blog.config'
 import type { SearchResultItem } from '@/declare/Search';
+
+defineExpose({
+  goSearch
+})
+
 const { SearchConfig } = cfg
 /** 1: `empty` 2: `pending` 3: `error` 4: `result` */
 const state = ref<1 | 2 | 3 | 4>(cfg.SearchConfig?.mode === "static" ? 2 : 1),
   STATIC_SEARCH_DATA = ref<Record<string, string> | null>(null),
-  searchResultArray = ref<SearchResultItem[]>([]),
   staticResultArray = ref<SearchResultItem[]>([]),
-  STATIC_SEATCH_ITEM_COUNT = 10
+  ResultVueRef = ref<InstanceType<typeof ResultVue> | null>(null)
 
 const isStaticSearch = () => STATIC_SEARCH_DATA.value && SearchConfig?.mode === "static"
 
-function updateStaticResult() {
-  searchResultArray.value = searchResultArray.value.concat(staticResultArray.value.splice(0, STATIC_SEATCH_ITEM_COUNT > staticResultArray.value.length ? staticResultArray.value.length : STATIC_SEATCH_ITEM_COUNT))
-}
-
-function nextPage() {
-  if (isStaticSearch()) {
-    updateStaticResult()
-  }
-}
-
 function goSearch(content: string) {
   if (content === "") return
-  searchResultArray.value = []
   staticResultArray.value = []
   if (isStaticSearch()) {
     const reg = new RegExp(content)
@@ -44,7 +37,6 @@ function goSearch(content: string) {
       }
     }
     state.value = 4
-    updateStaticResult()
   }
   else {
 
@@ -81,9 +73,6 @@ onMounted(async () => {
   }
 })
 
-defineExpose({
-  goSearch
-})
 </script>
 
 <template>
@@ -91,7 +80,7 @@ defineExpose({
     <EmptyVue v-if="state === 1" />
     <PendingVue v-else-if="state === 2" />
     <ErrorVue v-else-if="state === 3" @retry="retry" />
-    <ResultVue :result="searchResultArray" v-else-if="state === 4 && searchResultArray.length" />
+    <ResultVue :result="staticResultArray" v-else ref="ResultVueRef" />
   </div>
 </template>
 

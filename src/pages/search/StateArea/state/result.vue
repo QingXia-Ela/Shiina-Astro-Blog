@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { SearchResultItem } from '@/declare/Search';
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
+import cfg from 'blog.config'
 defineExpose({
   SwtichTipState
 })
@@ -8,7 +9,10 @@ const props = defineProps<{
   result: SearchResultItem[]
 }>()
 
-const MoreTip = ref<1 | 2 | 3>(1)
+const MoreTip = ref<1 | 2 | 3>(1),
+  showItemResult = ref<SearchResultItem[]>([]),
+  { SearchConfig } = cfg,
+  STATIC_SEATCH_ITEM_COUNT = 10
 
 /**
  * 改变展示
@@ -19,12 +23,31 @@ function SwtichTipState(state: 1 | 2 | 3) {
   MoreTip.value = state;
 }
 
+function staticUpdateResult() {
+  const l = showItemResult.value.length
+  if (l === props.result.length) {
+    SwtichTipState(3)
+    return
+  }
+  showItemResult.value = props.result.slice(l, STATIC_SEATCH_ITEM_COUNT + l > props.result.length ? props.result.length : l + STATIC_SEATCH_ITEM_COUNT)
+}
+
+watchEffect((c) => {
+  const l = props.result
+
+  showItemResult.value = []
+  if (SearchConfig?.mode === "static") {
+    staticUpdateResult()
+  }
+  else showItemResult.value = l
+})
+
 function RequireSearch() { }
 </script>
 
 <template>
   <div class="result">
-    <a class="result_item" :href="`/posts/${i.title}`" v-for="i in props.result" :key="i.title">
+    <a class="result_item" :href="`/posts/${i.title}`" v-for="i in showItemResult" :key="i.title">
       <i class="iconfont icon-24gl-fileText"></i>
       <div class="info">
         <div class="title">{{ i.title }}</div>

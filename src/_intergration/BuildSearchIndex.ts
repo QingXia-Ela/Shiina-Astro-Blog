@@ -78,7 +78,7 @@ export default function (options?: Record<string, any>): AstroIntegration {
           DebounceTimer = setTimeout(async () => {
             const res = await getSearchIndex(rootPath)
             writeDevCacheSearch(rootPath, JSON.stringify(res))
-            if (log) logInfo(`✨ New blog detected: ` + p)
+            if (log) logInfo(`\n✨ New blog detected: ` + p)
           }, 100);
         }
 
