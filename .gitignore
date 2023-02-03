@@ -20,3 +20,6 @@ pnpm-debug.log*
 
 # astro generated
 .astro
+
+# blog generated
+.blog

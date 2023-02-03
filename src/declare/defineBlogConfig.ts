@@ -22,9 +22,9 @@ interface BasicPersonalConfig {
  * @deprecated 将会在新版本中启用
  */
 interface BasicSearchConfig {
-  /**  激活搜索功能 */
+  /**  激活搜索功能，默认 `true` */
   active?: boolean
-  /** 是否构建搜索索引，默认为 true */
+  /** 是否构建搜索索引，默认为 `true` */
   buildSearchIndex?: boolean
   /** 
    * 输出搜索索引文件的路径，返回一个绝对路径来指定，返回内容为空时将不会输出文件
@@ -41,7 +41,7 @@ interface BasicSearchConfig {
   /** 
    * 请求的URL地址，默认是搜索索引被构建出来的位置
    * 
-   * 静态生成的站点可无需修改，服务端渲染的博客如果将 `mode` 选项设置为 `server` 时需要设置为自己的接口
+   * 静态生成的站点一般无需修改，其默认指向静态文件路径；服务端渲染的博客如果将 `mode` 选项设置为 `server` 时需要设置为自己的接口
    */
   requestURL?: string
   /** 
@@ -272,7 +272,7 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
       }
     },
     SearchConfig: {
-      active: false,
+      active: true,
       mode: 'static',
       buildSearchIndex: true
     }
