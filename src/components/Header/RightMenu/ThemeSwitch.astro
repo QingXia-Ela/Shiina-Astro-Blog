@@ -13,27 +13,27 @@
    */
   const DARK_MODE = "dark";
 
-  const t = document.querySelectorAll("[data-theme-switch]"),
-    state = localStorage.getItem(DARK_MODE);
+  const wrapper = document.querySelector("[data-theme-switch]")!,
+    t = wrapper.querySelectorAll(".iconfont");
 
   function SwitchState(choose: boolean) {
     document.querySelector("html")!.setAttribute("class", choose ? "dark" : "");
-
-    t.forEach((e) => {
-      let finalState = "",
-        sourceClass = e.getAttribute("class")!;
-      if (choose) {
-        finalState = sourceClass + " dark";
-      } else if (/dark/.test(sourceClass)) {
-        finalState = sourceClass.replaceAll("dark", "");
-      }
-      e.setAttribute("class", finalState);
-    });
+    let finalState = "",
+      sourceClass = wrapper.getAttribute("class")!;
+    if (choose) {
+      finalState = sourceClass + " dark";
+    } else if (/dark/.test(sourceClass)) {
+      finalState = sourceClass.replaceAll("dark", "");
+    }
+    wrapper.setAttribute("class", finalState);
 
     localStorage.setItem(DARK_MODE, choose + "");
   }
 
-  let FinalState = state === "true";
+  let FinalState = localStorage.getItem(DARK_MODE) === "true";
+
+  if (FinalState)
+    wrapper.setAttribute("class", wrapper.getAttribute("class") + " dark");
 
   t.forEach((v) =>
     v.addEventListener("click", () => {

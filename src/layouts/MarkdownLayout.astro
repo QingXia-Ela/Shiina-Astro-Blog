@@ -1,6 +1,5 @@
 ---
 import "@/styles/global.scss";
-import "@/assets/fonts/posts/iconfont.css";
 import HeadMeta from "@/components/HeadMeta.astro";
 import Header from "@/components/Header/index.astro";
 import Background from "@/components/Background/index.astro";
@@ -140,6 +139,7 @@ const {
 <html lang="en" class="dark">
   <head>
     <HeadMeta title={`${content.title} - `} />
+    <link rel="stylesheet" href="/fonts/posts/iconfont.css" />
   </head>
   <body>
     {header!.hidden ? null : <Header PositionTitle={`${content.title} - `} />}

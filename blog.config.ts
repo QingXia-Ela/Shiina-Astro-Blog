@@ -70,10 +70,14 @@ export default defineBlogConfig({
       background: {
 
       },
+
       footer: {
         hidden: true
       },
       setMinHeight: 'fill'
-    }
+    },
+    blog: {
+      PageArticleCount: 6
+    },
   }
 })
