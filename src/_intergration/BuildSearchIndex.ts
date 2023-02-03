@@ -7,7 +7,6 @@ import { fileURLToPath } from 'url'
 import cfg from '../../blog.config'
 import { logSuccess, logInfo } from "../utils/ChalkTips";
 import chokidar from 'chokidar'
-import { debounce } from "lodash";
 
 /**
  * 文件遍历方法

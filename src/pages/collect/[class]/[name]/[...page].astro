@@ -4,8 +4,8 @@ import List from "./_List.astro";
 import Pagination from "@/components/Pagination/Pagination.astro";
 import { COLLECT_POSITION_MAP } from "@/constant/Collect";
 import { getCollection } from "astro:content";
-import GetClassNamePosts from "./utils/GetClassNamePosts";
-import StaticPathFactory from "./utils/StaticPathFactory";
+import GetClassNamePosts from "@/utils/pages/collect/GetClassNamePosts";
+import StaticPathFactory from "@/utils/pages/collect/StaticPathFactory";
 import cfg from "blog.config";
 
 export async function getStaticPaths() {
