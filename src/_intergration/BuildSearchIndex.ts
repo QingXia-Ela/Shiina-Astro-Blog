@@ -82,8 +82,7 @@ export default function (options?: Record<string, any>): AstroIntegration {
           }, 100);
         }
 
-        if (SearchConfig?.buildSearchIndex)
-          writeDevCacheSearch(rootPath, "{}")
+        writeDevCacheSearch(rootPath, "{}")
         let DebounceTimer: NodeJS.Timeout
 
         const observer = chokidar.watch(`${rootPath}/src/content/blog/`)

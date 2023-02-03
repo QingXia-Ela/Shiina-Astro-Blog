@@ -13,7 +13,7 @@ import spin from '@/assets/svg/spin.svg'
       </svg>
       <!-- <img :src="spin" alt=""> -->
     </div>
-    <h3>搜索中</h3>
+    <h3>获取数据中</h3>
   </div>
 </template>
 
@@ -23,8 +23,8 @@ import spin from '@/assets/svg/spin.svg'
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  margin-top: 4rem;
-  margin-bottom: 2rem;
+  margin-top: 3rem;
+  margin-bottom: .8rem;
 
   .icon {
     font-size: 3rem;

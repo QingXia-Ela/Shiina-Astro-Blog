@@ -1,6 +1,14 @@
 <script lang="ts" setup>
+import type { SearchResultItem } from '@/declare/Search';
 import { ref } from 'vue';
-const MoreTip = ref(1)
+defineExpose({
+  SwtichTipState
+})
+const props = defineProps<{
+  result: SearchResultItem[]
+}>()
+
+const MoreTip = ref<1 | 2 | 3>(1)
 
 /**
  * 改变展示
@@ -16,19 +24,18 @@ function RequireSearch() { }
 
 <template>
   <div class="result">
-    <a class="result_item" href="/" v-for="i in 10" :key="i">
+    <a class="result_item" :href="`/posts/${i.title}`" v-for="i in props.result" :key="i.title">
       <i class="iconfont icon-24gl-fileText"></i>
       <div class="info">
-        <div class="title">标题</div>
-        <div class="brief_content text_nowrap">
-          测试内容</div>
+        <div class="title">{{ i.title }}</div>
+        <div class="brief_content text_nowrap">{{ i.content }}</div>
       </div>
       <i class="iconfont icon-24gl-link"></i>
     </a>
     <h3 v-if="MoreTip === 1" class="more_tip">正在加载更多...</h3>
     <h3 v-else-if="MoreTip === 2" class="more_tip">加载出错，<span @click="RequireSearch"
         class="retry text_underline_decoration">重试</span></h3>
-    <h3 v-else class="more_tip">没有更多内容了</h3>
+    <h3 v-else-if="MoreTip === 3 || !props.result.length" class="more_tip">没有更多内容了</h3>
   </div>
 </template>
 

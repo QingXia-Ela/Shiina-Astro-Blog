@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+defineEmits(['retry'])
+</script>
+
 <template>
   <div class="error">
     <div class="icon">
@@ -12,7 +16,7 @@
       </svg>
     </div>
     <h3>出错了！错误代码：114514。</h3>
-    <h4>要不稍后再试一下？</h4>
+    <h4 @click="$emit('retry')">点这里重试</h4>
   </div>
 </template>
 
@@ -31,6 +35,12 @@
 
   h3 {
     margin-bottom: 1rem;
+  }
+
+  h4 {
+    text-decoration: underline;
+    cursor: pointer;
+    user-select: none;
   }
 }
 </style>

@@ -2,15 +2,21 @@
 import { ref } from 'vue';
 import StateArea from './StateArea/index.vue'
 
-const SearchContent = ref("")
+const SearchContent = ref(""), StateAreaRef = ref<InstanceType<typeof StateArea> | null>(null)
+
+function goSearch(key?: string) {
+  if (key === "Enter")
+    StateAreaRef.value?.goSearch(SearchContent.value)
+}
 </script>
 
 <template>
   <div class="search_input">
-    <input id="InputArea" type="text" placeholder="文章关键字..." v-model="SearchContent" />
-    <i class="iconfont icon-24gl-search2"></i>
+    <input id="InputArea" type="text" placeholder="文章关键字..." v-model="SearchContent"
+      @keydown="(e) => goSearch(e.key)" />
+    <i class="iconfont icon-24gl-search2" @click="() => goSearch('Enter')"></i>
   </div>
-  <StateArea />
+  <StateArea ref="StateAreaRef" />
 </template>
 
 <style lang="scss" scoped>

@@ -38,7 +38,7 @@ export default defineBlogConfig({
   },
   SearchConfig: {
     active: true,
-    buildSearchIndex: false
+    buildSearchIndex: true
   },
   pages: {
     'friends': {
