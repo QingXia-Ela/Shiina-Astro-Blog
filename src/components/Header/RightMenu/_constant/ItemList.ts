@@ -1,6 +1,6 @@
 import type { ListItemProps } from "@/declare/Header/Header";
 import cfg from "blog.config";
-import { CategoriesMapFactory } from "@/pages/collect/[class]/[name]/utils/StaticPathFactory";
+import { CategoriesMapFactory } from "@/utils/pages/collect/StaticPathFactory";
 import { getCollection } from "astro:content";
 import { COLLECT_CATEGORIES } from "@/constant/Collect";
 
