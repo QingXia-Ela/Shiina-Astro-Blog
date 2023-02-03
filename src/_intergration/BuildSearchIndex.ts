@@ -47,7 +47,7 @@ async function getSearchIndex(root: string) {
   const mi = new MI()
   const SearchIndex: Record<string, string> = {}
   PathSet.forEach((path) => {
-    SearchIndex[subMarkdownTitle(path)] = mi.renderInline(fs.readFileSync(path, 'utf-8'))
+    SearchIndex[subMarkdownTitle(path)] = fs.readFileSync(path, 'utf-8')
   })
   return SearchIndex
 }
@@ -105,7 +105,7 @@ export default function (options?: Record<string, any>): AstroIntegration {
             const SearchIndex = await getSearchIndex(rootPath)
             const p = fileURLToPath(`${buildOutput === "static" ? staticGeneratedPath : clientURL.href}SearchIndex.json`)
             fs.writeFileSync(p, JSON.stringify(SearchIndex), 'utf-8')
-            logSuccess(`成功构建搜索索引: ${p} , 文件大小：${(fs.readFileSync(p).length / 1024).toFixed(2)}KB`)
+            logSuccess(`成功构建搜索索引: ${p}, 文件大小：${(fs.readFileSync(p).length / 1024).toFixed(2)}KB`)
           }
         }
       }

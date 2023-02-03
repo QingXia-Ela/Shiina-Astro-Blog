@@ -24,14 +24,22 @@ function goSearch(content: string) {
   if (content === "") return
   staticResultArray.value = []
   if (isStaticSearch()) {
-    const reg = new RegExp(content)
+    const reg = new RegExp(content.toLowerCase())
     for (const k in STATIC_SEARCH_DATA.value) {
       if (Object.prototype.hasOwnProperty.call(STATIC_SEARCH_DATA.value, k)) {
-        const e = STATIC_SEARCH_DATA.value[k];
-        if (reg.test(k.toUpperCase()) || reg.test(k.toLowerCase()) || reg.test(e)) {
+        const e = STATIC_SEARCH_DATA.value[k], i = e.toLowerCase().indexOf(reg.source)
+        if (reg.test(k.toLowerCase())) {
           staticResultArray.value.push({
             title: k,
             content: k
+          })
+        }
+        else if (i != -1) {
+          const t = i + reg.source.length
+          staticResultArray.value.push({
+            title: k,
+            content: `${e.substring(t, t + 100)}`,
+            hl: e.substring(i, i + reg.source.length)
           })
         }
       }

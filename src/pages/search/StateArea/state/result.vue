@@ -25,16 +25,17 @@ function SwtichTipState(state: 1 | 2 | 3) {
 
 function staticUpdateResult() {
   const l = showItemResult.value.length
-  if (l === props.result.length) {
-    SwtichTipState(3)
-    return
-  }
   showItemResult.value = props.result.slice(l, STATIC_SEATCH_ITEM_COUNT + l > props.result.length ? props.result.length : l + STATIC_SEATCH_ITEM_COUNT)
+  if (showItemResult.value.length === props.result.length)
+    SwtichTipState(3)
+  else
+    SwtichTipState(1)
+
 }
 
 watchEffect((c) => {
   const l = props.result
-
+  /* 可能会出现监听 bug？ */
   showItemResult.value = []
   if (SearchConfig?.mode === "static") {
     staticUpdateResult()
@@ -51,7 +52,10 @@ function RequireSearch() { }
       <i class="iconfont icon-24gl-fileText"></i>
       <div class="info">
         <div class="title">{{ i.title }}</div>
-        <div class="brief_content text_nowrap">{{ i.content }}</div>
+        <div class="brief_content text_nowrap">
+          <strong v-if="i.hl">{{ i.hl }}</strong>
+          {{ i.content }}
+        </div>
       </div>
       <i class="iconfont icon-24gl-link"></i>
     </a>
@@ -76,13 +80,13 @@ function RequireSearch() { }
     box-shadow: 0 2px 5px 0 rgba(90, 90, 90, 0.2), 0 2px 10px rgba(139, 139, 139, 0.5);
     transition: none;
 
+    strong {
+      text-decoration: underline;
+    }
+
     &:hover {
       color: #fff;
       background-color: var(--tips-default);
-
-      strong {
-        text-decoration: underline;
-      }
     }
 
     .info {
