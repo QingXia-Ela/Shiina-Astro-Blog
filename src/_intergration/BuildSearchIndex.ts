@@ -74,9 +74,6 @@ export default function (options?: Record<string, any>): AstroIntegration {
       },
       "astro:server:start": async () => {
         const { SearchConfig } = cfg
-        writeDevCacheSearch(rootPath, "{}")
-        let DebounceTimer: NodeJS.Timeout
-
         const writeDevSearchIndex = (p: string, log: boolean) => {
           if (!SearchConfig?.buildSearchIndex) return
           DebounceTimer = setTimeout(async () => {
@@ -85,6 +82,10 @@ export default function (options?: Record<string, any>): AstroIntegration {
             if (log) logInfo(`✨ New blog detected: ` + p)
           }, 100);
         }
+
+        if (SearchConfig?.buildSearchIndex)
+          writeDevCacheSearch(rootPath, "{}")
+        let DebounceTimer: NodeJS.Timeout
 
         const observer = chokidar.watch(`${rootPath}/src/content/blog/`)
 

@@ -37,7 +37,8 @@ export default defineBlogConfig({
     url: 'https://blog.shiinafan.top'
   },
   SearchConfig: {
-    active: true
+    active: true,
+    buildSearchIndex: false
   },
   pages: {
     'friends': {
