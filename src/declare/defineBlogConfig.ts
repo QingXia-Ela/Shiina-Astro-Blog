@@ -39,13 +39,13 @@ interface BasicSearchConfig {
    */
   mode?: 'static' | 'server'
   /** 
-   * 请求的URL地址，默认是搜索索引被构建出来的位置
+   * 请求的URL地址，默认是搜索索引被构建出来的位置，需要自己托管搜索索引文件时可以修改此项，内部使用 fetch api 实现文件获取
    * 
    * 静态生成的站点一般无需修改，其默认指向静态文件路径；服务端渲染的博客如果将 `mode` 选项设置为 `server` 时需要设置为自己的接口
    */
   requestURL?: string
   /** 
-   * 静态搜索处理函数
+   * 静态搜索处理函数，当搜索索引不是 .json 文件时需要修改
    * @param content 静态文件的字符串形式
    * @returns 需要一次性返回所有匹配的结果
    */

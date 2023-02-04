@@ -57,7 +57,7 @@ function goSearch(content: string) {
 
 async function requestStaticIndex() {
   // eslint-disable-next-line no-undef
-  return await (await fetch(process.env.NODE_ENV === "development" ? "../.blog/SearchIndex.json" : "/SearchIndex.json")).json()
+  return await (await fetch(process.env.NODE_ENV === "development" ? "../.blog/SearchIndex.json" : SearchConfig?.requestURL ? SearchConfig.requestURL : "/SearchIndex.json")).json()
 }
 
 function retry() {
