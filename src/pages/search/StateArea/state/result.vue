@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { SearchResultItem } from '@/declare/Search';
-import { onMounted, ref, watch, watchEffect } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import cfg from 'blog.config'
 defineExpose({
   SwtichTipState
@@ -47,8 +47,6 @@ onMounted(() => {
 
 watch(() => [props.result], () => {
   const l = props.result;
-  console.log(1);
-
   showItemResult.value = []
   if (SearchConfig?.mode === "static") {
     staticUpdateResult()

@@ -24,6 +24,11 @@ function goSearch(content: string) {
   if (content === "") return
   staticResultArray.value = []
   if (isStaticSearch()) {
+    state.value = 4
+    if (SearchConfig?.staticSearchHandler) {
+      staticResultArray.value = SearchConfig?.staticSearchHandler(content) ?? []
+      return
+    }
     const reg = new RegExp(content.toLowerCase())
     for (const k in STATIC_SEARCH_DATA.value) {
       if (Object.prototype.hasOwnProperty.call(STATIC_SEARCH_DATA.value, k)) {
@@ -44,7 +49,6 @@ function goSearch(content: string) {
         }
       }
     }
-    state.value = 4
   }
   else {
 

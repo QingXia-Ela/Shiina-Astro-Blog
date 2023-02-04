@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import type { SearchResult } from './Search'
+import type { SearchResultItem } from './Search'
 
 // 外链配置
 interface BasicLinkConfig {
@@ -47,10 +47,9 @@ interface BasicSearchConfig {
   /** 
    * 静态搜索处理函数
    * @param content 静态文件的字符串形式
-   * @param requestCount 已请求渲染的次数，可被视作分页
-   * @returns {SearchResult}
+   * @returns 需要一次性返回所有匹配的结果
    */
-  staticSearchHandler?: (content: string, requestCount: number) => SearchResult
+  staticSearchHandler?: (content: string) => SearchResultItem[]
 }
 
 // header 通用配置
