@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { SearchResultItem } from '@/declare/Search';
-import { ref, watchEffect } from 'vue';
+import { onMounted, ref, watch, watchEffect } from 'vue';
 import cfg from 'blog.config'
 defineExpose({
   SwtichTipState
@@ -10,6 +10,7 @@ const props = defineProps<{
 }>()
 
 const MoreTip = ref<1 | 2 | 3>(1),
+  LoadingMore = ref<HTMLElement>(),
   showItemResult = ref<SearchResultItem[]>([]),
   { SearchConfig } = cfg,
   STATIC_SEATCH_ITEM_COUNT = 10
@@ -25,23 +26,35 @@ function SwtichTipState(state: 1 | 2 | 3) {
 
 function staticUpdateResult() {
   const l = showItemResult.value.length
-  showItemResult.value = props.result.slice(l, STATIC_SEATCH_ITEM_COUNT + l > props.result.length ? props.result.length : l + STATIC_SEATCH_ITEM_COUNT)
+  showItemResult.value = showItemResult.value.concat(props.result.slice(l, STATIC_SEATCH_ITEM_COUNT + l > props.result.length ? props.result.length : l + STATIC_SEATCH_ITEM_COUNT))
   if (showItemResult.value.length === props.result.length)
     SwtichTipState(3)
   else
     SwtichTipState(1)
-
 }
 
-watchEffect((c) => {
-  const l = props.result
-  /* 可能会出现监听 bug？ */
+onMounted(() => {
+  const lazy = new IntersectionObserver(function (entry, o) {
+    entry.forEach((e) => {
+      if (e.isIntersecting) {
+        if (SearchConfig?.mode === "static") staticUpdateResult()
+      }
+    })
+  })
+
+  lazy.observe(LoadingMore.value!)
+})
+
+watch(() => [props.result], () => {
+  const l = props.result;
+  console.log(1);
+
   showItemResult.value = []
   if (SearchConfig?.mode === "static") {
     staticUpdateResult()
   }
   else showItemResult.value = l
-})
+}, { immediate: true, deep: true })
 
 function RequireSearch() { }
 </script>
@@ -59,8 +72,8 @@ function RequireSearch() { }
       </div>
       <i class="iconfont icon-24gl-link"></i>
     </a>
-    <h3 v-if="MoreTip === 1" class="more_tip">正在加载更多...</h3>
-    <h3 v-else-if="MoreTip === 2" class="more_tip">加载出错，<span @click="RequireSearch"
+    <h3 v-show="MoreTip === 1" class="more_tip" ref="LoadingMore">正在加载更多...</h3>
+    <h3 v-if="MoreTip === 2" class="more_tip">加载出错，<span @click="RequireSearch"
         class="retry text_underline_decoration">重试</span></h3>
     <h3 v-else-if="MoreTip === 3 || !props.result.length" class="more_tip">没有更多内容了</h3>
   </div>
