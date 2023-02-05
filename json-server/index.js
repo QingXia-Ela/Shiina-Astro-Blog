@@ -15,6 +15,15 @@ const data1 = [
   {
     title: 'NCY-108 测评',
     content: '你在干什么？这里不是西安环卫网'
+  },
+  {
+    title: '114514',
+    hl: 1919,
+    content: 810
+  },
+  {
+    title: '哼哼哼',
+    content: '啊啊啊啊啊啊啊啊啊啊啊啊'
   }
 ]
 
@@ -43,7 +52,6 @@ export default function RunSerever() {
   // search
   server.get('/search', (req, res) => {
     // console.log(req, res);
-    console.log(req.query);
     const { offset, key } = req.query
     switch (parseInt(offset)) {
       case 1:

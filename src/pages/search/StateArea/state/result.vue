@@ -64,8 +64,7 @@ function RequireSearch() { }
       <div class="info">
         <div class="title">{{ i.title }}</div>
         <div class="brief_content text_nowrap">
-          <strong v-if="i.hl">{{ i.hl }}</strong>
-          {{ i.content }}
+          <strong v-if="i.hl">{{ i.hl }}</strong>{{ i.content }}
         </div>
       </div>
       <i class="iconfont icon-24gl-link"></i>
@@ -79,7 +78,6 @@ function RequireSearch() { }
 
 <style lang="scss" scoped>
 .result {
-
   .result_item {
     display: flex;
     justify-content: space-between;

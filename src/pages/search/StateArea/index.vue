@@ -14,19 +14,22 @@ defineExpose({
 const { SearchConfig } = cfg
 /** 1: `empty` 2: `pending` 3: `error` 4: `result` */
 const state = ref<1 | 2 | 3 | 4>(cfg.SearchConfig?.mode === "static" ? 2 : 1),
-  STATIC_SEARCH_DATA = ref<Record<string, string> | null>(null),
+  STATIC_SEARCH_DATA = ref<Record<string, string>>({}),
   staticResultArray = ref<SearchResultItem[]>([]),
   ResultVueRef = ref<InstanceType<typeof ResultVue> | null>(null)
+let cacheContent = ""
 
-const isStaticSearch = () => STATIC_SEARCH_DATA.value && SearchConfig?.mode === "static"
+const isStaticSearch = () => SearchConfig?.mode === "static"
 
-function goSearch(content: string) {
-  if (content === "") return
+async function goSearch(content: string) {
+  if (content === cacheContent) return
+  cacheContent = content
+  let cnt = 1
   staticResultArray.value = []
   if (isStaticSearch()) {
     state.value = 4
     if (SearchConfig?.staticSearchHandler) {
-      staticResultArray.value = SearchConfig?.staticSearchHandler(content) ?? []
+      staticResultArray.value = await SearchConfig?.staticSearchHandler(content) ?? []
       return
     }
     const reg = new RegExp(content.toLowerCase())
@@ -51,7 +54,14 @@ function goSearch(content: string) {
     }
   }
   else {
-
+    const URL = (SearchConfig?.requestURL ?? "") + '?offset=' + cnt
+      , { data, end } = await (await fetch(URL)).json()
+    staticResultArray.value.push(...data)
+    state.value = 4
+    cnt++
+    if (end === "true") {
+      ResultVueRef.value?.SwtichTipState(3)
+    }
   }
 }
 
@@ -63,7 +73,7 @@ async function requestStaticIndex() {
 function retry() {
   state.value = 2
   setTimeout(async () => {
-    if (SearchConfig?.mode === "static") {
+    if (isStaticSearch()) {
       try {
         STATIC_SEARCH_DATA.value = await requestStaticIndex()
         state.value = 1
