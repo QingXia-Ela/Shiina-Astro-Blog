@@ -6,13 +6,14 @@ import image from '@astrojs/image';
 import node from '@astrojs/node';
 import InjectJSCSS from './src/_intergration/InjectJSCSS';
 import BuildSearchIndex from './src/_intergration/BuildSearchIndex'
+import RunJsonServer from './src/_intergration/RunJsonServer'
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://127.0.0.1',
   integrations: [mdx(), sitemap(), vue(), image({
     serviceEntryPoint: '@astrojs/image/sharp'
-  }), InjectJSCSS(), BuildSearchIndex()],
+  }), InjectJSCSS(), BuildSearchIndex(), RunJsonServer()],
   vite: {
     resolve: {
       alias: [{
