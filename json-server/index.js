@@ -62,10 +62,8 @@ export default function RunSerever() {
         end: offset + limit > data.length,
         data: data.slice(offset, offset + limit)
       }) : res.status(502).jsonp("模拟错误！")
-
-      flag = !flag
+      flag = true
     }
-
   })
 
   server.listen(5573, () => {

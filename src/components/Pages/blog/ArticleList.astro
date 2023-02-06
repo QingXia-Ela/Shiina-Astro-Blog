@@ -63,7 +63,6 @@ let { ListData = [], class: className } = Astro.props;
 <style lang="scss">
   .item {
     display: flex;
-    min-height: 8rem;
     margin-bottom: 1.4rem;
     padding: 0;
     background-color: var(--background-default);
@@ -91,6 +90,7 @@ let { ListData = [], class: className } = Astro.props;
       flex-flow: column nowrap;
       justify-content: space-between;
       width: 100%;
+      min-height: 8rem;
       padding: 0.8rem 1.2rem;
       color: var(--text-default);
 
@@ -172,7 +172,6 @@ let { ListData = [], class: className } = Astro.props;
   @media screen and (max-width: 992px) {
     .item {
       flex-flow: column nowrap;
-      height: 22rem;
 
       .img_wrapper {
         img {
@@ -180,12 +179,13 @@ let { ListData = [], class: className } = Astro.props;
         }
       }
 
-      .info {
-        width: 100%;
-        height: 12rem;
+      &.img {
+        .info {
+          width: 100%;
 
-        .brief {
-          margin: 0.4rem 0;
+          .brief {
+            margin: 0.4rem 0;
+          }
         }
       }
     }
