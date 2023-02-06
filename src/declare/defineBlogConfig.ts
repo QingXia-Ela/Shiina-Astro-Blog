@@ -49,9 +49,10 @@ interface BasicSearchConfig {
   /** 
    * 静态搜索处理函数，当搜索索引不是内置生成的文件时需要修改
    * @param content 静态文件的字符串形式
+   * @param key 搜索关键词
    * @returns 需要一次性返回所有匹配的结果
    */
-  staticSearchHandler?: (content: string) => (SearchResultItem[] | Promise<SearchResultItem[]>)
+  staticSearchHandler?: (content: any, keywords: string) => (SearchResultItem[] | Promise<SearchResultItem[]>)
 }
 
 // header 通用配置
@@ -184,7 +185,7 @@ interface BlogConfig extends Record<any, any> {
    * 
    * @deprecated 还在开发中
    */
-  SearchConfig?: BasicSearchConfig
+  SearchConfig: BasicSearchConfig
 }
 
 export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfig {

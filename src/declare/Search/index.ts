@@ -5,6 +5,8 @@ export interface SearchResultItem {
 }
 
 export interface SearchResult {
+  code?: string
+  msg?: string
   end: boolean
-  result: SearchResultItem[]
+  data: SearchResultItem[]
 }

@@ -15,7 +15,7 @@ defineEmits(['retry'])
         </path>
       </svg>
     </div>
-    <h3>出错了！错误代码：114514。</h3>
+    <h3>出错了！错误代码：502</h3>
     <h4 @click="$emit('retry')">点这里重试</h4>
   </div>
 </template>

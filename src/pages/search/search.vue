@@ -6,7 +6,7 @@ const SearchContent = ref(""), StateAreaRef = ref<InstanceType<typeof StateArea>
 
 function goSearch(key?: string) {
   if (key === "Enter")
-    StateAreaRef.value?.goSearch(SearchContent.value)
+    StateAreaRef.value?.FirstSearch(SearchContent.value)
 }
 </script>
 

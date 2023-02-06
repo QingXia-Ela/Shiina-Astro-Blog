@@ -2,7 +2,7 @@ import jsonServer from 'json-server'
 import { logSuccess } from '../src/utils/ChalkTips'
 
 /** @type {import('../src/declare/Search').SearchResultItem} */
-const data1 = [
+const data = [
   {
     title: '高亮测试',
     hl: '高亮内容',
@@ -24,11 +24,7 @@ const data1 = [
   {
     title: '哼哼哼',
     content: '啊啊啊啊啊啊啊啊啊啊啊啊'
-  }
-]
-
-/** @type {import('../src/declare/Search').SearchResultItem} */
-const data2 = [
+  },
   {
     title: '高亮测试',
     hl: '高亮内容',
@@ -36,7 +32,7 @@ const data2 = [
   },
   {
     title: '给我玩PDC.jpg',
-    content: 'pdc的网站还有1145145天上线'
+    content: 'pdc的网站还有114514天上线'
   }
 ]
 
@@ -47,48 +43,29 @@ export default function RunSerever() {
 
   server.use(middlewares)
   // server.use(router)
+  let flag = false
 
 
   // search
   server.get('/search', (req, res) => {
     // console.log(req, res);
-    const { offset, key } = req.query
-    switch (parseInt(offset)) {
-      case 1:
-        res.jsonp({
-          code: 200,
-          msg: 'success',
-          end: false,
-          data: data1
-        })
-        break;
+    const { offset = 0, limit, keywords } = req.query
 
-      case 2:
-        res.jsonp({
-          code: 200,
-          msg: 'success',
-          end: true,
-          data: data2
-        })
-        break;
+    if (!keywords) res.jsonp({
+      code: 400,
+      msg: "参数不合法"
+    })
+    else {
+      flag ? res.jsonp({
+        code: 200,
+        msg: "success",
+        end: offset + limit > data.length,
+        data: data.slice(offset, offset + limit)
+      }) : res.status(502).jsonp("模拟错误！")
 
-      case Number.isNaN(parseInt(offset)):
-        res.jsonp({
-          code: 400,
-          msg: 'Query offset invalid!',
-        })
-        break;
-
-      default:
-        res.jsonp({
-          code: 200,
-          msg: 'success',
-          end: true,
-          data: []
-        })
-
-        break;
+      flag = !flag
     }
+
   })
 
   server.listen(5573, () => {
