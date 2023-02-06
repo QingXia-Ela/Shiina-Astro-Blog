@@ -19,7 +19,7 @@ const { data, body } = Astro.props as CollectionEntry<"blog">,
       <h1 class="title">{data.title}</h1>
       <div class="time">
         <i class="iconfont icon-24gl-calendar" />
-        {PostsPublicTime(data.date)}
+        {PostsPublicTime(data.date)} 发布
       </div>
       <div class="info">
         <i class="iconfont icon-editor" />

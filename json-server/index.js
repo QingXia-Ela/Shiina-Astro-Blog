@@ -61,7 +61,10 @@ export default function RunSerever() {
         msg: "success",
         end: offset + limit > data.length,
         data: data.slice(offset, offset + limit)
-      }) : res.status(502).jsonp("模拟错误！")
+      }) : res.status(502).jsonp({
+        code: 502,
+        msg: "模拟错误！"
+      })
       flag = true
     }
   })

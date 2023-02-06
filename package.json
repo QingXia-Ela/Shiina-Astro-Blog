@@ -3,12 +3,17 @@
   "type": "module",
   "version": "0.0.1",
   "private": true,
+  "bin": {
+    "blog": "./src/_bin/blog.js"
+  },
   "scripts": {
     "dev": "astro dev --host",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "blog": "node ./src/_bin/blog.js",
+    "blog:deploy": "node ./src/_bin/deploy.js"
   },
   "dependencies": {
     "@astrojs/image": "^0.13.0",
