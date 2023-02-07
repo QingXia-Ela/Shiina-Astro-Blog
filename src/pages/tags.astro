@@ -1,9 +1,11 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import type Frontmatter from "@/declare/Frontmatter";
 import { COLLECT_TAGS } from "@/constant/Collect";
 import { getCollection } from "astro:content";
-const ArticleList = await getCollection("blog");
+const ArticleList = await getCollection(
+  "blog",
+  ({ data }) => data.draft !== true
+);
 
 let tagMap: Record<string, any> = {},
   max = 0,

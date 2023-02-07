@@ -13,7 +13,7 @@ interface MenuItemProps extends Record<string, any> {
 }
 
 const { SearchConfig } = cfg;
-const blog = await getCollection("blog")
+const blog = await getCollection("blog", ({ data }) => data.draft !== true)
 // @ts-expect-error: collectionEntry 类型匹配
 const CategoriesMap = CategoriesMapFactory(blog), CategoriesList: ListItemProps[] = []
 

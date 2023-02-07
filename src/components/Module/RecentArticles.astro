@@ -9,7 +9,8 @@ export interface Props {
 }
 const { horizontal } = Astro.props;
 const ArticleList = SortCollectArticles<"blog">(
-  await getCollection("blog")
+  // @ts-expect-error
+  await getCollection("blog", ({ data }) => data.draft !== true)
 ).slice(0, horizontal ? 3 : 5);
 ---
 

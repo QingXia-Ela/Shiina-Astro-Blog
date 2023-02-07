@@ -8,7 +8,7 @@ interface Props {
   slugs?: MarkdownHeading[];
 }
 
-const blog = await getCollection("blog");
+const blog = await getCollection("blog", ({ data }) => data.draft !== true);
 
 const { name } = Astro.params,
   { slugs: propSlugs } = Astro.props;

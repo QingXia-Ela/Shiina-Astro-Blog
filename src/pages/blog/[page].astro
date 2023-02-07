@@ -11,14 +11,18 @@ import { getCollection } from "astro:content";
 
 export async function getStaticPaths({ paginate }: any) {
   // 用 fetch()、Astro.glob() 等加载你的数据
-  // @ts-expect-error
-  const res = SortCollectArticles<"blog">(await getCollection("blog"));
+  const res = SortCollectArticles<"blog">(
+    // @ts-expect-error
+    await getCollection("blog", ({ data }) => data.draft !== true)
+  );
 
   // 返回包含分页的所有帖子的路由集合
   return paginate(res, { pageSize: PAGE_SIZE });
 }
-// @ts-expect-error
-const res = SortCollectArticles<"blog">(await getCollection("blog"));
+const res = SortCollectArticles<"blog">(
+  // @ts-expect-error
+  await getCollection("blog", ({ data }) => data.draft !== true)
+);
 
 // const e = await getCollection('blog')
 

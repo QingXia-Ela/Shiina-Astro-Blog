@@ -2,7 +2,10 @@
 import type Frontmatter from "@/declare/Frontmatter";
 import { getCollection } from "astro:content";
 
-const ArticleList = await getCollection("blog");
+const ArticleList = await getCollection(
+  "blog",
+  ({ data }) => data.draft !== true
+);
 let tagSet = new Set(),
   categorySet = new Set();
 

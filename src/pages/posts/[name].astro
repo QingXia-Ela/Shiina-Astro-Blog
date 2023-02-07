@@ -6,8 +6,8 @@ import WhiteModule from "@/components/WhiteModule.astro";
 import { CollectionEntry, getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const res = (await getCollection("blog")).map((entry) => ({
     // @ts-expect-error
+  const res = (await getCollection("blog", ({ data }) => data.draft !== true)).map((entry) => ({
     params: { name: entry.data.title },
     props: { entry },
   }));    
@@ -19,11 +19,10 @@ interface Props {
   entry: CollectionEntry<"blog">;
 }
 
-const blog = await getCollection("blog");
+const blog = await getCollection("blog", ({ data }) => data.draft !== true);
 
 
-const { entry } = Astro.props,
-  { name } = Astro.params;
+const { name } = Astro.params;
 
 let target = null;
 for (let i = 0; i < blog.length; i++) {
