@@ -39,7 +39,6 @@ export default defineBlogConfig({
   SearchConfig: {
     requestURL: 'http://127.0.0.1:5573/search',
     mode: 'server',
-
   },
   pages: {
     'friends': {
