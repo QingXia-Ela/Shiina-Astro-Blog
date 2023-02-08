@@ -34,7 +34,8 @@ export default defineBlogConfig({
   WebsiteSettings: {
     title: `Shiina's Blog`,
     description: '',
-    url: 'https://blog.shiinafan.top'
+    url: 'https://blog.shiinafan.top',
+    useIndex: true
   },
   SearchConfig: {
     // requestURL: 'http://127.0.0.1:5573/search',
@@ -74,7 +75,7 @@ export default defineBlogConfig({
       footer: {
         hidden: true
       },
-      setMinHeight: 'fill'
+      setMinHeight: "fill"
     },
     blog: {
       PageArticleCount: 6

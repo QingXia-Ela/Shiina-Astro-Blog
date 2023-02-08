@@ -1,10 +1,16 @@
 ---
 import cfg from "blog.config";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import BlogInfo from "@/components/BlogInfo.astro";
+import BlogPage from "./blog/[page].astro";
 import P1 from "@/_custom/Default/P1/P1.astro";
 ---
 
-<BaseLayout title={`首页 - `}>
-  <P1 />
-</BaseLayout>
+{
+  cfg.WebsiteSettings.useIndex ? (
+    <BaseLayout title={`首页 - `}>
+      <P1 />
+    </BaseLayout>
+  ) : (
+    <BlogPage />
+  )
+}

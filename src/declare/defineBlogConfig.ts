@@ -163,6 +163,8 @@ interface BasicWebsiteConfig {
   description: string
   /** 网站线上链接 */
   url: string
+  /** 为博客添加一个主页，默认为 false */
+  useIndex?: boolean
 }
 
 export type PageList = 'index' | 'blog' | 'tags' | 'about' | 'friends' | 'posts' | 'custom' | 'search' | 'collect'
@@ -213,7 +215,8 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
     WebsiteSettings: {
       title: `Shiina's Blog`,
       description: '',
-      url: 'https://blog.shiinafan.top'
+      url: 'https://blog.shiinafan.top',
+      useIndex: false
     },
     UserInfo: {
       name: 'Shiinafan',

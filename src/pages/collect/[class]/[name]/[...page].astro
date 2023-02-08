@@ -10,7 +10,6 @@ import cfg from "blog.config";
 
 export async function getStaticPaths() {
   const res = StaticPathFactory(
-    // @ts-expect-error
     await getCollection("blog", ({ data }) => data.draft !== true)!,
     cfg.pages.collect!.PageArticleCount!
   );
@@ -27,7 +26,6 @@ const LIST_MAX_ITEM_COUNT = cfg.pages.collect!.PageArticleCount!,
   { class: classify, name, page } = Astro.params as unknown as Params,
   finalPage = parseInt(parseInt(page) > 0 ? page : "1"),
   PathItem = GetClassNamePosts(
-    // @ts-expect-error
     await getCollection("blog", ({ data }) => data.draft !== true),
     classify,
     name

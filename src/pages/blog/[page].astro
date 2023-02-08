@@ -12,7 +12,6 @@ import { getCollection } from "astro:content";
 export async function getStaticPaths({ paginate }: any) {
   // 用 fetch()、Astro.glob() 等加载你的数据
   const res = SortCollectArticles<"blog">(
-    // @ts-expect-error
     await getCollection("blog", ({ data }) => data.draft !== true)
   );
 
@@ -20,7 +19,6 @@ export async function getStaticPaths({ paginate }: any) {
   return paginate(res, { pageSize: PAGE_SIZE });
 }
 const res = SortCollectArticles<"blog">(
-  // @ts-expect-error
   await getCollection("blog", ({ data }) => data.draft !== true)
 );
 

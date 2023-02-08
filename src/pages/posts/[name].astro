@@ -6,7 +6,6 @@ import WhiteModule from "@/components/WhiteModule.astro";
 import { CollectionEntry, getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-    // @ts-expect-error
   const res = (await getCollection("blog", ({ data }) => data.draft !== true)).map((entry) => ({
     params: { name: entry.data.title },
     props: { entry },
@@ -27,7 +26,6 @@ const { name } = Astro.params;
 let target = null;
 for (let i = 0; i < blog.length; i++) {
   const e = blog[i]
-  // @ts-expect-error
   if (e.data.title.indexOf(name!) != -1) {
     target = e
     break

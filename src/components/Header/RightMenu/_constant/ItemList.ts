@@ -14,7 +14,6 @@ interface MenuItemProps extends Record<string, any> {
 
 const { SearchConfig } = cfg;
 const blog = await getCollection("blog", ({ data }) => data.draft !== true)
-// @ts-expect-error: collectionEntry 类型匹配
 const CategoriesMap = CategoriesMapFactory(blog), CategoriesList: ListItemProps[] = []
 
 CategoriesMap.forEach((v, k) => {
@@ -24,14 +23,8 @@ CategoriesMap.forEach((v, k) => {
   })
 })
 
-
 const ItemList: MenuItemProps[] = [
-  {
-    name: "首页",
-    href: "/",
-    type: "normal",
-    iconfont: "iconfont icon-24gl-home11",
-  },
+
   {
     name: "博客",
     href: "/blog",
@@ -65,6 +58,15 @@ if (SearchConfig) {
   ItemList.push({
     href: '/search',
     iconfont: 'iconfont icon-24gl-search2'
+  })
+}
+
+if (cfg.WebsiteSettings.useIndex) {
+  ItemList.unshift({
+    name: "首页",
+    href: "/",
+    type: "normal",
+    iconfont: "iconfont icon-24gl-home11",
   })
 }
 
