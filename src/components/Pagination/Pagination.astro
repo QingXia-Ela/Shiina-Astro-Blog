@@ -1,6 +1,7 @@
 ---
 import type { PaginationItem } from "@/declare/Pagination";
 import BasePaginationItemFactory from "./PaginationItemFactory";
+import cfg from 'blog.config'
 
 export interface Props {
   currentPage: number;
@@ -17,34 +18,50 @@ const { currentPage, maxPage, PaginationItemFactory, path } = Astro.props,
   FinalFactory = PaginationItemFactory
     ? PaginationItemFactory
     : BasePaginationItemFactory;
-const ListData = FinalFactory(currentPage, maxPage);
+const ListData = FinalFactory(currentPage, maxPage), {WebsiteSettings: {base}} = cfg;
 ---
 
 <div class="pagination">
-  <a
-    class={`arrow${currentPage == 1 ? " disabled" : ""}`}
-    href={currentPage == 1 ? undefined : `${path}/${currentPage - 1}`}
-  >
-    <i class="iconfont icon-arrowleft"></i>
-  </a>
+  {
+    currentPage == 1 ? (
+    <div class="arrow disabled">
+      <i class="iconfont icon-arrowleft"></i>
+    </div>
+    ) : (
+    <a
+      class="arrow"
+      href={currentPage == 1 ? undefined : `${base}${path}/${currentPage - 1}`}
+    >
+      <i class="iconfont icon-arrowleft"></i>
+    </a>
+    )
+  }
   {
     ListData.map((val) => {
       return (
         <a
           class={`page_item${currentPage == val.index ? " active" : ""}`}
-          href={`${path}/${val.index}`}
+          href={`${base}${path}/${val.index}`}
         >
           {val.content}
         </a>
       );
     })
   }
-  <a
-    class={`arrow${currentPage == maxPage ? " disabled" : ""}`}
-    href={currentPage == maxPage ? undefined : `${path}/${currentPage + 1}`}
-  >
-    <i class="iconfont icon-arrowright"></i>
-  </a>
+  {
+    currentPage == maxPage ? (
+    <div class="arrow disabled">
+      <i class="iconfont icon-arrowleft"></i>
+    </div>
+    ) : (
+    <a
+      class="arrow"
+      href={currentPage == maxPage ? undefined : `${base}${path}/${currentPage + 1}`}
+    >
+      <i class="iconfont icon-arrowright"></i>
+    </a>
+    )
+  }
 </div>
 
 <style lang="scss">
@@ -74,6 +91,11 @@ const ListData = FinalFactory(currentPage, maxPage);
     }
 
     .arrow {
+      width: 2rem;
+      height: 2rem;
+      line-height: 2rem;
+      text-align: center;
+
       .iconfont {
         font-size: 1.2rem;
       }
