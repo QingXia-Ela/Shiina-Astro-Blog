@@ -10,7 +10,7 @@ import RunJsonServer from './src/_intergration/RunJsonServer'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://127.0.0.1',
+  site: 'https://qingxia-ela.github.io',
   integrations: [mdx(), sitemap(), vue(), image({
     serviceEntryPoint: '@astrojs/image/sharp'
   }), InjectJSCSS(), BuildSearchIndex(), RunJsonServer()],
