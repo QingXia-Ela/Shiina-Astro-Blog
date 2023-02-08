@@ -1,5 +1,7 @@
 import defineBlogConfig from "./src/declare/defineBlogConfig";
 
+const site = `https://qingxia-ela.github.io`, base = `/Shiina-Astro-Blog`
+
 export default defineBlogConfig({
   PageDefaultSettings: {
     background: {
@@ -17,7 +19,7 @@ export default defineBlogConfig({
   UserInfo: {
     name: 'Shiinafan',
     introduction: '有钱终成眷属，没钱亲眼目睹',
-    avatar: '/avatar/avatar2.jpg',
+    avatar: site + '/avatar/avatar2.jpg',
     link: [
       {
         sitename: 'Github',
@@ -34,9 +36,9 @@ export default defineBlogConfig({
   WebsiteSettings: {
     title: `Shiina's Blog`,
     description: '',
-    site: 'https://qingxia-ela.github.io',
+    site,
     useIndex: true,
-    base: '/Shiina-Astro-Blog',
+    base,
   },
   SearchConfig: {
     active: false,
