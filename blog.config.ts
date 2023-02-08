@@ -65,12 +65,12 @@ export default defineBlogConfig({
     },
     index: {
       header: {
-        hidden: false
+        hidden: true
       },
       background: {
-
+        type: "photo",
+        content: "/indexBG.png"
       },
-
       footer: {
         hidden: true
       },

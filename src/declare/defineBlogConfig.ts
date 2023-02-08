@@ -75,7 +75,7 @@ export interface BasicBackgroundConfig {
   type: 'photo' | 'fade' | 'purity'
   /**
    * 填入内容，根据 `type` 选项决定
-   * - `photo`，则填入图片路径
+   * - `photo`，则填入图片路径，**将图片放在 public 文件夹下，并将 public 作为根路径来查找图片**
    * - `fade` 则填入 `background-image` 可接受参数，比如 `linear-gradient()`
    * - `purify` 则填入颜色代码，如 `#eee`
    */
