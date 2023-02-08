@@ -6,7 +6,7 @@ import ThemeSwitch from "./ThemeSwitch.astro";
 import ItemList from "./_constant/ItemList";
 ---
 
-<link rel="stylesheet" href="/fonts/header/menu/iconfont.css" />
+<link rel="stylesheet" href={`${cfg.WebsiteSettings.base}/fonts/header/menu/iconfont.css`} />
 <div class="menu">
   {
     ItemList.map(({ href, name, type, iconfont, data }) => {
