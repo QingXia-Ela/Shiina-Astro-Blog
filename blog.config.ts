@@ -19,7 +19,7 @@ export default defineBlogConfig({
   UserInfo: {
     name: 'Shiinafan',
     introduction: '有钱终成眷属，没钱亲眼目睹',
-    avatar: site + '/avatar/avatar2.jpg',
+    avatar: base + '/avatar/avatar2.jpg',
     link: [
       {
         sitename: 'Github',
