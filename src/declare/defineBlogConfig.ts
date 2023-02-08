@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import type { SearchResultItem } from './Search'
+import astroCfg from '/astro.config.mjs';
 
 // 外链配置
 interface BasicLinkConfig {
@@ -162,9 +163,14 @@ interface BasicWebsiteConfig {
   /** 网站描述 */
   description: string
   /** 网站线上链接 */
-  url: string
+  url?: string
   /** 为博客添加一个主页，默认为 false */
   useIndex?: boolean
+  /** 
+   * 一级路径，默认跟随 `astro.config.mjs`
+   * @see https://docs.astro.build/zh-cn/guides/deploy/github/#如何部署
+   */
+  base?: string
 }
 
 export type PageList = 'index' | 'blog' | 'tags' | 'about' | 'friends' | 'posts' | 'custom' | 'search' | 'collect'
@@ -215,8 +221,9 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
     WebsiteSettings: {
       title: `Shiina's Blog`,
       description: '',
-      url: 'https://blog.shiinafan.top',
-      useIndex: false
+      url: astroCfg.site,
+      useIndex: false,
+      base: astroCfg.base ?? ""
     },
     UserInfo: {
       name: 'Shiinafan',

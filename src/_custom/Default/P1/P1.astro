@@ -1,13 +1,17 @@
 ---
 import cfg from "blog.config";
 import Status from "@/components/Module/PersonalInfo/status/index.astro";
+
+const {
+  WebsiteSettings: { base },
+} = cfg;
 ---
 
 <div class="index-wrapper w100 h100">
   <div class="index-wrapper__modal">
     <img
       class="index-wrapper__modal__img"
-      src="/avatar/avatar2.jpg"
+      src={base + "/avatar/avatar2.jpg"}
       alt=""
       width="160"
       height="160"
@@ -18,7 +22,7 @@ import Status from "@/components/Module/PersonalInfo/status/index.astro";
       <Status />
     </div>
     <div class="button-wrapper">
-      <a href="/blog" class="button-wrapper__basic enter">进入博客</a>
+      <a href={base + "/blog"} class="button-wrapper__basic enter">进入博客</a>
       <a
         href="https://github.com/QingXia-Ela"
         target="_blank"
@@ -34,7 +38,7 @@ import Status from "@/components/Module/PersonalInfo/status/index.astro";
 </div>
 
 <script
-  src="/js/particles/canvas-nest.js"
+  src={base + "/js/particles/canvas-nest.js"}
   color="0,0,0"
   opacity="1"
   zIndex="-2"

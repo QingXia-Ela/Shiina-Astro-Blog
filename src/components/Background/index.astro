@@ -1,11 +1,15 @@
 ---
+import cfg from "blog.config";
 import type { BasicBackgroundConfig } from "@/declare/defineBlogConfig";
 
 export interface Props {
   cfg: Partial<BasicBackgroundConfig>;
 }
 
-const { filter, mask, type, content } = Astro.props.cfg;
+const { filter, mask, type, content } = Astro.props.cfg,
+  {
+    WebsiteSettings: { base },
+  } = cfg;
 
 let bg = "";
 
@@ -14,7 +18,7 @@ switch (type) {
     bg = `background-image: ${content};`;
     break;
   case "photo":
-    bg = `background-image: url(${content});`;
+    bg = `background-image: url(${base! + content});`;
     break;
 
   default:

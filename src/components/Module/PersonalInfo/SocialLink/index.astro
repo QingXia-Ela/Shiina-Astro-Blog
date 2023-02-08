@@ -1,9 +1,12 @@
 ---
 import cfg from "blog.config";
-const { link } = cfg.UserInfo;
+const { link } = cfg.UserInfo,
+  {
+    WebsiteSettings: { base },
+  } = cfg;
 ---
 
-<link rel="stylesheet" href="/fonts/social/iconfont.css" />
+<link rel="stylesheet" href={base + "/fonts/social/iconfont.css"} />
 <div class="social">
   {
     link.map((val) => {

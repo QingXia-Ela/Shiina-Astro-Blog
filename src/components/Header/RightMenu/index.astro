@@ -11,7 +11,7 @@ import ItemList from "./_constant/ItemList";
   {
     ItemList.map(({ href, name, type, iconfont, data }) => {
       return !type || type === "normal" ? (
-        <a href={href} class="h100 flex_center">
+        <a href={cfg.WebsiteSettings.base! + href} class="h100 flex_center">
           <MenuItem ItemName={name} type={type} iconfont={iconfont} />
         </a>
       ) : (

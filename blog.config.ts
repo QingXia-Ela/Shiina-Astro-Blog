@@ -34,7 +34,6 @@ export default defineBlogConfig({
   WebsiteSettings: {
     title: `Shiina's Blog`,
     description: '',
-    url: 'https://blog.shiinafan.top',
     useIndex: true
   },
   SearchConfig: {

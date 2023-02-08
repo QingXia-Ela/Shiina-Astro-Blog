@@ -1,15 +1,18 @@
 ---
+import cfg from "blog.config";
 import ParseTime from "@/utils/ParseTime";
 import { COLLECT_TAGS } from "@/constant/Collect";
 import type { CollectionEntry } from "astro:content";
 export interface Props {
   ListData: CollectionEntry<"blog">[];
 }
-
+const {
+  WebsiteSettings: { base },
+} = cfg;
 function ImgFactory(s: string, data: Record<string, any>) {
   if (!s) return "";
   if (s && s[0] === ".") {
-    return `/content/blog/${data.title}/${s}`;
+    return `${base}/content/blog/${data.title}/${s}`;
   }
   return s;
 }
@@ -24,16 +27,16 @@ let { ListData = [], class: className } = Astro.props;
     return (
       <div class={`item ${data.index_img ? "img" : ""} ${className}`}>
         {data.index_img ? (
-          <a class="img_wrapper" href={`/posts/${data.title}`}>
+          <a class="img_wrapper" href={`${base}/posts/${data.title}`}>
             <img src={ImgFactory(data.index_img, data) ?? ""} />
           </a>
         ) : undefined}
         <div class="info">
-          <a class="title" href={`/posts/${data.title}`}>
+          <a class="title" href={`${base}/posts/${data.title}`}>
             {data.title}
           </a>
           {data.description ? (
-            <a class="brief" href={`/posts/${data.title}`}>
+            <a class="brief" href={`${base}/posts/${data.title}`}>
               {data.description}
             </a>
           ) : undefined}

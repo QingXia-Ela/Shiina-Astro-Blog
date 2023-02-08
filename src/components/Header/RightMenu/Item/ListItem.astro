@@ -1,6 +1,7 @@
 ---
 import type { ListItemProps } from "@/declare/Header/Header";
-import _ from "lodash";
+import { defaultsDeep } from "lodash";
+import cfg from "blog.config";
 /**
  * import  { MobileMenuId } from "@/constant/Header"
  */
@@ -17,9 +18,12 @@ const _DEFAULT_PROPS_: Props = {
     type: "list",
     iconfont: "",
   },
-  { data } = Astro.props;
+  { data } = Astro.props,
+  {
+    WebsiteSettings: { base },
+  } = cfg;
 
-let { ItemName, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
+let { ItemName, iconfont } = defaultsDeep(Astro.props, _DEFAULT_PROPS_);
 ---
 
 <div class="item list h100">
@@ -31,7 +35,7 @@ let { ItemName, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
     data ? (
       <div class="list_item column_flex default_box_shadow">
         {data.map(({ name, href }) => (
-          <a href={href}>{name}</a>
+          <a href={base + href}>{name}</a>
         ))}
       </div>
     ) : undefined
