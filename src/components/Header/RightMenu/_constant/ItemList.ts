@@ -54,7 +54,7 @@ const ItemList: MenuItemProps[] = [
   }
 ];
 
-if (SearchConfig) {
+if (SearchConfig.active) {
   ItemList.push({
     href: '/search',
     iconfont: 'iconfont icon-24gl-search2'

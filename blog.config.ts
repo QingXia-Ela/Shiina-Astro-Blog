@@ -38,6 +38,7 @@ export default defineBlogConfig({
     useIndex: true
   },
   SearchConfig: {
+    active: false,
     // requestURL: 'http://127.0.0.1:5573/search',
     mode: 'static',
   },
