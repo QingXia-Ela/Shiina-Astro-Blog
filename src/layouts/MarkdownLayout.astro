@@ -136,10 +136,13 @@ const {
   }
 </style>
 
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <HeadMeta title={`${content.title} - `} />
-    <link rel="stylesheet" href={`${cfg.WebsiteSettings.base}/fonts/posts/iconfont.css`} />
+    <link
+      rel="stylesheet"
+      href={`${cfg.WebsiteSettings.base}/fonts/posts/iconfont.css`}
+    />
   </head>
   <body>
     {header!.hidden ? null : <Header PositionTitle={`${content.title} - `} />}

@@ -26,7 +26,7 @@ const LIST_MAX_ITEM_COUNT = cfg.pages.collect!.PageArticleCount!,
     {
       finalData.map(({ data: { title, date } }) => (
         <li>
-          <a href={`/posts/${title}`}>
+          <a href={`${cfg.WebsiteSettings.base}/posts/${title}`}>
             <span class="text_nowrap w70">{title}</span>
             <div class="time">{ParseTime(date)}</div>
           </a>
