@@ -35,7 +35,7 @@ export default defineBlogConfig({
   },
   WebsiteSettings: {
     title: `Shiina's Blog`,
-    description: '',
+    description: ``,
     site,
     useIndex: true,
     base,

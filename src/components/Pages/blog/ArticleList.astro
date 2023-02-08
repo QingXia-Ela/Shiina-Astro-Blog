@@ -28,7 +28,7 @@ let { ListData = [], class: className } = Astro.props;
       <div class={`item ${data.index_img ? "img" : ""} ${className}`}>
         {data.index_img ? (
           <a class="img_wrapper" href={`${base}/posts/${data.title}`}>
-            <img src={ImgFactory(data.index_img, data) ?? ""} />
+            <img src={ImgFactory(data.index_img, data) ?? ""} alt={data.title} />
           </a>
         ) : undefined}
         <div class="info">
