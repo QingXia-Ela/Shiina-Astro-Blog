@@ -34,7 +34,9 @@ export default defineBlogConfig({
   WebsiteSettings: {
     title: `Shiina's Blog`,
     description: '',
-    useIndex: true
+    site: 'https://qingxia-ela.github.io',
+    useIndex: true,
+    base: '/Shiina-Astro-Blog',
   },
   SearchConfig: {
     active: false,
