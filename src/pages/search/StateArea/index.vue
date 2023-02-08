@@ -21,9 +21,10 @@ let outerKeyword = "", isFirstSearch = true
 
 const isStaticSearch = () => SearchConfig?.mode === "static"
 
-const ServerInstance = new SearchVirtualServer({})
+const ServerInstance = new SearchVirtualServer({ staticData: {} })
 
 async function goSearch(keywords: string, offset = 0, limit = 5, firstSearch = false) {
+  if (SearchConfig.mode === "static" && !ServerInstance.finishRequireData) return
   outerKeyword = keywords
   if (firstSearch) state.value = 2
   try {

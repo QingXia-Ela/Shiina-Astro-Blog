@@ -17,16 +17,17 @@ export default class <T = any> {
   staticSearchHandler: typeof cfg.SearchConfig.staticSearchHandler
   cacheKeywords: string
   resultCacheData: SearchResultItem[]
+  finishRequireData: boolean
 
   constructor({
     staticData,
     staticSearchHandler
   }: ServerProps<T>) {
-    if (cfg.SearchConfig?.mode === "static" && !staticData) throw Error("Static data is undefined")
     this.staticData = staticData as T
     this.staticSearchHandler = staticSearchHandler
     this.cacheKeywords = ""
     this.resultCacheData = []
+    this.finishRequireData = false
   }
 
   sliceCacheData(offset = 0, limit = 10) {
@@ -38,11 +39,12 @@ export default class <T = any> {
 
   setStaticData(data: T) {
     this.staticData = data
+    this.finishRequireData = true
   }
 
   async goSearch({ keywords, offset, limit }: SearchParams): Promise<SearchResult> {
     // static
-    if (this.staticData) {
+    if (cfg.SearchConfig.mode === "static") {
       const res: SearchResult = {
         code: "200",
         msg: "success!",
@@ -82,7 +84,7 @@ export default class <T = any> {
               }
             }
           }
-          this.resultCacheData = []
+          this.resultCacheData = result
         }
       }
       this.cacheKeywords = keywords
