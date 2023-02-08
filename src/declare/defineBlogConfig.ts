@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import type { SearchResultItem } from './Search'
-import astroCfg from '/astro.config.mjs';
 
+// const astroCfg = {}
 // 外链配置
 interface BasicLinkConfig {
   sitename?: string,
@@ -162,13 +162,25 @@ interface BasicWebsiteConfig {
   title: string
   /** 网站描述 */
   description: string
-  /** 网站线上链接 */
-  url?: string
+  /** 
+   * 网站线上链接，**请设置成 `astro.config.mjs` 下的 `site` 值**
+   * @example
+   * // astro.config.mjs
+   * export default defineConfig({
+   *    site: '', // 确保此处的值与 blog.config.ts 的值相同
+   * })
+   *  */
+  site: string
   /** 为博客添加一个主页，默认为 false */
   useIndex?: boolean
   /** 
-   * 一级路径，默认跟随 `astro.config.mjs`
-   * @see https://docs.astro.build/zh-cn/guides/deploy/github/#如何部署
+   * 一级路径，**请设置成 `astro.config.mjs` 下的 `base` 值**
+   * @example
+   * // astro.config.mjs
+   * export default defineConfig({
+   *    base: '', // 确保此处的值与 blog.config.ts 的值相同
+   * })
+   * @see https://docs.astro.build/zh-cn/guides/deploy/github/#如何部署 参考设置 base 属性
    */
   base?: string
 }
@@ -221,9 +233,9 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
     WebsiteSettings: {
       title: `Shiina's Blog`,
       description: '',
-      url: astroCfg.site,
+      site: "",
       useIndex: false,
-      base: astroCfg.base ?? ""
+      base: ""
     },
     UserInfo: {
       name: 'Shiinafan',

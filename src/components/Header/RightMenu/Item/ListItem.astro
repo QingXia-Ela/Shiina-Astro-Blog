@@ -1,6 +1,6 @@
 ---
 import type { ListItemProps } from "@/declare/Header/Header";
-import { defaultsDeep } from "lodash";
+import _ from 'lodash'
 import cfg from "blog.config";
 /**
  * import  { MobileMenuId } from "@/constant/Header"
@@ -23,7 +23,7 @@ const _DEFAULT_PROPS_: Props = {
     WebsiteSettings: { base },
   } = cfg;
 
-let { ItemName, iconfont } = defaultsDeep(Astro.props, _DEFAULT_PROPS_);
+let { ItemName, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
 ---
 
 <div class="item list h100">
