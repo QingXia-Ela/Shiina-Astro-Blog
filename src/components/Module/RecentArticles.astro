@@ -3,6 +3,7 @@ import type Frontmatter from "@/declare/Frontmatter";
 import ParseTime from "@/utils/ParseTime";
 import { SortCollectArticles } from "@/utils/SortArticle";
 import { getCollection } from "astro:content";
+import cfg from "blog.config";
 
 export interface Props {
   horizontal?: boolean;
@@ -17,7 +18,10 @@ const ArticleList = SortCollectArticles<"blog">(
   {
     ArticleList.map((val) => {
       return (
-        <a class="item" href={`/posts/${val.data.title}`}>
+        <a
+          class="item"
+          href={`${cfg.WebsiteSettings.base}/posts/${val.data.title}`}
+        >
           <div class="title text_nowrap w100">{val.data.title}</div>
           <div class="time text_nowrap w100">{ParseTime(val.data.date)}</div>
         </a>
