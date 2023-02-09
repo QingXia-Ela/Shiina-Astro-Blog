@@ -92,6 +92,10 @@ export interface BasicBackgroundConfig {
    * 颜色不透明度 0.3
    */
   mask: boolean
+  /**
+   * 暗色模式下启用背景面罩，用于降低背景亮度，默认 `false`
+   */
+  useMaskOnDarkMode: boolean
 }
 
 // footer 配置
@@ -132,7 +136,7 @@ export interface BasicPageConfig {
    * - 'fill' 将会以百分百宽高填充整个可见区域，并隐藏屏幕滚动条
    * - 'unset' 将不对高度做任何处理，保留滚动条
    */
-  setMinHeight?: 'content' | 'fill' | 'unset'
+  setMinHeight?: 'content' | 'fill' | 'unset',
 }
 
 interface BlogPageConfig extends BasicPageConfig {

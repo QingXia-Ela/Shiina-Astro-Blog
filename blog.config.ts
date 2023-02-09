@@ -6,7 +6,7 @@ export default defineBlogConfig({
   PageDefaultSettings: {
     background: {
       type: 'fade',
-      content: `linear-gradient(to left, #12c2e9, #c471ed, #f64f59)`
+      content: `linear-gradient(to left, #12c2e9, #c471ed, #f64f59)`,
     },
     footer: {
       content: [
@@ -75,6 +75,7 @@ export default defineBlogConfig({
       background: {
         type: "photo",
         content: "/indexBG.png",
+        useMaskOnDarkMode: true
       },
       footer: {
         hidden: true
