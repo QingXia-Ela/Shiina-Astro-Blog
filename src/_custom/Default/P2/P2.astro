@@ -1,2 +1,61 @@
 ---
+import cfg from "blog.config";
 ---
+
+<div class="index-wrapper w100 h100">
+  <h1>Shiina的个人博客</h1>
+  <h2>{cfg.UserInfo.introduction}</h2>
+</div>
+<div class="right-top-menu">
+  <a class="right-top-menu__link" href={`${cfg.WebsiteSettings.base}/blog`}
+    >博客</a
+  >
+  <a class="right-top-menu__link" href={`${cfg.WebsiteSettings.base}/about`}
+    >关于</a
+  >
+</div>
+<div id="beian">
+  <a class="beian-link" href="https://beian.miit.gov.cn/">粤ICP备2022085367号</a
+  >
+  遵纪守法，从你他做起
+</div>
+
+<style lang="scss">
+  .index-wrapper {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-shadow: 0 2px #000;
+    white-space: pre;
+  }
+
+  .right-top-menu {
+    position: fixed;
+    top: 1rem;
+    right: 2rem;
+  }
+
+  .right-top-menu__link {
+    color: #fff !important;
+    font-weight: 700;
+    text-shadow: 0 2px #000;
+  }
+
+  #beian {
+    z-index: 1000;
+    display: flex;
+    flex-flow: column;
+    position: fixed;
+    left: 50%;
+    bottom: 1rem;
+    transform: translateX(-50%);
+    color: #fff !important;
+  }
+
+  .beian-link {
+    color: #fff !important;
+    font-size: 0.9rem;
+  }
+</style>

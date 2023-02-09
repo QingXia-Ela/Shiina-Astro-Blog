@@ -89,7 +89,7 @@ export interface BasicBackgroundConfig {
   filter: boolean
   /** 为背景提供一个暗色效果，默认 `false`，详见：[MDN background-color](https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-color)
    * 
-   * 颜色透明度 0.6
+   * 颜色不透明度 0.3
    */
   mask: boolean
 }

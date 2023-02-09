@@ -3,12 +3,13 @@ import cfg from "blog.config";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import BlogPage from "./blog/[page].astro";
 import P1 from "@/_custom/Default/P1/P1.astro";
+import P2 from "@/_custom/Default/P2/P2.astro";
 ---
 
 {
   cfg.WebsiteSettings.useIndex ? (
     <BaseLayout title={`首页 - `}>
-      <P1 />
+      <P2 />
     </BaseLayout>
   ) : (
     <BlogPage />

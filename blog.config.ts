@@ -74,7 +74,8 @@ export default defineBlogConfig({
       },
       background: {
         type: "photo",
-        content: "/indexBG.png"
+        content: "/indexBG.png",
+        mask: true
       },
       footer: {
         hidden: true
