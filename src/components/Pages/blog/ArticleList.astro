@@ -9,28 +9,17 @@ export interface Props {
 const {
   WebsiteSettings: { base },
 } = cfg;
-function ImgFactory(s: string, data: Record<string, any>) {
-  if (!s) return "";
-  if (s && s[0] === ".") {
-    return `${base}/content/blog/${data.title}/${s}`;
-  }
-  return s;
-}
 
 let { ListData = [], class: className } = Astro.props;
 ---
 
 {
-  /** 这个 map 会有 bug，(Cannot read properties of undefined (reading 'map'))，考虑用其他方式循环导出 */
   ListData.map(({ data }) => {
     return (
       <div class={`item ${data.index_img ? "img" : ""} ${className}`}>
         {data.index_img ? (
           <a class="img_wrapper" href={`${base}/posts/${data.title}`}>
-            <img
-              src={ImgFactory(data.index_img, data) ?? ""}
-              alt={data.title}
-            />
+            <img src={`${base}${data.index_img}`} alt={data.title} />
           </a>
         ) : undefined}
         <div class="info">
