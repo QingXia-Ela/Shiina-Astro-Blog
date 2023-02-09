@@ -23,8 +23,8 @@ if (window.location.pathname == base + '/') {
   const l = [{
     id: 0,
     name: 'I Got Love',
-    img: '/MiniPlayer/test.jpg',
-    src: '/MiniPlayer/test.mp3',
+    img: 'MiniPlayer/test.jpg',
+    src: 'MiniPlayer/test.mp3',
   }]
   for (const i of l) {
     core.AppendSong(i)
