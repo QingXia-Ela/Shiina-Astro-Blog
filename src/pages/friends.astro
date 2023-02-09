@@ -20,7 +20,7 @@ const {
         {
           FriendList?.length ? (
             FriendList?.map(({ description, name, link, avatar }) => (
-              <div class="friend_item">
+              <a class="friend_item" href={link} target="_blank">
                 <div class="avatar_wrapper">
                   <img class="w100 h100" src={avatar} alt={name} />
                 </div>
@@ -28,7 +28,7 @@ const {
                   <div class="name text_nowrap">{name}</div>
                   <div class="autograph text_nowrap">{description}</div>
                 </div>
-              </div>
+              </a>
             ))
           ) : (
             <h3>这里啥都没有...</h3>

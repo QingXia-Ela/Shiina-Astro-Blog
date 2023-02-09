@@ -20,7 +20,6 @@ function ImgFactory(s: string, data: Record<string, any>) {
 let { ListData = [], class: className } = Astro.props;
 ---
 
-<link rel="stylesheet" href={`${cfg.WebsiteSettings.base}/fonts/posts/iconfont.css`} />
 {
   /** 这个 map 会有 bug，(Cannot read properties of undefined (reading 'map'))，考虑用其他方式循环导出 */
   ListData.map(({ data }) => {
@@ -28,7 +27,10 @@ let { ListData = [], class: className } = Astro.props;
       <div class={`item ${data.index_img ? "img" : ""} ${className}`}>
         {data.index_img ? (
           <a class="img_wrapper" href={`${base}/posts/${data.title}`}>
-            <img src={ImgFactory(data.index_img, data) ?? ""} alt={data.title} />
+            <img
+              src={ImgFactory(data.index_img, data) ?? ""}
+              alt={data.title}
+            />
           </a>
         ) : undefined}
         <div class="info">

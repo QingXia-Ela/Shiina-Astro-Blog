@@ -1,7 +1,7 @@
 ---
 import type { PaginationItem } from "@/declare/Pagination";
 import BasePaginationItemFactory from "./PaginationItemFactory";
-import cfg from 'blog.config'
+import cfg from "blog.config";
 
 export interface Props {
   currentPage: number;
@@ -18,22 +18,31 @@ const { currentPage, maxPage, PaginationItemFactory, path } = Astro.props,
   FinalFactory = PaginationItemFactory
     ? PaginationItemFactory
     : BasePaginationItemFactory;
-const ListData = FinalFactory(currentPage, maxPage), {WebsiteSettings: {base}} = cfg;
+const ListData = FinalFactory(currentPage, maxPage),
+  {
+    WebsiteSettings: { base },
+  } = cfg;
 ---
 
+<link
+  rel="stylesheet"
+  href={`${cfg.WebsiteSettings.base}/fonts/posts/iconfont.css`}
+/>
 <div class="pagination">
   {
     currentPage == 1 ? (
-    <div class="arrow disabled">
-      <i class="iconfont icon-arrowleft"></i>
-    </div>
+      <div class="arrow disabled">
+        <i class="iconfont icon-arrowleft" />
+      </div>
     ) : (
-    <a
-      class="arrow"
-      href={currentPage == 1 ? undefined : `${base}${path}/${currentPage - 1}`}
-    >
-      <i class="iconfont icon-arrowleft"></i>
-    </a>
+      <a
+        class="arrow"
+        href={
+          currentPage == 1 ? undefined : `${base}${path}/${currentPage - 1}`
+        }
+      >
+        <i class="iconfont icon-arrowleft" />
+      </a>
     )
   }
   {
@@ -50,16 +59,20 @@ const ListData = FinalFactory(currentPage, maxPage), {WebsiteSettings: {base}} =
   }
   {
     currentPage == maxPage ? (
-    <div class="arrow disabled">
-      <i class="iconfont icon-arrowleft"></i>
-    </div>
+      <div class="arrow disabled">
+        <i class="iconfont icon-arrowright" />
+      </div>
     ) : (
-    <a
-      class="arrow"
-      href={currentPage == maxPage ? undefined : `${base}${path}/${currentPage + 1}`}
-    >
-      <i class="iconfont icon-arrowright"></i>
-    </a>
+      <a
+        class="arrow"
+        href={
+          currentPage == maxPage
+            ? undefined
+            : `${base}${path}/${currentPage + 1}`
+        }
+      >
+        <i class="iconfont icon-arrowright" />
+      </a>
     )
   }
 </div>
