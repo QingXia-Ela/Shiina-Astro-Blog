@@ -57,7 +57,7 @@ async function nextPage() {
 
 async function requestStaticIndex() {
   // eslint-disable-next-line no-undef
-  ServerInstance.setStaticData(await (await fetch(process.env.NODE_ENV === "development" ? cfg.WebsiteSettings.base + "../.blog/SearchIndex.json" : SearchConfig?.requestURL ? SearchConfig.requestURL : "/SearchIndex.json")).json())
+  ServerInstance.setStaticData(await (await fetch(process.env.NODE_ENV === "development" ? "../.blog/SearchIndex.json" : SearchConfig?.requestURL ? SearchConfig.requestURL : cfg.WebsiteSettings.base + "/SearchIndex.json")).json())
 }
 
 function retry() {
