@@ -2,7 +2,6 @@ import type { AstroIntegration } from "astro";
 import fs from 'fs'
 import fsp from 'fs/promises'
 import path from 'path'
-import MI from 'markdown-it'
 import { fileURLToPath } from 'url'
 import cfg from '../../blog.config'
 import { logSuccess, logInfo } from "../utils/ChalkTips";
@@ -38,13 +37,12 @@ async function fileDisplay(filePath: string, extension: string[] = [], res: Set<
 }
 
 function subMarkdownTitle(path: string) {
-  return path.substring(path.indexOf("\\src\\content\\blog") + 18, path.lastIndexOf(".md")).split('\\')[0]
+  return path.substring(path.indexOf("\\src\\content\\blog") + 18, path.lastIndexOf(".md")).split('/')[0]
 }
 
 async function getSearchIndex(root: string) {
   const PathSet = new Set<string>()
-  await fileDisplay(`${root}src\\content\\blog`, [".md", ".mdx"], PathSet)
-  const mi = new MI()
+  await fileDisplay(`${root}src/content/blog`, [".md", ".mdx"], PathSet)
   const SearchIndex: Record<string, string> = {}
   PathSet.forEach((path) => {
     SearchIndex[subMarkdownTitle(path)] = fs.readFileSync(path, 'utf-8')
@@ -93,7 +91,7 @@ export default function (options?: Record<string, any>): AstroIntegration {
             writeDevSearchIndex(p, false)
           })
       },
-      'astro:build:done': async ({ dir }) => {
+      'astro:build:done': async ({ dir, pages }) => {
         const { SearchConfig } = cfg
         if (SearchConfig?.active) {
           if (SearchConfig?.buildSearchIndex) {
