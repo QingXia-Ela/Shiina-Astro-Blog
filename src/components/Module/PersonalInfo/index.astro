@@ -10,7 +10,7 @@ const { horizontal } = Astro.props;
 
 <div class={`personal_info ${horizontal ? "horizontal" : "vertical"}`}>
   <div class="img_wrapper">
-    <img src={cfg.UserInfo.avatar!} alt="avatar" />
+    <img src={cfg.WebsiteSettings.base + cfg.UserInfo.avatar!} alt="avatar" />
   </div>
   <div class="info_wrapper">
     <div class="name">{cfg.UserInfo.name}</div>
