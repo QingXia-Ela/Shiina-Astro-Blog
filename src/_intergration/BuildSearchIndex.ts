@@ -37,8 +37,10 @@ async function fileDisplay(filePath: string, extension: string[] = [], res: Set<
 }
 
 function subMarkdownTitle(path: string) {
-  const PostsName = path.split('\\').pop() ?? ""
-  return PostsName.substring(0, path.lastIndexOf(".md"))
+  const P1 = path.split('\\').pop() ?? "", P2 = path.split('/').pop() ?? "", PostsName = P1.length > P2.length ? P2 : P1
+  console.log(P1, P2);
+
+  return PostsName.substring(0, PostsName.lastIndexOf(".md"))
 }
 
 async function getSearchIndex(root: string) {
