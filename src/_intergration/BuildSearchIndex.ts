@@ -38,7 +38,7 @@ async function fileDisplay(filePath: string, extension: string[] = [], res: Set<
 }
 
 function subMarkdownTitle(path: string) {
-  return path.substring(path.indexOf("/src/content/blog") + 18, path.lastIndexOf(".md")).split('\\')[0]
+  return path.substring(path.indexOf("\\src\\content\\blog") + 18, path.lastIndexOf(".md")).split('\\')[0]
 }
 
 async function getSearchIndex(root: string) {
@@ -61,15 +61,13 @@ async function writeDevCacheSearch(rootPath: string, data: string) {
 
 
 export default function (options?: Record<string, any>): AstroIntegration {
-  let clientURL: URL, rootPath: string, buildOutput: "static" | "server", staticGeneratedPath: string
+  let rootPath: string
 
   return {
     name: 'BuildSearchIndex',
     hooks: {
       "astro:config:done": async ({ config }) => {
-        clientURL = config.build.client
         rootPath = fileURLToPath(config.root)
-        buildOutput = config.output
       },
       "astro:server:start": async () => {
         const { SearchConfig } = cfg
@@ -95,15 +93,12 @@ export default function (options?: Record<string, any>): AstroIntegration {
             writeDevSearchIndex(p, false)
           })
       },
-      "astro:build:generated": async ({ dir }) => {
-        staticGeneratedPath = dir.href
-      },
-      'astro:build:done': async () => {
+      'astro:build:done': async ({ dir }) => {
         const { SearchConfig } = cfg
         if (SearchConfig?.active) {
           if (SearchConfig?.buildSearchIndex) {
             const SearchIndex = await getSearchIndex(rootPath)
-            const p = fileURLToPath(`${buildOutput === "static" ? staticGeneratedPath : clientURL.href}SearchIndex.json`)
+            const p = `${fileURLToPath(dir)}SearchIndex.json`
             fs.writeFileSync(p, JSON.stringify(SearchIndex), 'utf-8')
             logSuccess(`成功构建搜索索引: ${p}, 文件大小：${(fs.readFileSync(p).length / 1024).toFixed(2)}KB`)
           }

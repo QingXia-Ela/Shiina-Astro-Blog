@@ -41,7 +41,7 @@ export default defineBlogConfig({
     base,
   },
   SearchConfig: {
-    active: false,
+    active: true,
     // requestURL: 'http://127.0.0.1:5573/search',
     mode: 'static',
   },
