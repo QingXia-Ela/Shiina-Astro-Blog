@@ -40,6 +40,7 @@ const ListData = FinalFactory(currentPage, maxPage),
         href={
           currentPage == 1 ? undefined : `${base}${path}/${currentPage - 1}`
         }
+        aria-label="Prev Page"
       >
         <i class="iconfont icon-arrowleft" />
       </a>
@@ -70,6 +71,7 @@ const ListData = FinalFactory(currentPage, maxPage),
             ? undefined
             : `${base}${path}/${currentPage + 1}`
         }
+        aria-label="Next Page"
       >
         <i class="iconfont icon-arrowright" />
       </a>

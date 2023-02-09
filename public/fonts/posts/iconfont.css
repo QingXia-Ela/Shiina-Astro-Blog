@@ -2,7 +2,7 @@
   font-family: "iconfont";
   /* Project id  */
   src: url('iconfont.ttf') format('truetype');
-  font-display: auto;
+  font-display: swap;
 }
 
 .iconfont {
