@@ -1,6 +1,6 @@
 ---
 import type { ListItemProps } from "@/declare/Header/Header";
-import _ from 'lodash'
+import _ from "lodash";
 import cfg from "blog.config";
 /**
  * import  { MobileMenuId } from "@/constant/Header"
@@ -26,48 +26,43 @@ const _DEFAULT_PROPS_: Props = {
 let { ItemName, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
 ---
 
-<div class="item list h100">
-  <div class="info">
-    {iconfont.length ? <i class={iconfont} /> : undefined}
-    {ItemName}
-  </div>
-  {
-    data ? (
+{
+  data && data.length ? (
+    <div class="item list h100">
+      <div class="info">
+        {iconfont.length ? <i class={iconfont} /> : undefined}
+        {ItemName}
+      </div>
       <div class="list_item column_flex default_box_shadow">
         {data.map(({ name, href }) => (
           <a href={base + href}>{name}</a>
         ))}
       </div>
-    ) : undefined
-  }
-</div>
+    </div>
+  ) : undefined
+}
 
 <script type="module">
   /**
    * MobileMenuId = 'MobileMenu'
    */
   const MobileMenuId = "MobileMenu";
-  if (!window._Mobile_Menu_Namespace_) window._Mobile_Menu_Namespace_ = {};
+  const ItemList = document
+    .getElementById(MobileMenuId)
+    .querySelector(".list_menu_item")
+    .querySelectorAll(".item");
+  ItemList.forEach((val) => {
+    val.addEventListener("click", (e) => {
+      let CurrentClass = val.getAttribute("class"),
+        FinalClass = "",
+        isOpen = /open/.test(CurrentClass);
 
-  if (!window._Mobile_Menu_Namespace_.AddListItem) {
-    const ItemList = document
-      .getElementById(MobileMenuId)
-      .querySelector(".list_menu_item")
-      .querySelectorAll(".item");
-    ItemList.forEach((val) => {
-      val.addEventListener("click", (e) => {
-        let CurrentClass = val.getAttribute("class"),
-          FinalClass = "",
-          isOpen = /open/.test(CurrentClass);
+      if (isOpen) FinalClass = CurrentClass.replace("open");
+      else FinalClass = CurrentClass + " open";
 
-        if (isOpen) FinalClass = CurrentClass.replace("open");
-        else FinalClass = CurrentClass + " open";
-
-        val.setAttribute("class", FinalClass);
-      });
+      val.setAttribute("class", FinalClass);
     });
-    window._Mobile_Menu_Namespace_.AddListItem = true;
-  }
+  });
 </script>
 
 <style lang="scss">

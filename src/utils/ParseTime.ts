@@ -12,6 +12,6 @@ export default function (t: T) {
 
 export function PostsPublicTime(t: T) {
   const D = new Date(t);
-
+  if (D.toString() === "Invalid Date") return t
   return `${D.getFullYear()} 年 ${D.getMonth() + 1} 月 ${D.getDate() - 1} 日 - ${MakeUpZero(D.getHours())}:${MakeUpZero(D.getMinutes())}:${MakeUpZero(D.getSeconds())}`
 }

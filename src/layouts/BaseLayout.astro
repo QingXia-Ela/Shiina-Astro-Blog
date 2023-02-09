@@ -62,15 +62,6 @@ const {
     --text-default: var(--d-text-default);
     --tips-default: var(--d-tips-default);
   }
-
-  /* @media (prefers-color-scheme: dark) {
-    html > body {
-      --background-default: var(--d-background-default);
-      --background-active-default: var(--d-background-active-default);
-      --text-default: var(--d-text-default);
-      --tips-default: var(--d-tips-default);
-    }
-  } */
 </style>
 
 <style lang="scss">
@@ -84,6 +75,7 @@ const {
 <html lang="zh">
   <head>
     <HeadMeta title={title} />
+    <link rel="icon" href={cfg.WebsiteSettings.base + "/favicon.svg"} />
   </head>
   <body>
     {header!.hidden ? null : <Header PositionTitle={title} />}

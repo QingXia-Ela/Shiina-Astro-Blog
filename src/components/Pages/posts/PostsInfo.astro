@@ -10,7 +10,7 @@ interface Props {
 
 const { data, body } = Astro.props as CollectionEntry<"blog">,
   PassTime = parseInt(
-    ((+new Date() - +new Date(data.date)) / 24 / 3600 / 1000).toFixed(0)
+    ((+new Date() - +new Date(data.pubDate)) / 24 / 3600 / 1000).toFixed(0)
   ),
   {
     WebsiteSettings: { base },

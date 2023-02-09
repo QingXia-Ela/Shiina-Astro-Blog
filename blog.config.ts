@@ -10,26 +10,20 @@ export default defineBlogConfig({
     },
     footer: {
       content: [
-        '<div>Copyright © 2022 - 2023 Shiinafan</div>',
         '<div>Powered by Astro & Vue</div>',
-        '<a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2022085367号</a>',
+        '<a href="https://github.com/QingXia-Ela/Shiina-Astro-Blog/" target="_blank">Github Link</a>',
       ]
     }
   },
   UserInfo: {
     name: 'Shiinafan',
     introduction: '有钱终成眷属，没钱亲眼目睹',
-    avatar: base + '/avatar/avatar2.jpg',
+    avatar: '/avatar/avatar2.jpg',
     link: [
       {
         sitename: 'Github',
         link: 'https://github.com/QingXia-Ela',
         class: 'iconfont icon-github'
-      },
-      {
-        sitename: 'Gitee',
-        link: 'https://gitee.com/shiinafan',
-        class: 'iconfont icon-gitee-fill-round'
       }
     ]
   },
@@ -42,31 +36,11 @@ export default defineBlogConfig({
   },
   SearchConfig: {
     active: true,
-    // requestURL: 'http://127.0.0.1:5573/search',
     mode: 'static',
   },
   pages: {
     'friends': {
-      FriendList: [
-        {
-          name: '晒逗的快乐生活',
-          link: "https://www.ussjackdaw.com/",
-          avatar: "https://www.ussjackdaw.com/usr/uploads/2020/08/3358277886.png",
-          description: 'WDRShadow'
-        },
-        {
-          name: "Light_Quanta's Site",
-          description: "Light_Quanta",
-          link: "https://docs.lq0.tech/",
-          avatar: "https://docs.lq0.tech/_assets/favicons/favicon-16x16.png"
-        },
-        {
-          name: "agou",
-          description: "Hi，我是 agou，一个人群中最不起眼，但闹起事来让人急眼的普通大学生。",
-          link: "https://agou.im",
-          avatar: "https://gravatar.junbo.wang/avatar/92f14fcd71bdc4008eb6d7f2e6ca50e8?s=128&r=R&d="
-        }
-      ]
+      FriendList: []
     },
     index: {
       header: {
@@ -83,7 +57,7 @@ export default defineBlogConfig({
       setMinHeight: "fill"
     },
     blog: {
-      PageArticleCount: 6
+      PageArticleCount: 5
     },
   }
 })
