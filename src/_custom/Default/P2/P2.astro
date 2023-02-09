@@ -1,46 +1,148 @@
 ---
 import cfg from "blog.config";
+import Status from "@/components/Module/PersonalInfo/status/index.astro";
+
+const {
+  WebsiteSettings: { base },
+} = cfg;
 ---
 
 <div class="index-wrapper w100 h100">
-  <h1>Shiina的个人博客</h1>
-  <h2>{cfg.UserInfo.introduction}</h2>
-</div>
-<div class="right-top-menu">
-  <a class="right-top-menu__link" href={`${cfg.WebsiteSettings.base}/blog`}
-    >博客</a
-  >
-  <a class="right-top-menu__link" href={`${cfg.WebsiteSettings.base}/about`}
-    >关于</a
-  >
+  <div class="index-wrapper__modal">
+    <img
+      class="index-wrapper__modal__img"
+      src={base + "/avatar/avatar2.jpg"}
+      alt="avatar"
+      width="160"
+      height="160"
+    />
+    <div class="text-wrapper">
+      <div class="text-wrapper__name">{cfg.UserInfo.name}</div>
+      <div class="text-wrapper__description">{cfg.UserInfo.introduction}</div>
+      <div class="text-wrapper__skill">
+        技术栈：HTML CSS JS jquery bootstrap axios Nodejs Vue React Astro
+        nuxt.js threejs
+      </div>
+    </div>
+    <div class="button-wrapper">
+      <a href={base + "/blog"} class="button-wrapper__basic enter">进入博客</a>
+      <a
+        href="https://github.com/QingXia-Ela"
+        target="_blank"
+        class="button-wrapper__basic github">GitHub</a
+      >
+    </div>
+  </div>
 </div>
 <div id="beian">
-  <a class="beian-link" href="https://beian.miit.gov.cn/">粤ICP备2022085367号</a
+  <a class="beian-link" target="_blank" href="https://beian.miit.gov.cn/"
+    >粤ICP备2022085367号</a
   >
   遵纪守法，从你他做起
 </div>
 
+<script
+  src={base + "/js/particles/canvas-nest.js"}
+  color="0,0,0"
+  opacity="1"
+  zIndex="-2"
+  count="99"
+  is:inline
+></script>
+
 <style lang="scss">
   .index-wrapper {
     display: flex;
-    flex-flow: column;
     justify-content: center;
     align-items: center;
+  }
+
+  .index-wrapper__modal {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 18rem;
+    height: 30rem;
+    padding: 0 2rem;
+    background-image: linear-gradient(
+        90deg,
+        rgba(99, 99, 99, 0.1),
+        rgba(99, 99, 99, 0.1) 1px,
+        transparent 0,
+        transparent
+      ),
+      linear-gradient(90deg, hsla(0, 0%, 100%, 0.1) -20%, transparent 15%),
+      linear-gradient(0deg, hsla(0, 0%, 100%, 0.1), transparent 25%);
+    background-color: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid hsla(0, 0%, 100%, 0.4941176471);
+    border-left: 1px solid hsla(0, 0%, 100%, 0.4941176471);
+    box-shadow: 0 0 10px 5px hsla(0, 0%, 100%, 0.15);
+    backdrop-filter: blur(3px);
+    border-radius: 1rem;
     color: #fff;
-    text-shadow: 0 2px #000;
-    white-space: pre;
+    text-shadow: 0 0 2px #000;
   }
 
-  .right-top-menu {
-    position: fixed;
-    top: 1rem;
-    right: 2rem;
+  .index-wrapper__modal__img {
+    width: 10rem;
+    border-radius: 100vh;
   }
 
-  .right-top-menu__link {
-    color: #fff !important;
-    font-weight: 700;
-    text-shadow: 0 2px #000;
+  .text-wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .text-wrapper__name {
+    font-size: 1.4rem;
+  }
+
+  .text-wrapper__skill {
+    margin-top: 0.4rem;
+    text-align: center;
+  }
+
+  .button-wrapper {
+    width: 100%;
+    margin: 0.4rem 0;
+  }
+
+  .button-wrapper__basic {
+    display: block;
+    width: 100%;
+    height: 2.1rem;
+    line-height: 1.9rem;
+    margin: 0.6rem 0;
+    font-size: 1rem;
+    text-align: center;
+    text-shadow: 0 0 1px #000;
+    box-shadow: 0 5px 10px hsla(0, 0%, 0%, 0.25);
+    border-radius: 8px;
+    transition: color 0.3s, background-color 0.3s;
+
+    &.enter {
+      background-color: #fff;
+      border: 0.1rem solid #fff;
+
+      &:hover {
+        color: #fff;
+        background-color: transparent;
+      }
+    }
+
+    &.github {
+      color: #fff;
+      border: 0.1rem solid #fff;
+
+      &:hover {
+        color: #000;
+        background-color: #fff;
+      }
+    }
   }
 
   #beian {
@@ -51,11 +153,11 @@ import cfg from "blog.config";
     left: 50%;
     bottom: 1rem;
     transform: translateX(-50%);
-    color: #fff !important;
+    color: #000 !important;
   }
 
   .beian-link {
-    color: #fff !important;
+    color: #000 !important;
     font-size: 0.9rem;
   }
 </style>
