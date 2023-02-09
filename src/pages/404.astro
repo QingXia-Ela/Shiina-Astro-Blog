@@ -1,0 +1,38 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import cfg from "blog.config";
+---
+
+<BaseLayout title={"404 - "}>
+  <div class="white_module">
+    <div class="sad">:(</div>
+    <h1>404 - 页面不存在！</h1>
+    <h2>5秒后返回博客页</h2>
+  </div>
+</BaseLayout>
+
+<script base={cfg.WebsiteSettings.base} id="JumpScript">
+  setTimeout(() => {
+    window.location.href = `${document
+      .querySelector("#JumpScript")
+      .getAttribute("base")}/blog`;
+  }, 5000);
+</script>
+
+<style lang="scss">
+  .white_module {
+    width: 70%;
+    margin: 3rem auto;
+    text-align: center;
+  }
+
+  .sad {
+    font-size: 3rem;
+  }
+
+  @media screen and (max-width: 992px) {
+    .white_module {
+      width: 95%;
+    }
+  }
+</style>

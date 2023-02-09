@@ -1,6 +1,7 @@
 ---
 import { COLLECT_CATEGORIES, COLLECT_TAGS } from "@/constant/Collect";
 import { PostsPublicTime } from "@/utils/ParseTime";
+import cfg from "blog.config";
 import type { CollectionEntry } from "astro:content";
 interface Props {
   data: CollectionEntry<"blog"> | {};
@@ -10,7 +11,10 @@ interface Props {
 const { data, body } = Astro.props as CollectionEntry<"blog">,
   PassTime = parseInt(
     ((+new Date() - +new Date(data.date)) / 24 / 3600 / 1000).toFixed(0)
-  );
+  ),
+  {
+    WebsiteSettings: { base },
+  } = cfg;
 ---
 
 {
@@ -30,7 +34,9 @@ const { data, body } = Astro.props as CollectionEntry<"blog">,
       <div class="categories">
         {data.categories ? (
           <i class="iconfont icon-categories">
-            <a href={`/collect/${COLLECT_CATEGORIES}/${data.categories}`}>
+            <a
+              href={`${base}/collect/${COLLECT_CATEGORIES}/${data.categories}`}
+            >
               {data.categories}
             </a>
           </i>
@@ -39,7 +45,7 @@ const { data, body } = Astro.props as CollectionEntry<"blog">,
           ? data.tags.map((val) => (
               <div class="label">
                 <i class="iconfont icon-24gl-tags2">
-                  <a href={`/collect/${COLLECT_TAGS}/${val}`}>{val}</a>
+                  <a href={`${base}/collect/${COLLECT_TAGS}/${val}`}>{val}</a>
                 </i>
               </div>
             ))
@@ -98,7 +104,6 @@ const { data, body } = Astro.props as CollectionEntry<"blog">,
       gap: 0.5rem;
 
       a {
-        color: var(--text-default);
         white-space: nowrap;
       }
 
