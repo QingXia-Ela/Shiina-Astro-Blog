@@ -30,7 +30,7 @@ switch (command) {
   case 'd':
   case 'deploy':
     await deploy()
-    console.log(chalk.bold.bgGreen(" SUCCESS ") + chalk.bold("推送成功！请前往仓库查看构建状态"))
+    console.log(chalk.bold.bgGreen(" SUCCESS ") + chalk.bold(" 推送成功！请前往仓库查看构建状态"))
     break;
 
   default:

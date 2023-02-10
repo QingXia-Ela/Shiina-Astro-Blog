@@ -37,6 +37,7 @@ async function fileDisplay(filePath: string, extension: string[] = [], res: Set<
 }
 
 function subMarkdownTitle(path: string) {
+  // 处理 windows 与 GitHub ubuntu 路径斜杠方向不一致的问题
   const P1 = path.split('\\').pop() ?? "", P2 = path.split('/').pop() ?? "", PostsName = P1.length > P2.length ? P2 : P1
   return PostsName.substring(0, PostsName.lastIndexOf(".md"))
 }
