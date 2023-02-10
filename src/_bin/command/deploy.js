@@ -5,19 +5,16 @@ const c = ["git add .",
   "git push"
 ]
 
-
-export default function () {
-  exec(c[0]).stdout.on("data", (ch) => {
-    console.log(ch);
-  }).on("end", () => {
-    exec(c[1]).stdout.on("data", (ch) => {
+async function push(command) {
+  return new Promise((res, rej) => {
+    exec(command).stdout.on("data", (ch) => {
       console.log(ch);
-    }).on("end", () => {
-      exec(c[2]).stdout.on("data", (ch) => {
-        console.log(ch);
-      }).on("end", () => {
-        console.log("推送成功");
-      })
-    })
+    }).on("error", (e) => rej(e)).on("end", () => res())
   })
+}
+
+export default async function () {
+  await push(c[0])
+  await push(c[1])
+  await push(c[2])
 }

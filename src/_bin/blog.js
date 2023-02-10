@@ -29,12 +29,12 @@ switch (command) {
 
   case 'd':
   case 'deploy':
-    deploy()
+    await deploy()
+    console.log(chalk.bold.bgGreen(" SUCCESS ") + chalk.bold("推送成功！请前往仓库查看构建状态"))
     break;
 
   default:
     console.log(chalk.bold.bgRed(" ERROR ") + chalk.bold(" 未知指令！可以查看以下指令列表进行指令执行："))
     GetCommands()
-    // cp.execSync()
     break;
 }
