@@ -48,7 +48,7 @@ export default defineBlogConfig({
       },
       background: {
         type: "photo",
-        content: "/indexBG.png",
+        content: "/indexBG.jpg",
         useMaskOnDarkMode: true
       },
       footer: {
