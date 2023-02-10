@@ -43,6 +43,7 @@
     "eslint-plugin-vue": "^9.8.0",
     "json-server": "^0.17.1",
     "markdown-it": "^13.0.1",
+    "mddir": "^1.1.1",
     "npm": "^9.2.0",
     "sass": "^1.56.2"
   }

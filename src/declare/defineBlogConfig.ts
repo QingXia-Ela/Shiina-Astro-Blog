@@ -11,16 +11,18 @@ interface BasicLinkConfig {
 
 // 个人信息配置
 interface BasicPersonalConfig {
+  /** 你的名字，用于资料卡名字展示 */
   name: string
+  /** 你的简介 */
   introduction?: string,
-  /** 头像路径，从项目根目录开始查找，如：`/source/avatar.jpg`，如果文件位于 `/public` 下可以将其省略 */
+  /** 头像路径，从public目录开始查找，如：`/avatar/avatar2.jpg` */
   avatar?: string,
+  /** 你的网站外链，如 GitHub，会展示在资料卡 */
   link: BasicLinkConfig[]
 }
 
 /**
  * search 相关配置
- * @deprecated 将会在新版本中启用
  */
 interface BasicSearchConfig {
   /**  激活搜索功能，默认 `true` */
@@ -87,7 +89,8 @@ export interface BasicBackgroundConfig {
   jsPlugin: boolean
   /** 为背景提供一个毛玻璃效果，默认 `false`，详见：[MDN filter](https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter) */
   filter: boolean
-  /** 为背景提供一个暗色效果，默认 `false`，详见：[MDN background-color](https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-color)
+  /** 
+   * 为背景提供一个暗色效果，默认 `false`，详见：[MDN background-color](https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-color)
    * 
    * 颜色不透明度 0.3
    */
@@ -102,7 +105,7 @@ export interface BasicBackgroundConfig {
 interface BasicFooterConfig {
   /** 隐藏 footer，默认 `false` */
   hidden?: boolean
-  /** 底部 footer，默认是 `Copyright © By {你的名字}`，会作为 HTML 插入到页尾 */
+  /** 底部 footer，默认是 `Copyright © {当前年份}`，会作为 HTML 插入到页尾 */
   content?: string[]
 }
 
@@ -114,9 +117,9 @@ interface BasicThemeColorConfig {
   backgroundDefault: string
   /** 选择框激活 / 鼠标悬浮时的背景颜色，默认：`#ddd`，夜间默认：`#444` */
   backgroundActiveDefault: string
-  /** 文字默认颜色，默认：`#fff`，夜间默认：`#000` */
+  /** 文字默认颜色，默认：`#000`，夜间默认：`#fff` */
   textDefault: string
-  /** 文字按钮激活 / 鼠标悬浮时默认颜色，默认：`#ad7ffd`，夜间默认：`#4e3e6b` */
+  /** 文字按钮激活 / 鼠标悬浮时默认颜色，默认：`#3F5EFB`，夜间默认：`#919edf` */
   tipsDefault: string
 }
 
@@ -157,6 +160,7 @@ interface FriendItem {
 }
 
 interface FriendsPageConfig extends BasicPageConfig {
+  /** 友链列表 */
   FriendList?: FriendItem[]
 }
 
@@ -169,20 +173,20 @@ interface BasicWebsiteConfig {
   /** 
    * 网站线上链接，**请设置成 `astro.config.mjs` 下的 `site` 值**
    * @example
-   * // astro.config.mjs
+   * // blog.config.ts
    * export default defineConfig({
-   *    site: '', // 确保此处的值与 blog.config.ts 的值相同
+   *    site: '', // 确保此处的值与 astro.config.mjs 的值相同
    * })
    *  */
   site: string
-  /** 为博客添加一个主页，默认为 false */
+  /** 为博客添加一个自定义主页，默认为 false */
   useIndex?: boolean
   /** 
-   * 一级路径，**请设置成 `astro.config.mjs` 下的 `base` 值**
+   * 网站二级路径，**请设置成 `astro.config.mjs` 下的 `base` 值**
    * @example
-   * // astro.config.mjs
+   * // blog.config.ts
    * export default defineConfig({
-   *    base: '', // 确保此处的值与 blog.config.ts 的值相同
+   *    base: '', // 确保此处的值与 astro.config.mjs 的值相同
    * })
    * @see https://docs.astro.build/zh-cn/guides/deploy/github/#如何部署 参考设置 base 属性
    */
@@ -206,8 +210,6 @@ interface BlogConfig extends Record<any, any> {
   UserInfo: BasicPersonalConfig
   /** 
    * 搜索配置
-   * 
-   * @deprecated 还在开发中
    */
   SearchConfig: BasicSearchConfig
 }
@@ -230,7 +232,7 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
       footer: {
         hidden: false,
         content: [
-          '<div>Copyright © 2022</div>'
+          `<div>Copyright © ${(new Date()).getFullYear()}</div>`
         ]
       }
     },

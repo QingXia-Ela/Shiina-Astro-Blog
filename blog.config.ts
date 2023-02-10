@@ -29,7 +29,7 @@ export default defineBlogConfig({
   },
   WebsiteSettings: {
     title: `Shiina's Blog`,
-    description: ``,
+    description: `Shiina's Blog，用于记录自己学习的知识和踩过的坑`,
     site,
     useIndex: true,
     base,
