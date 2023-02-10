@@ -4,21 +4,32 @@ import CreateNewBlog from "./command/new.js";
 import GetCommands from "./command/command.js";
 import cp from 'child_process'
 import chalk from "chalk";
+import deploy from "./command/deploy.js";
 const [_1, _2, command, ...args] = process.argv
 
 switch (command) {
+  case 'n':
   case 'new':
     CreateNewBlog(args.join("-"))
     break;
+
+  case 'b':
   case 'build':
     cp.exec("astro build").stdout.on("data", (data) => {
       console.log(`${data}`);
     })
     break;
+
+  case 's':
   case 'server':
     cp.exec(`astro dev --host ${args.join(" ")}`).stdout.on("data", (data) => {
       console.log(`${data}`);
     })
+    break;
+
+  case 'd':
+  case 'deploy':
+    deploy()
     break;
 
   default:

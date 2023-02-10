@@ -1,7 +1,7 @@
 ---
 title: "First post"
 description: "Lorem ipsum dolor sit amet"
-date: "Jul 08 2022"
+date: 2022-07-08
 index_img: "/placeholder-hero.jpg"
 categories: posts
 tags: [posts]
