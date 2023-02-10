@@ -1,46 +1,41 @@
-# Astro Starter Kit: Minimal
+# Shiina-Astro-Blog
+
+一个基于 Astro + Vue 制作的个人静态博客生成器
+
+不定期更新小功能
+
+## 阅读指引
+
+[点击这里阅读](./docs/user/%E6%A6%82%E8%A7%88.md)
+
+## 项目启动
 
 ```
-npm create astro@latest -- --template minimal
+git clone https://github.com/QingXia-Ela/Shiina-Astro-Blog.git
+cd ./Shiina-Astro-Blog
+pnpm i
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/s/github/withastro/astro/tree/latest/examples/minimal)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## 启动项目
 
 ```
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+npm run dev
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 新建一篇文章
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```
+npx blog n <文章标题>
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+## 构建
 
-## 🧞 Commands
+```
+npm run build
+```
 
-All commands are run from the root of the project, from a terminal:
+## 推送到 git
 
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `npm install`          | Installs dependencies                            |
-| `npm run dev`          | Starts local dev server at `localhost:3000`      |
-| `npm run build`        | Build your production site to `./dist/`          |
-| `npm run preview`      | Preview your build locally, before deploying     |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```
+npx blog d
+```
