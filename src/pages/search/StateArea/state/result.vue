@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import type { SearchResultItem } from '@/declare/Search';
 import { onMounted, ref, watch } from 'vue';
+import cfg from 'blog.config';
+
 defineExpose({
   SwtichTipState
 })
@@ -9,7 +11,7 @@ const emit = defineEmits(["nextPage", "retry"])
 
 const props = defineProps<{
   result: SearchResultItem[]
-}>()
+}>(), { WebsiteSettings: { base } } = cfg;
 
 const MoreTip = ref<1 | 2 | 3>(1),
   LoadingMore = ref<HTMLElement>()
@@ -37,7 +39,7 @@ onMounted(() => {
 
 <template>
   <div class="result">
-    <a class="result_item" :href="`/posts/${i.title}`" v-for="i in props.result" :key="i.title">
+    <a class="result_item" :href="`${base}/posts/${i.title}`" v-for="i in props.result" :key="i.title">
       <i class="iconfont icon-24gl-fileText"></i>
       <div class="info">
         <div class="title">{{ i.title }}</div>
