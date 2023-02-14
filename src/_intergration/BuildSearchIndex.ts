@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url'
 import cfg from '../../blog.config'
 import { logSuccess, logInfo } from "../utils/ChalkTips";
 import chokidar from 'chokidar'
+import MarkdownFrontMatterResolve from "../utils/MarkdownFrontMatterResolve";
 
 /**
  * 文件遍历方法
@@ -47,7 +48,9 @@ async function getSearchIndex(root: string) {
   await fileDisplay(`${root}src/content/blog`, [".md", ".mdx"], PathSet)
   const SearchIndex: Record<string, string> = {}
   PathSet.forEach((path) => {
-    SearchIndex[subMarkdownTitle(path)] = fs.readFileSync(path, 'utf-8')
+    const res = fs.readFileSync(path, 'utf-8')
+      , frontmatter = MarkdownFrontMatterResolve(res)
+    SearchIndex[frontmatter['title']] = res
   })
   return SearchIndex
 }

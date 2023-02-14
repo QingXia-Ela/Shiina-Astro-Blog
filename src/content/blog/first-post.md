@@ -1,5 +1,5 @@
 ---
-title: "First post"
+title: First post
 description: "Lorem ipsum dolor sit amet"
 date: 2022-07-08
 index_img: "/placeholder-hero.jpg"

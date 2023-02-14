@@ -1,5 +1,5 @@
 ---
-title: "Third post"
+title: Third post
 description: "Lorem ipsum dolor sit amet"
 date: 2022-07-15
 index_img: "/placeholder-hero.jpg"
