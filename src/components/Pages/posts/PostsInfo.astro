@@ -10,7 +10,7 @@ interface Props {
 
 const { data, body } = Astro.props as CollectionEntry<"blog">,
   PassTime = parseInt(
-    ((+new Date() - +new Date(data.pubDate)) / 24 / 3600 / 1000).toFixed(0)
+    ((+new Date() - +new Date(data.date)) / 24 / 3600 / 1000).toFixed(0)
   ),
   {
     WebsiteSettings: { base },
@@ -55,10 +55,14 @@ const { data, body } = Astro.props as CollectionEntry<"blog">,
         本作品采用
         <a
           class="license__link"
-          href="https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh-Hans"
+          href={
+            data.licenseLink
+              ? data.licenseLink
+              : "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh-Hans"
+          }
           target="_blank"
         >
-          CC BY-NC-SA 4.0
+          {data.license ? data.license : "CC BY-NC-SA 4.0"}
         </a>
         进行许可。
       </div>
