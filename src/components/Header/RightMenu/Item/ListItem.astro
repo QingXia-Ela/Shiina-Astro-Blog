@@ -2,9 +2,6 @@
 import type { ListItemProps } from "@/declare/Header/Header";
 import _ from "lodash";
 import cfg from "blog.config";
-/**
- * import  { MobileMenuId } from "@/constant/Header"
- */
 
 export interface Props {
   ItemName?: string;
@@ -42,25 +39,34 @@ let { ItemName, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
   ) : undefined
 }
 
-<script type="module">
-  /**
-   * MobileMenuId = 'MobileMenu'
-   */
-  const MobileMenuId = "MobileMenu";
-  const ItemList = document
-    .getElementById(MobileMenuId)
-    .querySelector(".list_menu_item")
-    .querySelectorAll(".item");
+<script>
+  const MobileMenuId = "MobileMenu",
+    MenuId = "Menu";
+  const ItemList: Element[] = [
+    ...document.getElementById(MobileMenuId)!.querySelectorAll(".item.list"),
+    ...document.getElementById(MenuId)!.querySelectorAll(".item.list"),
+  ];
+
+  function SwitchMenu(val: Element, open?: boolean) {
+    let CurrentClass = val.getAttribute("class") ?? "",
+      FinalClass = "",
+      isOpen = /open/.test(CurrentClass);
+
+    if (isOpen) FinalClass = CurrentClass.replace("open", "");
+    else FinalClass = CurrentClass + " open";
+
+    val.setAttribute("class", FinalClass);
+  }
+
   ItemList.forEach((val) => {
     val.addEventListener("click", (e) => {
-      let CurrentClass = val.getAttribute("class"),
-        FinalClass = "",
-        isOpen = /open/.test(CurrentClass);
-
-      if (isOpen) FinalClass = CurrentClass.replace("open");
-      else FinalClass = CurrentClass + " open";
-
-      val.setAttribute("class", FinalClass);
+      if (window.innerWidth < 992) SwitchMenu(val);
+    });
+    val.addEventListener("mouseenter", (e) => {
+      if (window.innerWidth > 992) SwitchMenu(val);
+    });
+    val.addEventListener("mouseleave", (e) => {
+      if (window.innerWidth > 992) SwitchMenu(val);
     });
   });
 </script>
@@ -78,7 +84,6 @@ let { ItemName, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
     transition: color 0.2s;
     cursor: pointer;
 
-    &:hover,
     &.open {
       color: var(--tips-default);
 

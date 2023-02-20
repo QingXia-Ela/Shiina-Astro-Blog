@@ -4,10 +4,14 @@ import MenuItem from "./Item/Item.astro";
 import ListMenuItem from "./Item/ListItem.astro";
 import ThemeSwitch from "./ThemeSwitch.astro";
 import ItemList from "./_constant/ItemList";
+import { MenuId } from "@/constant/Header";
 ---
 
-<link rel="stylesheet" href={`${cfg.WebsiteSettings.base}/fonts/header/menu/iconfont.css`} />
-<div class="menu">
+<link
+  rel="stylesheet"
+  href={`${cfg.WebsiteSettings.base}/fonts/header/menu/iconfont.css`}
+/>
+<div class="menu" id={MenuId}>
   {
     ItemList.map(({ href, name, type, iconfont, data }) => {
       return !type || type === "normal" ? (

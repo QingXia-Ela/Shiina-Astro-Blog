@@ -13,8 +13,8 @@
    */
   const DARK_MODE = "dark";
 
-  const wrapper = document.querySelector("[data-theme-switch]")!;
-  if (wrapper) {
+  const ButtonList = document.querySelectorAll("[data-theme-switch]")!;
+  ButtonList.forEach((wrapper) => {
     const t = wrapper.querySelectorAll(".iconfont");
 
     function SwitchState(choose: boolean) {
@@ -38,12 +38,12 @@
     if (FinalState)
       wrapper.setAttribute("class", wrapper.getAttribute("class") + " dark");
 
-    t.forEach((v) =>
+    t.forEach((v) => {
       v.addEventListener("click", () => {
         SwitchState((FinalState = !FinalState));
-      })
-    );
-  }
+      });
+    });
+  });
 </script>
 
 <style lang="scss">

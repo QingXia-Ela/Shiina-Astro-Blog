@@ -1,4 +1,5 @@
 ---
+import cfg from "blog.config";
 import ItemList from "./_constant/ItemList";
 import MenuItem from "./Item/Item.astro";
 import ListMenuItem from "./Item/ListItem.astro";
@@ -16,7 +17,10 @@ import { MobileMenuId } from "@/constant/Header";
     {
       ItemList.map(({ href, name, type, iconfont, data }) => {
         return !type || type === "normal" ? (
-          <a href={href} class="h100 flex_center list_item">
+          <a
+            href={`${cfg.WebsiteSettings.base}${href}`}
+            class="h100 flex_center list_item"
+          >
             <MenuItem ItemName={name} type={type} iconfont={iconfont} />
           </a>
         ) : (
