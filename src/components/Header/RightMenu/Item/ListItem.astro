@@ -82,6 +82,7 @@ let { ItemName, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
     color: var(--text-default);
     background-color: var(--background-default);
     transition: color 0.2s;
+    user-select: none;
     cursor: pointer;
 
     &.open {

@@ -41,18 +41,18 @@ import { MobileMenuId } from "@/constant/Header";
   </div>
 </div>
 
-<script type="module">
+<script>
   const MobileMenuId = "MobileMenu",
-    MobileMenuElement = document.querySelector("#" + MobileMenuId);
+    MobileMenuElement = document.querySelector("#" + MobileMenuId)!;
 
-  MobileMenuElement.querySelector(".switch_button").addEventListener(
+  MobileMenuElement.querySelector(".switch_button")!.addEventListener(
     "click",
     () => {
-      let CurrentClass = MobileMenuElement.getAttribute("class"),
+      let CurrentClass = MobileMenuElement.getAttribute("class")!,
         FinalClass = "",
         isOpen = /open/.test(CurrentClass);
 
-      if (isOpen) FinalClass = CurrentClass.replace("open");
+      if (isOpen) FinalClass = CurrentClass.replace("open", "");
       else FinalClass = CurrentClass + " open";
 
       MobileMenuElement.setAttribute("class", FinalClass);
