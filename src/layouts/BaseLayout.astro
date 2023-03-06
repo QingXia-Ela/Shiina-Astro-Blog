@@ -88,3 +88,19 @@ const {
     <LeftBottomMenu components={["BackToTop"]} />
   </body>
 </html>
+
+<script>
+  import JudgeLegalBrowser from "@/utils/JudgeLegalBrowser";
+
+  if (
+    !JudgeLegalBrowser({
+      firefox: "79",
+      opera: "74",
+      chrome: "88",
+      safari: "14",
+    })
+  )
+    alert(
+      "当前浏览器版本过低，页面展示可能受到影响！推荐更新一下浏览器再来访问！"
+    );
+</script>

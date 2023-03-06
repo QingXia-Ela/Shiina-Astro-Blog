@@ -42,10 +42,9 @@ import { MobileMenuId } from "@/constant/Header";
 </div>
 
 <script>
-  const MobileMenuId = "MobileMenu",
-    MobileMenuElement = document.querySelector("#" + MobileMenuId)!;
+  const MobileMenuElement = document.getElementById("MobileMenu");
 
-  MobileMenuElement.querySelector(".switch_button")!.addEventListener(
+  MobileMenuElement?.querySelector(".switch_button")!.addEventListener(
     "click",
     () => {
       let CurrentClass = MobileMenuElement.getAttribute("class")!,

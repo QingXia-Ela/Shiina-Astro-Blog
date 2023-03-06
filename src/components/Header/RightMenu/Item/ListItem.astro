@@ -40,35 +40,38 @@ let { ItemName, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
 }
 
 <script>
-  const MobileMenuId = "MobileMenu",
-    MenuId = "Menu";
-  const ItemList: Element[] = [
-    ...document.getElementById(MobileMenuId)!.querySelectorAll(".item.list"),
-    ...document.getElementById(MenuId)!.querySelectorAll(".item.list"),
-  ];
+  const MobileMenuEl = document.getElementById("MobileMenu"),
+    MenuEl = document.getElementById("Menu");
 
-  function SwitchMenu(val: Element, open?: boolean) {
-    let CurrentClass = val.getAttribute("class") ?? "",
-      FinalClass = "",
-      isOpen = /open/.test(CurrentClass);
+  if (MobileMenuEl && MenuEl) {
+    const ItemList: Element[] = [
+      ...MobileMenuEl.querySelectorAll(".item.list"),
+      ...MenuEl.querySelectorAll(".item.list"),
+    ];
 
-    if (isOpen) FinalClass = CurrentClass.replace("open", "");
-    else FinalClass = CurrentClass + " open";
+    function SwitchMenu(val: Element, open?: boolean) {
+      let CurrentClass = val.getAttribute("class") ?? "",
+        FinalClass = "",
+        isOpen = /open/.test(CurrentClass);
 
-    val.setAttribute("class", FinalClass);
+      if (isOpen) FinalClass = CurrentClass.replace("open", "");
+      else FinalClass = CurrentClass + " open";
+
+      val.setAttribute("class", FinalClass);
+    }
+
+    ItemList.forEach((val) => {
+      val.addEventListener("click", (e) => {
+        if (window.innerWidth < 992) SwitchMenu(val);
+      });
+      val.addEventListener("mouseenter", (e) => {
+        if (window.innerWidth > 992) SwitchMenu(val);
+      });
+      val.addEventListener("mouseleave", (e) => {
+        if (window.innerWidth > 992) SwitchMenu(val);
+      });
+    });
   }
-
-  ItemList.forEach((val) => {
-    val.addEventListener("click", (e) => {
-      if (window.innerWidth < 992) SwitchMenu(val);
-    });
-    val.addEventListener("mouseenter", (e) => {
-      if (window.innerWidth > 992) SwitchMenu(val);
-    });
-    val.addEventListener("mouseleave", (e) => {
-      if (window.innerWidth > 992) SwitchMenu(val);
-    });
-  });
 </script>
 
 <style lang="scss">
