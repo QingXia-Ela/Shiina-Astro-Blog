@@ -27,7 +27,9 @@ let { ItemName, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
   data && data.length ? (
     <div class="item list h100">
       <div class="info">
-        {iconfont.length ? <i class={iconfont} /> : undefined}
+        {iconfont.length ? (
+          <i class={`${iconfont} prevent_iconfont_deformation`} />
+        ) : undefined}
         {ItemName}
       </div>
       <div class="list_item column_flex default_box_shadow">

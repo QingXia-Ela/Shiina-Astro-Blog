@@ -66,6 +66,8 @@ interface BasicHeaderConfig {
   hidden?: boolean
   /** 保持背景颜色，即取消透明模式，默认 `true` */
   keepBackgroundColor?: boolean
+  /** 保持 header 展开，默认 `true` */
+  keepOpen?: boolean
 }
 
 // 单个页面的 header 配置
@@ -221,7 +223,8 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
       header: {
         title: '',
         hidden: false,
-        keepBackgroundColor: true
+        keepBackgroundColor: true,
+        keepOpen: true
       },
       background: {
         filter: false,

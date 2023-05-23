@@ -17,11 +17,18 @@ let { ItemName, type, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
 ---
 
 <div class={`item ${type === "list" ? "list" : ""}`}>
-  {iconfont.length ? <i class={iconfont} /> : undefined}
+  {
+    iconfont.length ? (
+      <i class={`${iconfont} prevent_iconfont_deformation`} />
+    ) : undefined
+  }
   {ItemName ? ItemName : <slot />}
 </div>
 <style lang="scss">
   .item {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
     position: relative;
     font-size: 0.95rem;
     padding: 0 0.6rem;

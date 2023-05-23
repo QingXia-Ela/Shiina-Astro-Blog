@@ -33,7 +33,7 @@ let { ListData = [], class: className } = Astro.props;
           ) : undefined}
           <div class="class_info">
             <div class="time">
-              <i class="iconfont icon-24gl-calendar" />
+              <i class="iconfont icon-24gl-calendar prevent_iconfont_deformation" />
               {ParseTime(data.date)}
             </div>
             <div class="tags">
@@ -41,7 +41,7 @@ let { ListData = [], class: className } = Astro.props;
                 if (i > 6) return null;
                 return (
                   <a class="tag_item" href={`/collect/${COLLECT_TAGS}/${val}`}>
-                    <i class="iconfont icon-24gl-tags2" />
+                    <i class="iconfont icon-24gl-tags2 prevent_iconfont_deformation" />
                     <span>{val}</span>
                   </a>
                 );

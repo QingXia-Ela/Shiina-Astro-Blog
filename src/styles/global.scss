@@ -120,6 +120,15 @@ a {
   align-items: center;
 }
 
+/*
+  only iconfont using!
+*/
+.prevent_iconfont_deformation {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+}
+
 .tac {
   text-align: center;
 }

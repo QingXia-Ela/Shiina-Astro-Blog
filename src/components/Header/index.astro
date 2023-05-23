@@ -10,6 +10,7 @@ export interface Props {
 const { header } = GetCurrentPageSetting(Astro.url),
   { PositionTitle } = Astro.props,
   KeepBGColor = header!.keepBackgroundColor,
+  KeepOpen = header!.keepOpen,
   Pos = PositionTitle ? PositionTitle : "",
   {
     WebsiteSettings: { title },
@@ -17,7 +18,11 @@ const { header } = GetCurrentPageSetting(Astro.url),
 ---
 
 <header>
-  <div class={`wrapper ${KeepBGColor ? "keep_bg" : ""} `}>
+  <div
+    class={`wrapper ${KeepBGColor ? "keep_bg" : ""} ${
+      KeepOpen ? "show_menu" : ""
+    }`}
+  >
     <div class="full_item full_title text_nowrap">{Pos + title}</div>
     <div class="full_item list">
       <div class="title">{title}</div>
