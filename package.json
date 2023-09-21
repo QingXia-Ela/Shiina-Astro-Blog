@@ -1,7 +1,7 @@
 {
   "name": "astro-blog",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "bin": {
     "blog": "./src/_bin/blog.js"
@@ -17,12 +17,12 @@
   },
   "dependencies": {
     "@astrojs/image": "^0.13.0",
-    "@astrojs/mdx": "^0.14.0",
+    "@astrojs/mdx": "^1.1.0",
     "@astrojs/node": "^5.0.2",
     "@astrojs/rss": "^2.1.0",
     "@astrojs/sitemap": "^1.0.0",
     "@astrojs/vue": "^2.0.0",
-    "astro": "2.0.5",
+    "astro": "^3.1.1",
     "github-markdown-css": "^5.1.0",
     "install": "^0.13.0",
     "lodash": "^4.17.21",

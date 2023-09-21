@@ -2,7 +2,6 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import vue from '@astrojs/vue';
 import sitemap from '@astrojs/sitemap';
-import image from '@astrojs/image';
 import node from '@astrojs/node';
 import InjectJSCSS from './src/_intergration/InjectJSCSS';
 import BuildSearchIndex from './src/_intergration/BuildSearchIndex'
@@ -12,9 +11,7 @@ import RunJsonServer from './src/_intergration/RunJsonServer'
 export default defineConfig({
   site: 'https://qingxia-ela.github.io',
   base: '/Shiina-Astro-Blog',
-  integrations: [mdx(), sitemap(), vue(), image({
-    serviceEntryPoint: '@astrojs/image/sharp'
-  }), InjectJSCSS(), BuildSearchIndex(), RunJsonServer()],
+  integrations: [mdx(), sitemap(), vue(), InjectJSCSS(), BuildSearchIndex(), RunJsonServer()],
   vite: {
     resolve: {
       alias: [{

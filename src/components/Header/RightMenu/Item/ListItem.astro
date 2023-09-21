@@ -1,6 +1,6 @@
 ---
 import type { ListItemProps } from "@/declare/Header/Header";
-import _ from "lodash";
+import defaultsDeep from "lodash/defaultsDeep";
 import cfg from "blog.config";
 
 export interface Props {
@@ -20,7 +20,7 @@ const _DEFAULT_PROPS_: Props = {
     WebsiteSettings: { base },
   } = cfg;
 
-let { ItemName, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
+let { ItemName, iconfont } = defaultsDeep(Astro.props, _DEFAULT_PROPS_);
 ---
 
 {
@@ -28,7 +28,10 @@ let { ItemName, iconfont } = _.defaultsDeep(Astro.props, _DEFAULT_PROPS_);
     <div class="item list h100">
       <div class="info">
         {iconfont.length ? (
-          <i class={`${iconfont} prevent_iconfont_deformation`} />
+          <i
+            class={`${iconfont} prevent_iconfont_deformation`}
+            style="margin-right: 6px;"
+          />
         ) : undefined}
         {ItemName}
       </div>
