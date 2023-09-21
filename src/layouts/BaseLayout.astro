@@ -11,13 +11,13 @@ import LeftBottomMenu from "@/components/LeftBottomMenu/index.astro";
 export interface Props {
   /** 当前页面标题 */
   title?: string;
+  url?: string;
 }
 
+const { title, url } = Astro.props;
 const { header, footer, background, setMinHeight } = GetCurrentPageSetting(
-  Astro.url
+  url ?? Astro.url,
 );
-
-const { title } = Astro.props;
 
 const SetMinHeightFactory = () => {
   switch (setMinHeight) {
@@ -101,6 +101,6 @@ const {
     })
   )
     alert(
-      "当前浏览器版本过低，页面展示可能受到影响！推荐更新一下浏览器再来访问！"
+      "当前浏览器版本过低，页面展示可能受到影响！推荐更新一下浏览器再来访问！",
     );
 </script>

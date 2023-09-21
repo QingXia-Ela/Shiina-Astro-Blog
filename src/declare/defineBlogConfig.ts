@@ -244,7 +244,7 @@ export default function defineBlogConfig(config: Partial<BlogConfig>): BlogConfi
       description: '',
       site: "",
       useIndex: false,
-      base: ""
+      base: "",
     },
     UserInfo: {
       name: 'Shiinafan',

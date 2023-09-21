@@ -7,9 +7,9 @@ const PathList: PathListProps = {
   '/': 'index',
 }
 
-export default function (url: URL): BasicPageConfig {
+export default function (url: URL | string): BasicPageConfig {
   let res: BasicPageConfig | undefined
-  const fURL = url.pathname.replace(cfg.WebsiteSettings.base, "")
+  const fURL = url instanceof URL ? url.pathname.replace(cfg.WebsiteSettings.base, "") : url
   if (PathList[fURL]) res = cfg.pages[PathList[fURL]]
   else {
     for (const i in cfg.pages) {
